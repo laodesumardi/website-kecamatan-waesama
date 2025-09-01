@@ -52,7 +52,7 @@ if [ ! -f .env ]; then
     # Update konfigurasi untuk production
     sed -i 's/APP_ENV=local/APP_ENV=production/' .env
     sed -i 's/APP_DEBUG=true/APP_DEBUG=false/' .env
-    sed -i 's|APP_URL=http://localhost|APP_URL=https://wb.kecamatangwaesama.id|' .env
+    sed -i 's|APP_URL=http://localhost|APP_URL=https://website.kecamatangwaesama.id|' .env
     
     print_status "File .env berhasil dibuat"
 fi
@@ -131,7 +131,7 @@ php artisan about
 
 echo
 print_status "=== DEPLOYMENT SELESAI ==="
-print_status "Website: https://wb.kecamatangwaesama.id"
+print_status "Website: https://website.kecamatangwaesama.id"
 print_status "Silakan cek website untuk memastikan berjalan dengan baik"
 
 # 13. Show important notes
