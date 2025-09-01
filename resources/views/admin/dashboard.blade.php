@@ -2,67 +2,7 @@
 
 @section('title', 'Dashboard Admin')
 
-@section('sidebar-menu')
-    <!-- Dashboard -->
-    <a href="{{ route('admin.dashboard') }}" class="nav-item active text-white">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Data Penduduk -->
-    <a href="{{ route('admin.penduduk.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-users"></i>
-        <span class="nav-text">Data Penduduk</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('admin.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="{{ route('admin.antrian.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Dashboard Antrian -->
-    <a href="{{ route('admin.antrian.dashboard') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-chart-line"></i>
-        <span class="nav-text">Dashboard Antrian</span>
-    </a>
-    
-    <!-- Berita -->
-    <a href="{{ route('admin.berita.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-newspaper"></i>
-        <span class="nav-text">Berita</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="{{ route('admin.pengaduan.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-    
-    <!-- Manajemen User -->
-    <a href="{{ route('admin.user.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-user-cog"></i>
-        <span class="nav-text">Manajemen User</span>
-    </a>
-    
-    <!-- Laporan -->
-    <a href="{{ route('admin.laporan.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-chart-bar"></i>
-        <span class="nav-text">Laporan</span>
-    </a>
-    
-    <!-- Pengaturan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-cog"></i>
-        <span class="nav-text">Pengaturan</span>
-    </a>
-@endsection
+
 
 @section('content')
 <div class="space-y-6">
@@ -219,7 +159,7 @@
     <div class="bg-white rounded-xl p-6 card-shadow">
         <div class="flex items-center justify-between mb-6">
             <h3 class="text-lg font-semibold text-gray-800">Aktivitas Terbaru</h3>
-            <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
+            <a href="{{ route('admin.pengaduan.index') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
         </div>
         <div class="space-y-4">
             <div class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">

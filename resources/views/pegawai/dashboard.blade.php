@@ -2,44 +2,6 @@
 
 @section('title', 'Dashboard Pegawai')
 
-@section('sidebar-menu')
-    <!-- Dashboard -->
-    <a href="{{ route('pegawai.dashboard') }}" class="nav-item active text-white">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('pegawai.surat.index') }}" class="nav-item text-white">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-    
-    <!-- Data Penduduk -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-users"></i>
-        <span class="nav-text">Data Penduduk</span>
-    </a>
-    
-    <!-- Laporan -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-chart-bar"></i>
-        <span class="nav-text">Laporan</span>
-    </a>
-@endsection
-
 @section('content')
 <div class="space-y-6">
     <!-- Welcome Section -->
@@ -161,24 +123,24 @@
                         <p class="text-gray-600 group-hover:text-blue-600 font-medium">Proses Surat</p>
                     </div>
                 </a>
-                <button class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group">
+                <a href="{{ route('pegawai.antrian.index') }}" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group">
                     <div class="text-center">
                         <i class="fas fa-user-plus text-2xl text-gray-400 group-hover:text-green-600 mb-2"></i>
                         <p class="text-gray-600 group-hover:text-green-600 font-medium">Panggil Antrian</p>
                     </div>
-                </button>
-                <button class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group">
+                </a>
+                <a href="{{ route('pegawai.pengaduan.index') }}" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group">
                     <div class="text-center">
                         <i class="fas fa-reply text-2xl text-gray-400 group-hover:text-purple-600 mb-2"></i>
                         <p class="text-gray-600 group-hover:text-purple-600 font-medium">Balas Pengaduan</p>
                     </div>
-                </button>
-                <button class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-yellow-300 hover:bg-yellow-50 transition-all duration-200 group">
+                </a>
+                <a href="{{ route('pegawai.penduduk.index') }}" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-yellow-300 hover:bg-yellow-50 transition-all duration-200 group">
                     <div class="text-center">
                         <i class="fas fa-search text-2xl text-gray-400 group-hover:text-yellow-600 mb-2"></i>
                         <p class="text-gray-600 group-hover:text-yellow-600 font-medium">Cari Data</p>
                     </div>
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -235,7 +197,7 @@
         <div class="bg-white rounded-xl p-6 card-shadow">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-800">Aktivitas Terbaru</h3>
-                <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
+                <a href="{{ route('pegawai.surat.index') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
             </div>
             <div class="space-y-4">
                 <div class="flex items-center space-x-4">

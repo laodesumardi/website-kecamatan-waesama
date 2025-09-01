@@ -75,6 +75,7 @@
             border-radius: 12px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .map-placeholder {
@@ -303,44 +304,68 @@
                 <div class="fade-in">
                     <div class="bg-white rounded-xl shadow-sm p-8">
                         <h2 class="text-2xl font-bold text-gray-800 mb-6">Kirim Pesan</h2>
-                        <form class="space-y-6">
+                        
+                        @if(session('success'))
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        
+                        @if(session('error'))
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        
+                        @if($errors->any())
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                                <ul class="list-disc list-inside">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
+                        <form action="{{ route('public.kontak.store') }}" method="POST" class="space-y-6">
+                            @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
-                                    <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan nama lengkap">
+                                    <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nama_lengkap') border-red-500 @enderror" placeholder="Masukkan nama lengkap">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                                    <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan email">
+                                    <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('email') border-red-500 @enderror" placeholder="Masukkan email">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                                    <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan nomor HP">
+                                    <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nomor_hp') border-red-500 @enderror" placeholder="Masukkan nomor HP">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
-                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <select name="kategori" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('kategori') border-red-500 @enderror">
                                         <option value="">Pilih Kategori</option>
-                                        <option value="informasi">Permintaan Informasi</option>
-                                        <option value="keluhan">Keluhan</option>
-                                        <option value="saran">Saran</option>
-                                        <option value="layanan">Pertanyaan Layanan</option>
-                                        <option value="lainnya">Lainnya</option>
+                                        <option value="informasi" {{ old('kategori') == 'informasi' ? 'selected' : '' }}>Permintaan Informasi</option>
+                                        <option value="keluhan" {{ old('kategori') == 'keluhan' ? 'selected' : '' }}>Keluhan</option>
+                                        <option value="saran" {{ old('kategori') == 'saran' ? 'selected' : '' }}>Saran</option>
+                                        <option value="layanan" {{ old('kategori') == 'layanan' ? 'selected' : '' }}>Pertanyaan Layanan</option>
+                                        <option value="lainnya" {{ old('kategori') == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Subjek *</label>
-                                <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan subjek pesan">
+                                <input type="text" name="subjek" value="{{ old('subjek') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('subjek') border-red-500 @enderror" placeholder="Masukkan subjek pesan">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Pesan *</label>
-                                <textarea rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Tulis pesan Anda di sini..."></textarea>
+                                <textarea name="pesan" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none @error('pesan') border-red-500 @enderror" placeholder="Tulis pesan Anda di sini...">{{ old('pesan') }}</textarea>
                             </div>
 
                             <div class="flex items-start">
@@ -363,13 +388,22 @@
                     <div class="bg-white rounded-xl shadow-sm p-8">
                         <h2 class="text-2xl font-bold text-gray-800 mb-6">Lokasi Kantor</h2>
 
-                        <!-- Map Placeholder -->
+                        <!-- Google Maps Embed -->
                         <div class="map-container mb-6">
-                            <div class="map-placeholder">
-                                <div class="text-center">
-                                    <i class="fas fa-map-marked-alt text-gray-400 text-4xl mb-4"></i>
-                                    <p class="text-gray-500 font-medium">Peta Lokasi Kantor Camat Waesama</p>
-                                    <p class="text-gray-400 text-sm mt-2">Klik untuk membuka di Google Maps</p>
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7!2d127.1!3d-3.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMzYnMDAuMCJTIDEyN8KwMDYnMDAuMCJF!5e0!3m2!1sid!2sid!4v1640995200000!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="400" 
+                                style="border:0; border-radius: 12px;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Peta Lokasi Kantor Camat Waesama">
+                            </iframe>
+                            <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-all duration-300 rounded-xl flex items-center justify-center opacity-0 hover:opacity-100">
+                                <div class="text-white text-center">
+                                    <i class="fas fa-external-link-alt text-2xl mb-2"></i>
+                                    <p class="font-medium">Klik untuk membuka di Google Maps</p>
                                 </div>
                             </div>
                         </div>
@@ -380,7 +414,7 @@
                                 <i class="fas fa-map-marker-alt text-blue-600 text-lg mr-3 mt-1"></i>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Alamat Lengkap</h4>
-                                    <p class="text-gray-600 text-sm">Jl. Raya Waesama No. 123, Kecamatan Waesama, Kabupaten Buru, Provinsi Maluku 97571</p>
+                                    <p class="text-gray-600 text-sm">Jl. Raya Waesama No. 123, Kecamatan Waesama, Kabupaten Buru Selatan, Provinsi Maluku 97571</p>
                                 </div>
                             </div>
 
@@ -402,14 +436,10 @@
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                            <a href="https://maps.google.com" target="_blank" class="flex items-center justify-center bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                        <div class="mt-6">
+                            <a href="https://www.google.com/maps/place/Waesama,+Kabupaten+Buru+Selatan,+Maluku/@-3.6,127.1,15z" target="_blank" class="flex items-center justify-center bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full">
                                 <i class="fas fa-map mr-2"></i>
                                 Buka di Google Maps
-                            </a>
-                            <a href="https://wa.me/6281234567890" target="_blank" class="flex items-center justify-center bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">
-                                <i class="fab fa-whatsapp mr-2"></i>
-                                Chat WhatsApp
                             </a>
                         </div>
                     </div>
@@ -571,9 +601,18 @@
     <!-- Mobile Menu Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const menuIcon = document.getElementById('menu-icon');
+            
+            // Map Click Handler
+            const mapContainer = document.querySelector('.map-container');
+            if (mapContainer) {
+                mapContainer.addEventListener('click', function() {
+                    window.open('https://www.google.com/maps/place/Waesama,+Kabupaten+Buru+Selatan,+Maluku/@-3.6,127.1,15z', '_blank');
+                });
+            }
 
             if (mobileMenuBtn && mobileMenu && menuIcon) {
                 mobileMenuBtn.addEventListener('click', function() {

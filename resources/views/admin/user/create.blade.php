@@ -1,72 +1,31 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 
 @section('title', 'Tambah User')
-
-@section('sidebar')
-    <!-- Dashboard -->
-    <a href="{{ route('admin.dashboard') }}" class="nav-item">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Data Penduduk -->
-    <a href="{{ route('admin.penduduk.index') }}" class="nav-item">
-        <i class="fas fa-users"></i>
-        <span class="nav-text">Data Penduduk</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('admin.surat.index') }}" class="nav-item">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="{{ route('admin.antrian.index') }}" class="nav-item">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Berita -->
-    <a href="{{ route('admin.berita.index') }}" class="nav-item">
-        <i class="fas fa-newspaper"></i>
-        <span class="nav-text">Berita</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="{{ route('admin.pengaduan.index') }}" class="nav-item">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-    
-    <!-- Manajemen User -->
-    <a href="{{ route('admin.user.index') }}" class="flex items-center px-4 py-3 text-white bg-blue-600 rounded-lg">
-        <i class="fas fa-user-cog"></i>
-        <span class="nav-text">Manajemen User</span>
-    </a>
-    
-    <!-- Laporan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-chart-bar"></i>
-        <span class="nav-text">Laporan</span>
-    </a>
-@endsection
 
 @section('content')
 <div class="p-6">
     <!-- Header Section -->
     <div class="mb-6">
-        <!-- Breadcrumb -->
-        <nav class="text-sm text-gray-600 mb-4">
-            <a href="{{ route('admin.dashboard') }}" class="hover:text-blue-600">Dashboard</a>
-            <span class="mx-2">/</span>
-            <a href="{{ route('admin.user.index') }}" class="hover:text-blue-600">Manajemen User</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-800">Tambah User</span>
-        </nav>
-        
-        <h1 class="text-2xl font-bold text-gray-800">Tambah User</h1>
-        <p class="text-gray-600 text-sm">Tambah user baru ke dalam sistem</p>
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">Tambah User</h1>
+        <p class="text-gray-600">Tambah user baru ke dalam sistem</p>
+    </div>
+    
+    <!-- Action Bar -->
+    <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+        <div class="flex items-center justify-between">
+            <nav class="text-sm text-gray-600">
+                <a href="{{ route('admin.dashboard') }}" class="hover:text-blue-600">Dashboard</a>
+                <span class="mx-2">/</span>
+                <a href="{{ route('admin.user.index') }}" class="hover:text-blue-600">Manajemen User</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-800">Tambah User</span>
+            </nav>
+            
+            <a href="{{ route('admin.user.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i>
+                Kembali
+            </a>
+        </div>
     </div>
 
     <!-- Form -->
@@ -216,12 +175,6 @@
 </div>
 
 <script>
-// Toggle sidebar
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('-translate-x-full');
-}
-
 // NIK input validation
 document.getElementById('nik').addEventListener('input', function(e) {
     // Only allow numbers

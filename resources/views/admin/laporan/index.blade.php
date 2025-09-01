@@ -2,62 +2,6 @@
 
 @section('title', 'Laporan Admin')
 
-@section('sidebar-menu')
-    <!-- Dashboard -->
-    <a href="{{ route('admin.dashboard') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Data Penduduk -->
-    <a href="{{ route('admin.penduduk.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-users"></i>
-        <span class="nav-text">Data Penduduk</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('admin.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="{{ route('admin.antrian.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Berita -->
-    <a href="{{ route('admin.berita.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-newspaper"></i>
-        <span class="nav-text">Berita</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="{{ route('admin.pengaduan.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-    
-    <!-- Manajemen User -->
-    <a href="{{ route('admin.user.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-user-cog"></i>
-        <span class="nav-text">Manajemen User</span>
-    </a>
-    
-    <!-- Laporan -->
-    <a href="{{ route('admin.laporan.index') }}" class="nav-item active text-white">
-        <i class="fas fa-chart-bar"></i>
-        <span class="nav-text">Laporan</span>
-    </a>
-    
-    <!-- Pengaturan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-cog"></i>
-        <span class="nav-text">Pengaturan</span>
-    </a>
-@endsection
-
 @section('content')
 <div class="space-y-6">
     <!-- Welcome Section -->

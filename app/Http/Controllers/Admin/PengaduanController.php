@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -132,7 +133,29 @@ class PengaduanController extends Controller
             $validated['tanggal_selesai'] = now();
         }
         
-        Pengaduan::create($validated);
+        $pengaduan = Pengaduan::create($validated);
+        
+        // Create notification for all admin users
+        $adminUsers = User::whereHas('role', function($query) {
+            $query->where('name', 'Admin');
+        })->get();
+        
+        foreach ($adminUsers as $admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'type' => 'pengaduan_baru',
+                'title' => 'Pengaduan Baru',
+                'message' => "Pengaduan baru dari {$validated['nama_pengadu']}: {$validated['judul_pengaduan']}",
+                'data' => json_encode([
+                    'pengaduan_id' => $pengaduan->id,
+                    'nama_pengadu' => $validated['nama_pengadu'],
+                    'judul_pengaduan' => $validated['judul_pengaduan'],
+                    'kategori' => $validated['kategori'],
+                    'prioritas' => $validated['prioritas'],
+                    'url' => route('admin.pengaduan.show', $pengaduan)
+                ])
+            ]);
+        }
         
         return redirect()->route('admin.pengaduan.index')
             ->with('success', 'Pengaduan berhasil ditambahkan.');
@@ -385,8 +408,8 @@ class PengaduanController extends Controller
      */
     public function exportPdf(Pengaduan $pengaduan)
     {
-        // Load pengaduan with processor relationship
-        $pengaduan->load('processor');
+        // Load pengaduan with handler relationship
+        $pengaduan->load('handler');
         
         // Generate PDF
         $pdf = Pdf::loadView('pdf.pengaduan', compact('pengaduan'));

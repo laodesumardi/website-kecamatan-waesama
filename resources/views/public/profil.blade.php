@@ -1,209 +1,289 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Kantor - Kantor Camat Waesama</title>
-    <meta name="description" content="Profil lengkap Kantor Camat Waesama - Visi, Misi, Struktur Organisasi, dan Sejarah">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <title>Profil Kantor - Kantor Camat Waesama</title>
+        <meta name="description" content="Profil lengkap Kantor Camat Waesama - Visi, Misi, Struktur Organisasi, dan Sejarah">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Styles / Scripts -->
+        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @else
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; }
+                .hero-bg { background: #003f88; }
+                .card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+                .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+                .btn-primary { background: #003f88; }
+                .btn-primary:hover { background: #002a5c; }
+                .news-card { border-left: 4px solid #667eea; }
+                .service-icon { background: #003f88; }
+                .animate-fade-in { animation: fadeIn 0.6s ease-in; }
+                .fade-in { animation: fadeIn 0.6s ease-in; }
+                @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+                .text-gradient { color: #003f88; }
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+                /* Enhanced hover effects */
+                .service-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                }
 
-        .hero-bg {
-            background: #003f88;
-        }
+                .news-card:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                }
 
-        .card-hover {
-            transition: all 0.3s ease;
-        }
+                .btn-primary {
+                    transition: all 0.3s ease;
+                }
 
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
+                .btn-primary:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 10px 20px rgba(0, 63, 136, 0.4);
+                }
 
-        .fade-in {
-            animation: fadeIn 0.6s ease-in;
-        }
+                /* Standardized Public Navigation Menu */
+                .public-nav-item {
+                    color: #666;
+                    text-decoration: none;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.375rem;
+                    transition: all 0.3s ease;
+                    display: inline-block;
+                }
+                .public-nav-item:hover {
+                    color: #003f88;
+                    background: rgba(0, 63, 136, 0.1);
+                }
+                .public-nav-item.active {
+                    color: #003f88;
+                    font-weight: 600;
+                }
+                .public-nav-btn {
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 0.5rem;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                    display: inline-block;
+                }
+                .public-nav-btn.primary {
+                    background: #003f88;
+                    color: white;
+                }
+                .public-nav-btn.primary:hover {
+                    background: #002a5c;
+                }
+                .public-nav-btn.secondary {
+                    color: #003f88;
+                    border: 2px solid #003f88;
+                }
+                .public-nav-btn.secondary:hover {
+                    background: #003f88;
+                    color: white;
+                }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+                .timeline-item {
+                    position: relative;
+                    padding-left: 2rem;
+                }
 
-        .text-gradient {
-                color: #003f88;
-            }
+                .timeline-item::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0.5rem;
+                    width: 0.75rem;
+                    height: 0.75rem;
+                    background: #667eea;
+                    border-radius: 50%;
+                }
 
-        .btn-primary {
-            background: #003f88;
-            transition: all 0.3s ease;
-        }
+                .timeline-item::after {
+                    content: '';
+                    position: absolute;
+                    left: 0.375rem;
+                    top: 1.25rem;
+                    width: 2px;
+                    height: calc(100% - 1.25rem);
+                    background: #e5e7eb;
+                }
 
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.5rem;
-            width: 0.75rem;
-            height: 0.75rem;
-            background: #667eea;
-            border-radius: 50%;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: 0.375rem;
-            top: 1.25rem;
-            width: 2px;
-            height: calc(100% - 1.25rem);
-            background: #e5e7eb;
-        }
-
-        .timeline-item:last-child::after {
-            display: none;
-        }
-
-        /* Standardized Public Navigation Menu */
-        .public-nav-item {
-            color: #666;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        .public-nav-item:hover {
-            color: #003f88;
-            background: rgba(0, 63, 136, 0.1);
-        }
-        .public-nav-item.active {
-            color: #003f88;
-            font-weight: 600;
-        }
-        .public-nav-btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 500;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        .public-nav-btn.primary {
-            background: #003f88;
-            color: white;
-        }
-        .public-nav-btn.primary:hover {
-            background: #002a5c;
-        }
-        .public-nav-btn.secondary {
-            color: #003f88;
-            border: 2px solid #003f88;
-        }
-        .public-nav-btn.secondary:hover {
-            background: #003f88;
-            color: white;
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-building text-2xl text-blue-800"></i>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900">Kantor Camat Waesama</h1>
-                        <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
-                    </div>
+                .timeline-item:last-child::after {
+                    display: none;
+                }
+            </style>
+        @endif
+    </head>
+    <body>
+      <!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main Navigation Container -->
+        <div class="flex justify-between items-center h-16 lg:h-20">
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-3 flex-shrink-0">
+                <div class="bg-blue-800 p-2 rounded-lg">
+                    <i class="fas fa-building text-xl text-white"></i>
                 </div>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <div class="flex space-x-2">
-                        <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
-                        <a href="{{ route('public.profil') }}" class="public-nav-item active"><i class="fas fa-info-circle mr-2"></i>Profil</a>
-                        <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
-                        <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
-                        <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
-                    </div>
-
-                    @if (Route::has('login'))
-                        <div class="flex space-x-4 items-center">
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
-                            @else
-                                <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif
-                            @endauth
-                        </div>
-                    @endif
+                <div class="hidden sm:block">
+                    <h1 class="text-lg font-bold text-gray-900 leading-tight">Kantor Camat Waesama</h1>
+                    <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
                 </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-800 focus:outline-none">
-                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
-                    </button>
+                <div class="sm:hidden">
+                    <h1 class="text-base font-bold text-gray-900">Camat Waesama</h1>
                 </div>
             </div>
 
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="md:hidden hidden pb-4">
-                <div class="flex flex-col space-y-2">
-                    <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
-                    <a href="{{ route('public.profil') }}" class="public-nav-item active"><i class="fas fa-info-circle mr-2"></i>Profil</a>
-                    <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
-                    <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
-                    <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <!-- Navigation Links -->
+                <div class="flex items-center space-x-1">
+                    <a href="{{ route('welcome') }}"
+                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                        <i class="fas fa-home text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <span>Beranda</span>
+                    </a>
 
-                    @if (Route::has('login'))
-                        <div class="flex flex-col space-y-2 pt-2 border-t border-gray-200">
-                            @auth
-                                <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
-                            @else
-                                <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif
-                            @endauth
-                        </div>
-                    @endif
+                    <a href="{{ route('public.profil') }}"
+                       class="group flex items-center px-3 py-2 text-sm font-medium text-blue-800 bg-blue-50 rounded-lg ">
+                        <i class="fas fa-info-circle text-base mr-2"></i>
+                        <span>Profil</span>
+                    </a>
+
+                    <a href="{{ route('public.berita') }}"
+                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                        <i class="fas fa-newspaper text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <span>Berita</span>
+                    </a>
+
+                    <a href="{{ route('public.layanan') }}"
+                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                        <i class="fas fa-cogs text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <span>Layanan</span>
+                    </a>
+
+                    <a href="{{ route('public.kontak') }}"
+                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                        <i class="fas fa-phone text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <span>Kontak</span>
+                    </a>
                 </div>
+
+                <!-- Authentication Section -->
+                @if (Route::has('login'))
+                    <div class="flex items-center space-x-3 pl-6 border-l border-gray-200">
+                        @auth
+                            <a href="{{ url('/dashboard') }}"
+                               class="inline-flex items-center px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                Dashboard
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}"
+                               class="inline-flex items-center px-4 py-2 border border-blue-800 text-blue-800 text-sm font-medium rounded-lg hover:bg-blue-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
+                                Masuk
+                            </a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}"
+                                   class="inline-flex items-center px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
+                                    <i class="fas fa-user-plus mr-2"></i>
+                                    Daftar
+                                </a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="lg:hidden">
+                <button id="mobile-menu-btn"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-blue-800 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                        aria-expanded="false"
+                        aria-controls="mobile-menu"
+                        aria-label="Toggle navigation menu">
+                    <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
-    </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 bg-white" role="navigation" aria-hidden="true">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <!-- Mobile Navigation Links -->
+                <a href="{{ route('welcome') }}"
+                   class="group flex items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                    <i class="fas fa-home text-lg mr-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <span>Beranda</span>
+                </a>
+
+                <a href="{{ route('public.profil') }}"
+                   class="group flex items-center px-3 py-2 text-base font-medium text-blue-800 bg-blue-50 rounded-lg">
+                    <i class="fas fa-info-circle text-lg mr-3"></i>
+                    <span>Profil</span>
+                </a>
+
+                <a href="{{ route('public.berita') }}"
+                   class="group flex items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                    <i class="fas fa-newspaper text-lg mr-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <span>Berita</span>
+                </a>
+
+                <a href="{{ route('public.layanan') }}"
+                   class="group flex items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                    <i class="fas fa-cogs text-lg mr-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <span>Layanan</span>
+                </a>
+
+                <a href="{{ route('public.kontak') }}"
+                   class="group flex items-center px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                    <i class="fas fa-phone text-lg mr-3 group-hover:scale-110 transition-transform duration-200"></i>
+                    <span>Kontak</span>
+                </a>
+
+                <!-- Mobile Authentication Section -->
+                @if (Route::has('login'))
+                    <div class="pt-4 border-t border-gray-200 space-y-2">
+                        @auth
+                            <a href="{{ url('/dashboard') }}"
+                               class="flex items-center px-3 py-2 text-base font-medium text-white bg-blue-800 rounded-lg hover:bg-blue-900 transition-all duration-200">
+                                <i class="fas fa-tachometer-alt text-lg mr-3"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}"
+                               class="flex items-center px-3 py-2 text-base font-medium text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-800 hover:text-white transition-all duration-200">
+                                <i class="fas fa-sign-in-alt text-lg mr-3"></i>
+                                <span>Masuk</span>
+                            </a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}"
+                                   class="flex items-center px-3 py-2 text-base font-medium text-white bg-blue-800 rounded-lg hover:bg-blue-900 transition-all duration-200">
+                                    <i class="fas fa-user-plus text-lg mr-3"></i>
+                                    <span>Daftar</span>
+                                </a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</nav>
 
     <!-- Hero Section -->
    <section class="hero-bg text-white py-16 pt-[150px]">
@@ -248,30 +328,30 @@
         <section class="mb-16">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Visi -->
-                <div class="bg-white rounded-xl shadow-sm p-8 card-hover fade-in">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                            <i class="fas fa-eye text-blue-600 text-2xl"></i>
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover fade-in">
+                    <div class="text-center mb-6">
+                        <div class="bg-blue-100 p-4 rounded-full inline-block mb-4">
+                            <i class="fas fa-eye text-blue-600 text-3xl"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-gray-800">Visi</h3>
                     </div>
-                    <p class="text-gray-600 leading-relaxed text-lg">
+                    <p class="text-gray-600 text-center leading-relaxed">
                         "Terwujudnya Kecamatan Waesama yang Maju, Sejahtera, dan Berkeadilan melalui Pelayanan Prima dan Pembangunan Berkelanjutan"
                     </p>
                 </div>
 
                 <!-- Misi -->
-                <div class="bg-white rounded-xl shadow-sm p-8 card-hover fade-in">
-                    <div class="flex items-center mb-6">
-                        <div class="bg-green-100 p-3 rounded-lg mr-4">
-                            <i class="fas fa-bullseye text-green-600 text-2xl"></i>
+                <div class="bg-white rounded-xl p-8 shadow-lg card-hover fade-in">
+                    <div class="text-center mb-6">
+                        <div class="bg-green-100 p-4 rounded-full inline-block mb-4">
+                            <i class="fas fa-bullseye text-green-600 text-3xl"></i>
                         </div>
                         <h3 class="text-2xl font-bold text-gray-800">Misi</h3>
                     </div>
                     <ul class="text-gray-600 space-y-3">
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span>Meningkatkan kualitas pelayanan publik yang profesional dan berintegritas</span>
+                            <span>Meningkatkan kualitas pelayanan publik yang profesional dan transparan</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
@@ -283,7 +363,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                            <span>Mewujudkan tata kelola pemerintahan yang transparan dan akuntabel</span>
+                            <span>Menjaga keamanan dan ketertiban masyarakat</span>
                         </li>
                     </ul>
                 </div>
@@ -292,26 +372,20 @@
 
         <!-- Struktur Organisasi -->
         <section class="mb-16">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12 fade-in">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Struktur Organisasi</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Struktur organisasi Kantor Camat Waesama yang terdiri dari berbagai bidang untuk melayani masyarakat</p>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
+            <div class="bg-white rounded-xl p-8 shadow-lg fade-in">
                 <!-- Camat -->
                 <div class="text-center mb-8">
-                    <div class="inline-block bg-blue-600 text-white px-6 py-4 rounded-lg mb-4">
-                        <h3 class="text-xl font-bold">CAMAT</h3>
-                        <p class="text-blue-100">Drs. Ahmad Suryanto, M.Si</p>
+                    <div class="bg-blue-600 text-white p-6 rounded-lg inline-block mb-4">
+                        <i class="fas fa-user-tie text-3xl"></i>
                     </div>
-                </div>
-
-                <!-- Sekretaris Camat -->
-                <div class="text-center mb-8">
-                    <div class="inline-block bg-green-600 text-white px-6 py-4 rounded-lg">
-                        <h4 class="text-lg font-semibold">SEKRETARIS CAMAT</h4>
-                        <p class="text-green-100">Siti Nurhaliza, S.Sos</p>
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Camat Waesama</h3>
+                    <p class="text-gray-600 font-medium">Drs. Ahmad Suryanto, M.AP</p>
+                    <p class="text-sm text-gray-500">Kepala Kecamatan</p>
                 </div>
 
                 <!-- Bidang-bidang -->
@@ -339,8 +413,8 @@
                             <i class="fas fa-handshake text-2xl"></i>
                         </div>
                         <h4 class="font-bold text-gray-800 mb-2">Bidang Kesejahteraan</h4>
-                        <p class="text-sm text-gray-600 mb-3">Menangani program kesejahteraan masyarakat</p>
-                        <p class="text-sm font-medium text-teal-600">Kepala: Dr. Andi Wijaya</p>
+                        <p class="text-sm text-gray-600 mb-3">Menangani program kesejahteraan dan pemberdayaan masyarakat</p>
+                        <p class="text-sm font-medium text-teal-600">Kepala: Siti Nurhaliza, S.Sos</p>
                     </div>
                 </div>
             </div>
@@ -352,228 +426,301 @@
                 <div class="fade-in">
                     <h2 class="text-3xl font-bold text-gray-800 mb-6">Sejarah Singkat</h2>
                     <p class="text-gray-600 mb-6 leading-relaxed">
-                        Kecamatan Waesama dibentuk berdasarkan Peraturan Daerah Kabupaten Buru pada tahun 2008 sebagai hasil pemekaran dari kecamatan induk. Pembentukan kecamatan ini bertujuan untuk mendekatkan pelayanan pemerintahan kepada masyarakat.
+                        Kecamatan Waesama dibentuk pada tahun 2008 sebagai hasil pemekaran dari Kecamatan induk. Pembentukan kecamatan ini bertujuan untuk mendekatkan pelayanan pemerintahan kepada masyarakat dan mempercepat pembangunan di wilayah tersebut.
                     </p>
-                    <p class="text-gray-600 leading-relaxed">
-                        Sejak berdiri, Kantor Camat Waesama terus berkomitmen untuk meningkatkan kualitas pelayanan dan pembangunan di wilayah kecamatan melalui berbagai program inovatif dan berkelanjutan.
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Sejak berdiri, Kantor Camat Waesama terus berkomitmen untuk memberikan pelayanan terbaik dan mendorong pembangunan yang berkelanjutan di wilayah kecamatan.
                     </p>
                 </div>
 
                 <div class="fade-in">
-                    <h3 class="text-xl font-bold text-gray-800 mb-6">Timeline Perkembangan</h3>
                     <div class="space-y-6">
                         <div class="timeline-item">
-                            <div class="font-semibold text-blue-600">2008</div>
-                            <div class="text-gray-800 font-medium">Pembentukan Kecamatan</div>
-                            <div class="text-gray-600 text-sm">Kecamatan Waesama resmi dibentuk melalui Perda Kabupaten Buru</div>
+                            <h4 class="font-bold text-gray-800 mb-2">2008</h4>
+                            <p class="text-gray-600">Pembentukan Kecamatan Waesama melalui pemekaran</p>
                         </div>
-
                         <div class="timeline-item">
-                            <div class="font-semibold text-blue-600">2010</div>
-                            <div class="text-gray-800 font-medium">Pembangunan Kantor</div>
-                            <div class="text-gray-600 text-sm">Gedung kantor camat permanen mulai dibangun</div>
+                            <h4 class="font-bold text-gray-800 mb-2">2010</h4>
+                            <p class="text-gray-600">Pembangunan gedung kantor camat yang representatif</p>
                         </div>
-
                         <div class="timeline-item">
-                            <div class="font-semibold text-blue-600">2015</div>
-                            <div class="text-gray-800 font-medium">Digitalisasi Pelayanan</div>
-                            <div class="text-gray-600 text-sm">Implementasi sistem pelayanan berbasis teknologi</div>
+                            <h4 class="font-bold text-gray-800 mb-2">2015</h4>
+                            <p class="text-gray-600">Implementasi sistem pelayanan online pertama</p>
                         </div>
-
                         <div class="timeline-item">
-                            <div class="font-semibold text-blue-600">2020</div>
-                            <div class="text-gray-800 font-medium">Pelayanan Online</div>
-                            <div class="text-gray-600 text-sm">Launching layanan online untuk kemudahan masyarakat</div>
+                            <h4 class="font-bold text-gray-800 mb-2">2020</h4>
+                            <p class="text-gray-600">Digitalisasi penuh layanan administrasi kependudukan</p>
                         </div>
-
                         <div class="timeline-item">
-                            <div class="font-semibold text-blue-600">2024</div>
-                            <div class="text-gray-800 font-medium">Modernisasi Sistem</div>
-                            <div class="text-gray-600 text-sm">Upgrade sistem informasi dan website resmi</div>
+                            <h4 class="font-bold text-gray-800 mb-2">2024</h4>
+                            <p class="text-gray-600">Peluncuran website resmi dan sistem terintegrasi</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Wilayah Kerja -->
-        <section class="mb-16">
-            <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Wilayah Kerja</h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="text-center">
-                        <div class="bg-blue-100 p-4 rounded-lg mb-4">
-                            <i class="fas fa-map-marked-alt text-blue-600 text-3xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Luas Wilayah</h4>
-                        <p class="text-2xl font-bold text-blue-600">125.5</p>
-                        <p class="text-gray-600">km²</p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="bg-green-100 p-4 rounded-lg mb-4">
-                            <i class="fas fa-home text-green-600 text-3xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Jumlah Desa</h4>
-                        <p class="text-2xl font-bold text-green-600">12</p>
-                        <p class="text-gray-600">Desa</p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="bg-purple-100 p-4 rounded-lg mb-4">
-                            <i class="fas fa-users text-purple-600 text-3xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Jumlah Penduduk</h4>
-                        <p class="text-2xl font-bold text-purple-600">25,432</p>
-                        <p class="text-gray-600">Jiwa</p>
-                    </div>
-
-                    <div class="text-center">
-                        <div class="bg-orange-100 p-4 rounded-lg mb-4">
-                            <i class="fas fa-family text-orange-600 text-3xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Jumlah KK</h4>
-                        <p class="text-2xl font-bold text-orange-600">6,358</p>
-                        <p class="text-gray-600">Kepala Keluarga</p>
-                    </div>
-                </div>
-
-                <div class="bg-gray-50 p-6 rounded-lg">
-                    <h4 class="font-bold text-gray-800 mb-4">Desa-desa di Kecamatan Waesama:</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waesama</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Batu Merah</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waeapo</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waenetat</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Leksula</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waelata</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waekasar</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waesala</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waetulia</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waemulang</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waesamu</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg text-center">
-                            <span class="text-gray-700">Waenetat Timur</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action -->
-        <section class="text-center">
-            <div class="bg-[#003f88] text-white rounded-xl p-12 fade-in">
-                <h2 class="text-3xl font-bold mb-4">Butuh Informasi Lebih Lanjut?</h2>
-                <p class="text-xl mb-8 opacity-90">Hubungi kami untuk mendapatkan informasi dan pelayanan terbaik</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('public.kontak') }}" class="bg-white text-[#003f88] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                        <i class="fas fa-phone mr-2"></i>
-                        Hubungi Kami
-                    </a>
-                    <a href="{{ route('public.layanan') }}" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#003f88] transition-colors">
-                        <i class="fas fa-concierge-bell mr-2"></i>
-                        Lihat Layanan
-                    </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-4 mb-4">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23667eea' font-size='40' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Logo" class="h-12 w-12">
-                        <div>
-                            <h3 class="text-xl font-bold">Kantor Camat Waesama</h3>
-                            <p class="text-gray-300">Melayani dengan Sepenuh Hati</p>
+        <!-- Footer -->
+        <footer style="background-color: #1f2937; color: white; padding: 3rem 0;">
+            <div style="max-width: 80rem; margin: 0 auto; padding: 0 1rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                    <div style="grid-column: span 2;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23667eea' font-size='40' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Logo" style="height: 3rem; width: 3rem; margin-right: 1rem;">
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.25rem;">Kantor Camat Waesama</h3>
+                                <p style="color: #9ca3af;">Melayani dengan Sepenuh Hati</p>
+                            </div>
+                        </div>
+                        <p style="color: #9ca3af; margin-bottom: 1rem;">Kantor Camat Waesama berkomitmen memberikan pelayanan terbaik kepada masyarakat dengan mengutamakan transparansi, akuntabilitas, dan profesionalisme.</p>
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="#" style="color: #9ca3af; font-size: 1.25rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" style="color: #9ca3af; font-size: 1.25rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" style="color: #9ca3af; font-size: 1.25rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" style="color: #9ca3af; font-size: 1.25rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">
+                                <i class="fab fa-youtube"></i>
+                            </a>
                         </div>
                     </div>
-                    <p class="text-gray-300 mb-4">Kantor Camat Waesama berkomitmen memberikan pelayanan terbaik kepada masyarakat dengan mengutamakan transparansi, akuntabilitas, dan profesionalisme.</p>
-                </div>
 
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
-                    <ul class="space-y-2">
-                        <li><a href="{{ url('/') }}" class="text-gray-300 hover:text-white transition-colors">Beranda</a></li>
-                        <li><a href="{{ route('public.profil') }}" class="text-gray-300 hover:text-white transition-colors">Profil</a></li>
-                        <li><a href="{{ route('public.berita') }}" class="text-gray-300 hover:text-white transition-colors">Berita</a></li>
-                        <li><a href="{{ route('public.layanan') }}" class="text-gray-300 hover:text-white transition-colors">Layanan</a></li>
-                        <li><a href="{{ route('public.kontak') }}" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
-                    </ul>
-                </div>
+                    <div>
+                        <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">Tautan Cepat</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #9ca3af; text-decoration: none;">Tentang Kami</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #9ca3af; text-decoration: none;">Berita</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #9ca3af; text-decoration: none;">Kontak</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="#" style="color: #9ca3af; text-decoration: none;">FAQ</a></li>
+                        </ul>
+                    </div>
 
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Media Sosial</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                            <i class="fab fa-facebook-f text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
-                            <i class="fab fa-youtube text-xl"></i>
-                        </a>
+                    <div>
+                        <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">Kontak</h4>
+                        <div style="color: #9ca3af;">
+                            <p style="margin-bottom: 0.5rem;"><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Jl. Raya Waesama No. 123</p>
+                            <p style="margin-bottom: 0.5rem;"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>(021) 123-4567</p>
+                            <p style="margin-bottom: 0.5rem;"><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>info@waesama.go.id</p>
+                        </div>
                     </div>
                 </div>
+
+                <div style="border-top: 1px solid #374151; padding-top: 2rem; text-align: center; color: #9ca3af;">
+                    <p>&copy; 2024 Kantor Camat Waesama. Semua hak dilindungi.</p>
+                </div>
             </div>
+        </footer>
 
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p class="text-gray-300">&copy; 2024 Kantor Camat Waesama. Semua hak dilindungi.</p>
-            </div>
-        </div>
-    </footer>
+        <script>
+           // Mobile Menu Toggle - Clean and Optimized Version
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
 
-    <!-- Mobile Menu Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
+    // Early return if required elements don't exist
+    if (!mobileMenuBtn || !mobileMenu || !menuIcon) {
+        console.warn('Mobile menu elements not found');
+        return;
+    }
 
-            if (mobileMenuBtn && mobileMenu && menuIcon) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
+    // Menu state management
+    const MenuState = {
+        isOpen: false,
 
-                    if (mobileMenu.classList.contains('hidden')) {
-                        menuIcon.classList.remove('fa-times');
-                        menuIcon.classList.add('fa-bars');
-                    } else {
-                        menuIcon.classList.remove('fa-bars');
-                        menuIcon.classList.add('fa-times');
+        open() {
+            this.isOpen = true;
+            mobileMenu.classList.remove('hidden');
+            menuIcon.className = 'fas fa-times text-xl';
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+
+            // Smooth slide-in animation
+            this.animateIn();
+        },
+
+        close() {
+            this.isOpen = false;
+
+            // Smooth slide-out animation
+            this.animateOut(() => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fas fa-bars text-xl';
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        },
+
+        toggle() {
+            if (this.isOpen) {
+                this.close();
+            } else {
+                this.open();
+            }
+        },
+
+        animateIn() {
+            mobileMenu.style.opacity = '0';
+            mobileMenu.style.transform = 'translateY(-10px)';
+
+            requestAnimationFrame(() => {
+                mobileMenu.style.transition = 'opacity 0.2s ease-out, transform 0.2s ease-out';
+                mobileMenu.style.opacity = '1';
+                mobileMenu.style.transform = 'translateY(0)';
+            });
+        },
+
+        animateOut(callback) {
+            mobileMenu.style.transition = 'opacity 0.2s ease-in, transform 0.2s ease-in';
+            mobileMenu.style.opacity = '0';
+            mobileMenu.style.transform = 'translateY(-10px)';
+
+            setTimeout(callback, 200);
+        }
+    };
+
+    // Event Handlers
+    const EventHandlers = {
+        // Mobile menu button click handler
+        handleMenuButtonClick(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            MenuState.toggle();
+        },
+
+        // Click outside to close menu
+        handleDocumentClick(event) {
+            if (MenuState.isOpen &&
+                !mobileMenuBtn.contains(event.target) &&
+                !mobileMenu.contains(event.target)) {
+                MenuState.close();
+            }
+        },
+
+        // Handle escape key to close menu
+        handleKeyDown(event) {
+            if (event.key === 'Escape' && MenuState.isOpen) {
+                MenuState.close();
+                mobileMenuBtn.focus(); // Return focus to button for accessibility
+            }
+        },
+
+        // Handle window resize (close menu when switching to desktop)
+        handleWindowResize() {
+            if (window.innerWidth >= 1024 && MenuState.isOpen) {
+                MenuState.close();
+            }
+        },
+
+        // Handle focus trap within mobile menu
+        handleFocusTrap(event) {
+            if (!MenuState.isOpen) return;
+
+            const focusableElements = mobileMenu.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])'
+            );
+
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+
+            if (event.key === 'Tab') {
+                if (event.shiftKey) {
+                    // Shift + Tab
+                    if (document.activeElement === firstFocusable) {
+                        event.preventDefault();
+                        lastFocusable.focus();
                     }
-                });
+                } else {
+                    // Tab
+                    if (document.activeElement === lastFocusable) {
+                        event.preventDefault();
+                        firstFocusable.focus();
+                    }
+                }
+            }
+        }
+    };
+
+    // Initialize event listeners
+    function initializeEventListeners() {
+        // Mobile menu button click
+        mobileMenuBtn.addEventListener('click', EventHandlers.handleMenuButtonClick);
+
+        // Click outside to close
+        document.addEventListener('click', EventHandlers.handleDocumentClick);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', EventHandlers.handleKeyDown);
+        document.addEventListener('keydown', EventHandlers.handleFocusTrap);
+
+        // Window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(EventHandlers.handleWindowResize, 100);
+        });
+
+        // Prevent menu links from bubbling up to document click handler
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                // Close menu when clicking on a link (optional)
+                setTimeout(() => MenuState.close(), 150);
             }
         });
-    </script>
-</body>
+    }
+
+    // Initialize accessibility attributes
+    function initializeAccessibility() {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
+        mobileMenuBtn.setAttribute('aria-label', 'Toggle navigation menu');
+
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        mobileMenu.setAttribute('role', 'navigation');
+    }
+
+    // Update accessibility attributes when menu state changes
+    function updateAccessibility() {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    mobileMenu.setAttribute('aria-hidden', isHidden.toString());
+                }
+            });
+        });
+
+        observer.observe(mobileMenu, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+
+    // Initialize everything
+    function init() {
+        try {
+            initializeAccessibility();
+            initializeEventListeners();
+            updateAccessibility();
+
+            console.log('Mobile menu initialized successfully');
+        } catch (error) {
+            console.error('Error initializing mobile menu:', error);
+        }
+    }
+
+    // Start the application
+    init();
+
+    // Expose MenuState for debugging (optional - remove in production)
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        window.MobileMenu = MenuState;
+    }
+});
+</script>
+        </script>
+    </body>
 </html>

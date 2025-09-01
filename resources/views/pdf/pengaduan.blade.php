@@ -131,41 +131,48 @@
         <table class="info-table">
             <tr>
                 <td class="label">Nomor Pengaduan</td>
-                <td>{{ $pengaduan->id }}</td>
+                <td>{{ $pengaduan->nomor_pengaduan }}</td>
             </tr>
             <tr>
                 <td class="label">Judul Pengaduan</td>
-                <td>{{ $pengaduan->judul }}</td>
+                <td>{{ $pengaduan->judul_pengaduan }}</td>
             </tr>
             <tr>
                 <td class="label">Nama Pengadu</td>
-                <td>{{ $pengaduan->nama }}</td>
+                <td>{{ $pengaduan->nama_pengadu }}</td>
             </tr>
             <tr>
                 <td class="label">Email</td>
-                <td>{{ $pengaduan->email }}</td>
+                <td>{{ $pengaduan->email_pengadu }}</td>
             </tr>
             <tr>
                 <td class="label">Nomor Telepon</td>
-                <td>{{ $pengaduan->telepon ?? '-' }}</td>
+                <td>{{ $pengaduan->phone_pengadu ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Alamat</td>
-                <td>{{ $pengaduan->alamat ?? '-' }}</td>
+                <td>{{ $pengaduan->alamat_pengadu ?? '-' }}</td>
             </tr>
             <tr>
                 <td class="label">Kategori</td>
                 <td>{{ $pengaduan->kategori }}</td>
             </tr>
             <tr>
+                <td class="label">Prioritas</td>
+                <td>{{ $pengaduan->prioritas }}</td>
+            </tr>
+            <tr>
                 <td class="label">Status</td>
                 <td>
                     <span class="status 
                         @switch($pengaduan->status)
-                            @case('Pending')
+                            @case('Diterima')
                                 status-pending
                                 @break
                             @case('Diproses')
+                                status-processing
+                                @break
+                            @case('Ditindaklanjuti')
                                 status-processing
                                 @break
                             @case('Selesai')
@@ -194,7 +201,7 @@
         <div class="description">
             <h3>Deskripsi Pengaduan:</h3>
             <div class="description-content">
-                {{ $pengaduan->deskripsi }}
+                {{ $pengaduan->isi_pengaduan }}
             </div>
         </div>
 
@@ -204,9 +211,9 @@
             <div class="response-content">
                 {{ $pengaduan->tanggapan }}
             </div>
-            @if($pengaduan->processor)
+            @if($pengaduan->handler)
             <p style="margin-top: 10px; font-style: italic; font-size: 11px;">
-                Ditanggapi oleh: {{ $pengaduan->processor->name }}
+                Ditanggapi oleh: {{ $pengaduan->handler->name }}
             </p>
             @endif
         </div>

@@ -1,29 +1,41 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.main')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+@section('title', 'Profile')
+
+@section('content')
+<div class="space-y-6">
+    <!-- Welcome Section -->
+    <div class="bg-[#003f88] rounded-xl p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold mb-2">Profile Settings</h2>
+                <p class="text-blue-100">Kelola informasi profil dan keamanan akun Anda.</p>
             </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+            <div class="hidden md:block">
+                <i class="fas fa-user-cog text-6xl text-blue-200"></i>
             </div>
         </div>
     </div>
-</x-app-layout>
+
+    <!-- Profile Information Card -->
+    <div class="bg-white rounded-xl p-6 card-shadow">
+        <div class="max-w-xl">
+            @include('profile.partials.update-profile-information-form')
+        </div>
+    </div>
+
+    <!-- Update Password Card -->
+    <div class="bg-white rounded-xl p-6 card-shadow">
+        <div class="max-w-xl">
+            @include('profile.partials.update-password-form')
+        </div>
+    </div>
+
+    <!-- Delete Account Card -->
+    <div class="bg-white rounded-xl p-6 card-shadow">
+        <div class="max-w-xl">
+            @include('profile.partials.delete-user-form')
+        </div>
+    </div>
+</div>
+@endsection

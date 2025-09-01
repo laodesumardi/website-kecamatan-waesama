@@ -1,70 +1,20 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 
 @section('title', 'Manajemen User')
 
-@section('sidebar')
-    <!-- Dashboard -->
-    <a href="{{ route('admin.dashboard') }}" class="nav-item">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Data Penduduk -->
-    <a href="{{ route('admin.penduduk.index') }}" class="nav-item">
-        <i class="fas fa-users"></i>
-        <span class="nav-text">Data Penduduk</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('admin.surat.index') }}" class="nav-item">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="{{ route('admin.antrian.index') }}" class="nav-item">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Berita -->
-    <a href="{{ route('admin.berita.index') }}" class="nav-item">
-        <i class="fas fa-newspaper"></i>
-        <span class="nav-text">Berita</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="{{ route('admin.pengaduan.index') }}" class="nav-item">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-    
-    <!-- Manajemen User -->
-    <a href="{{ route('admin.user.index') }}" class="flex items-center px-4 py-3 text-white bg-blue-600 rounded-lg">
-        <i class="fas fa-user-cog"></i>
-        <span class="nav-text">Manajemen User</span>
-    </a>
-    
-    <!-- Laporan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-chart-bar"></i>
-        <span class="nav-text">Laporan</span>
-    </a>
-@endsection
-
 @section('content')
-<div class="p-6">
-    <!-- Header Section -->
-    <div class="mb-6">
-        <!-- Breadcrumb -->
-        <nav class="text-sm text-gray-600 mb-4">
-            <a href="{{ route('admin.dashboard') }}" class="hover:text-blue-600">Dashboard</a>
-            <span class="mx-2">/</span>
-            <span class="text-gray-800">Manajemen User</span>
-        </nav>
-        
-        <h1 class="text-2xl font-bold text-gray-800">Manajemen User</h1>
-        <p class="text-gray-600 text-sm">Kelola pengguna sistem</p>
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="bg-[#003f88] rounded-xl p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold mb-2">Manajemen User</h2>
+                <p class="text-blue-100">Kelola pengguna sistem dengan mudah dan efisien.</p>
+            </div>
+            <div class="hidden md:block">
+                <i class="fas fa-user-cog text-6xl text-blue-200"></i>
+            </div>
+        </div>
     </div>
 
     <!-- Alert Messages -->
@@ -81,7 +31,7 @@
     @endif
 
     <!-- Action Bar -->
-    <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
+    <div class="bg-white rounded-xl p-6 card-shadow">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <!-- Search and Filters -->
             <form method="GET" action="{{ route('admin.user.index') }}" class="space-y-4">
@@ -139,7 +89,7 @@
     </div>
 
     <!-- Users Table -->
-    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+    <div class="bg-white rounded-xl card-shadow overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">

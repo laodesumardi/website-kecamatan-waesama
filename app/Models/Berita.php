@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Berita extends Model
 {
@@ -37,5 +38,29 @@ class Berita extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Get the bookmarks for the berita.
+     */
+    public function bookmarks(): HasMany
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    /**
+     * Get the users who bookmarked this berita.
+     */
+    public function bookmarkedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks')->withTimestamps();
+    }
+
+    /**
+     * Check if berita is bookmarked by a specific user.
+     */
+    public function isBookmarkedBy($userId)
+    {
+        return $this->bookmarks()->where('user_id', $userId)->exists();
     }
 }

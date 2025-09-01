@@ -14,6 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'share.notifications' => \App\Http\Middleware\ShareNotificationData::class,
+        ]);
+        
+        // Add notification data sharing to web middleware group
+        $middleware->web(append: [
+            \App\Http\Middleware\ShareNotificationData::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -2,50 +2,6 @@
 
 @section('title', 'Dashboard Warga')
 
-@section('sidebar-menu')
-    <!-- Dashboard -->
-    <a href="{{ route('warga.dashboard') }}" class="nav-item active text-white">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Ajukan Surat -->
-    <a href="{{ route('warga.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-file-plus"></i>
-        <span class="nav-text">Ajukan Surat</span>
-    </a>
-    
-    <!-- Riwayat Surat -->
-    <a href="{{ route('warga.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-history"></i>
-        <span class="nav-text">Riwayat Surat</span>
-    </a>
-    
-    <!-- Antrian Online -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian Online</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-    
-    <!-- Berita -->
-    <a href="{{ route('public.berita') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-newspaper"></i>
-        <span class="nav-text">Berita</span>
-    </a>
-    
-    <!-- Profil -->
-    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
-        <i class="fas fa-user"></i>
-        <span class="nav-text">Profil Saya</span>
-    </a>
-@endsection
-
 @section('content')
 <div class="space-y-6">
     <!-- Welcome Section -->
@@ -75,7 +31,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ route('warga.surat.index') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Riwayat →</a>
+                <a href="{{ route('warga.surat.list') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Riwayat →</a>
             </div>
         </div>
 
@@ -91,7 +47,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="#" class="text-green-600 hover:text-green-700 text-sm font-medium">Ambil Antrian →</a>
+                <a href="#" class="text-gray-500 cursor-not-allowed text-sm font-medium" title="Fitur dalam pengembangan">Ambil Antrian →</a>
             </div>
         </div>
 
@@ -107,7 +63,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="#" class="text-purple-600 hover:text-purple-700 text-sm font-medium">Buat Pengaduan →</a>
+                <a href="#" class="text-gray-500 cursor-not-allowed text-sm font-medium" title="Fitur dalam pengembangan">Buat Pengaduan →</a>
             </div>
         </div>
     </div>
@@ -119,30 +75,30 @@
             <i class="fas fa-rocket text-gray-400"></i>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group">
+            <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Domisili']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group block">
                 <div class="text-center">
                     <i class="fas fa-id-card text-3xl text-gray-400 group-hover:text-blue-600 mb-3"></i>
                     <p class="text-gray-600 group-hover:text-blue-600 font-medium text-sm">Surat Keterangan Domisili</p>
                 </div>
-            </button>
-            <button class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group">
+            </a>
+            <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Usaha']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group block">
                 <div class="text-center">
                     <i class="fas fa-briefcase text-3xl text-gray-400 group-hover:text-green-600 mb-3"></i>
                     <p class="text-gray-600 group-hover:text-green-600 font-medium text-sm">Surat Keterangan Usaha</p>
                 </div>
-            </button>
-            <button class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group">
+            </a>
+            <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Belum Menikah']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group block">
                 <div class="text-center">
                     <i class="fas fa-heart text-3xl text-gray-400 group-hover:text-purple-600 mb-3"></i>
                     <p class="text-gray-600 group-hover:text-purple-600 font-medium text-sm">Surat Keterangan Belum Menikah</p>
                 </div>
-            </button>
-            <button class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-yellow-300 hover:bg-yellow-50 transition-all duration-200 group">
+            </a>
+            <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Sehat']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-yellow-300 hover:bg-yellow-50 transition-all duration-200 group block">
                 <div class="text-center">
                     <i class="fas fa-file-medical text-3xl text-gray-400 group-hover:text-yellow-600 mb-3"></i>
                     <p class="text-gray-600 group-hover:text-yellow-600 font-medium text-sm">Surat Keterangan Sehat</p>
                 </div>
-            </button>
+            </a>
         </div>
     </div>
 
@@ -152,7 +108,7 @@
         <div class="bg-white rounded-xl p-6 card-shadow">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-800">Berita Terbaru</h3>
-                <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
+                <a href="{{ route('warga.berita.index') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
             </div>
             <div class="space-y-4">
                 @forelse($recentNews as $news)

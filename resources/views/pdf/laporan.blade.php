@@ -176,31 +176,276 @@
     <div class="content">
         <h2 style="text-align: center; margin-bottom: 20px;">LAPORAN {{ strtoupper($type) }}</h2>
         
-        @if($type === 'surat')
+        @if($type === 'overview')
+            <!-- Summary Overview -->
+            <div class="summary">
+                <h3>Ringkasan Data Keseluruhan</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">Total Penduduk</div>
+                        <div class="value">{{ $data['total_penduduk'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Total Surat</div>
+                        <div class="value">{{ $data['total_surat'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Total Antrian</div>
+                        <div class="value">{{ $data['total_antrian'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Total Pengaduan</div>
+                        <div class="value">{{ $data['total_pengaduan'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Total Berita</div>
+                        <div class="value">{{ $data['total_berita'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Total User</div>
+                        <div class="value">{{ $data['total_user'] ?? 0 }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Status -->
+            <div class="summary">
+                <h3>Detail Status Layanan</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Layanan</th>
+                            <th>Pending</th>
+                            <th>Diproses</th>
+                            <th>Selesai</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Surat</td>
+                            <td>{{ $data['surat_pending'] ?? 0 }}</td>
+                            <td>{{ $data['surat_processing'] ?? 0 }}</td>
+                            <td>{{ $data['surat_completed'] ?? 0 }}</td>
+                            <td>{{ $data['total_surat'] ?? 0 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Antrian</td>
+                            <td>{{ $data['antrian_pending'] ?? 0 }}</td>
+                            <td>{{ $data['antrian_processing'] ?? 0 }}</td>
+                            <td>{{ $data['antrian_completed'] ?? 0 }}</td>
+                            <td>{{ $data['total_antrian'] ?? 0 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pengaduan</td>
+                            <td>{{ $data['pengaduan_pending'] ?? 0 }}</td>
+                            <td>{{ $data['pengaduan_processing'] ?? 0 }}</td>
+                            <td>{{ $data['pengaduan_completed'] ?? 0 }}</td>
+                            <td>{{ $data['total_pengaduan'] ?? 0 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        @elseif($type === 'penduduk')
+            <!-- Summary Penduduk -->
+            <div class="summary">
+                <h3>Ringkasan Data Penduduk</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">Total Penduduk</div>
+                        <div class="value">{{ $data['total'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Laki-laki</div>
+                        <div class="value">{{ $data['by_gender']->where('jenis_kelamin', 'Laki-laki')->first()->total ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Perempuan</div>
+                        <div class="value">{{ $data['by_gender']->where('jenis_kelamin', 'Perempuan')->first()->total ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Registrasi Periode Ini</div>
+                        <div class="value">{{ $data['new_registrations'] ?? 0 }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data by Status Perkawinan -->
+            @if(isset($data['by_status']) && $data['by_status']->count() > 0)
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Status Perkawinan</th>
+                        <th>Jumlah</th>
+                        <th>Persentase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data['by_status'] as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item->status_perkawinan }}</td>
+                        <td>{{ $item->total }}</td>
+                        <td>{{ $data['total'] > 0 ? round(($item->total / $data['total']) * 100, 1) : 0 }}%</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+        @elseif($type === 'berita')
+            <!-- Summary Berita -->
+            <div class="summary">
+                <h3>Ringkasan Data Berita</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">Total Berita</div>
+                        <div class="value">{{ $data['total'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Berita Published</div>
+                        <div class="value">{{ $data['published'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Berita Draft</div>
+                        <div class="value">{{ $data['draft'] ?? 0 }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Berita Terbaru -->
+            @if(isset($data['recent']) && $data['recent']->count() > 0)
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Judul</th>
+                        <th>Penulis</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data['recent'] as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item->judul }}</td>
+                        <td>{{ $item->author->name ?? '-' }}</td>
+                        <td>
+                            <span class="status 
+                                @if($item->is_published)
+                                    status-completed
+                                @else
+                                    status-pending
+                                @endif">
+                                {{ $item->is_published ? 'Published' : 'Draft' }}
+                            </span>
+                        </td>
+                        <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+        @elseif($type === 'user')
+            <!-- Summary User -->
+            <div class="summary">
+                <h3>Ringkasan Data User</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="label">Total User</div>
+                        <div class="value">{{ $data['total'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">User Aktif</div>
+                        <div class="value">{{ $data['active'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">User Tidak Aktif</div>
+                        <div class="value">{{ $data['inactive'] ?? 0 }}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="label">Registrasi Baru</div>
+                        <div class="value">{{ $data['new_registrations'] ?? 0 }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data by Role -->
+            @if(isset($data['by_role']) && $data['by_role']->count() > 0)
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Role</th>
+                        <th>Jumlah</th>
+                        <th>Persentase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data['by_role'] as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ ucfirst($item->role) }}</td>
+                        <td>{{ $item->total }}</td>
+                        <td>{{ $data['total'] > 0 ? round(($item->total / $data['total']) * 100, 1) : 0 }}%</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+        @elseif($type === 'surat')
             <!-- Summary Surat -->
             <div class="summary">
                 <h3>Ringkasan Data Surat</h3>
                 <div class="summary-grid">
                     <div class="summary-item">
                         <div class="label">Total Surat</div>
-                        <div class="value">{{ count($data) }}</div>
+                        <div class="value">{{ $data['total'] ?? 0 }}</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="label">Surat Selesai</div>
-                        <div class="value">{{ collect($data)->where('status', 'Selesai')->count() }}</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="label">Surat Diproses</div>
-                        <div class="value">{{ collect($data)->where('status', 'Diproses')->count() }}</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="label">Surat Pending</div>
-                        <div class="value">{{ collect($data)->where('status', 'Pending')->count() }}</div>
-                    </div>
+                    @if(isset($data['by_status']))
+                        @foreach($data['by_status'] as $status)
+                        <div class="summary-item">
+                            <div class="label">{{ ucfirst($status->status) }}</div>
+                            <div class="value">{{ $status->total }}</div>
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
-            <!-- Data Surat -->
+            <!-- Data Surat by Type -->
+            @if(isset($data['by_type']) && $data['by_type']->count() > 0)
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Jenis Surat</th>
+                        <th>Jumlah</th>
+                        <th>Persentase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data['by_type'] as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item->jenis_surat }}</td>
+                        <td>{{ $item->total }}</td>
+                        <td>{{ $data['total'] > 0 ? round(($item->total / $data['total']) * 100, 1) : 0 }}%</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+            <!-- Data Surat Terbaru -->
+            @if(isset($data['recent']) && $data['recent']->count() > 0)
+            <div class="page-break"></div>
+            <h3>Data Surat Terbaru</h3>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -213,28 +458,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $index => $item)
+                    @foreach($data['recent'] as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item->nomor_surat ?? '-' }}</td>
                         <td>{{ $item->jenis_surat }}</td>
-                        <td>{{ $item->nama_pemohon }}</td>
+                        <td>{{ $item->penduduk->nama ?? $item->nama_pemohon ?? '-' }}</td>
                         <td>
                             <span class="status 
                                 @switch($item->status)
-                                    @case('Pending')
+                                    @case('pending')
                                         status-pending
                                         @break
-                                    @case('Diproses')
+                                    @case('processing')
                                         status-processing
                                         @break
-                                    @case('Selesai')
+                                    @case('completed')
                                         status-completed
                                         @break
-                                    @default
+                                    @case('rejected')
                                         status-rejected
+                                        @break
+                                    @default
+                                        status-pending
                                 @endswitch">
-                                {{ $item->status }}
+                                {{ ucfirst($item->status) }}
                             </span>
                         </td>
                         <td>{{ $item->created_at->format('d/m/Y') }}</td>
@@ -242,6 +490,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
 
         @elseif($type === 'antrian')
             <!-- Summary Antrian -->
@@ -250,24 +499,47 @@
                 <div class="summary-grid">
                     <div class="summary-item">
                         <div class="label">Total Antrian</div>
-                        <div class="value">{{ count($data) }}</div>
+                        <div class="value">{{ $data['total'] ?? 0 }}</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="label">Antrian Selesai</div>
-                        <div class="value">{{ collect($data)->where('status', 'Selesai')->count() }}</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="label">Antrian Dilayani</div>
-                        <div class="value">{{ collect($data)->where('status', 'Dilayani')->count() }}</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="label">Antrian Menunggu</div>
-                        <div class="value">{{ collect($data)->where('status', 'Menunggu')->count() }}</div>
-                    </div>
+                    @if(isset($data['by_status']))
+                        @foreach($data['by_status'] as $status)
+                        <div class="summary-item">
+                            <div class="label">{{ ucfirst($status->status) }}</div>
+                            <div class="value">{{ $status->total }}</div>
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
-            <!-- Data Antrian -->
+            <!-- Data Antrian by Service -->
+            @if(isset($data['by_service']) && $data['by_service']->count() > 0)
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Jenis Layanan</th>
+                        <th>Jumlah</th>
+                        <th>Persentase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data['by_service'] as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item->layanan }}</td>
+                        <td>{{ $item->total }}</td>
+                        <td>{{ $data['total'] > 0 ? round(($item->total / $data['total']) * 100, 1) : 0 }}%</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+            <!-- Data Antrian Terbaru -->
+            @if(isset($data['recent']) && $data['recent']->count() > 0)
+            <div class="page-break"></div>
+            <h3>Data Antrian Terbaru</h3>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -280,7 +552,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $index => $item)
+                    @foreach($data['recent'] as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item->nomor_antrian }}</td>
@@ -289,22 +561,26 @@
                         <td>
                             <span class="status 
                                 @switch($item->status)
-                                    @case('Menunggu')
+                                    @case('waiting')
+                                    @case('menunggu')
                                         status-pending
                                         @break
-                                    @case('Dipanggil')
+                                    @case('called')
+                                    @case('dipanggil')
                                         status-processing
                                         @break
-                                    @case('Dilayani')
+                                    @case('serving')
+                                    @case('dilayani')
                                         status-processing
                                         @break
-                                    @case('Selesai')
+                                    @case('completed')
+                                    @case('selesai')
                                         status-completed
                                         @break
                                     @default
-                                        status-rejected
+                                        status-pending
                                 @endswitch">
-                                {{ $item->status }}
+                                {{ ucfirst($item->status) }}
                             </span>
                         </td>
                         <td>{{ $item->created_at->format('d/m/Y') }}</td>
@@ -312,6 +588,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
 
         @elseif($type === 'pengaduan')
             <!-- Summary Pengaduan -->
@@ -320,24 +597,47 @@
                 <div class="summary-grid">
                     <div class="summary-item">
                         <div class="label">Total Pengaduan</div>
-                        <div class="value">{{ count($data) }}</div>
+                        <div class="value">{{ $data['total'] ?? 0 }}</div>
                     </div>
-                    <div class="summary-item">
-                        <div class="label">Pengaduan Selesai</div>
-                        <div class="value">{{ collect($data)->where('status', 'Selesai')->count() }}</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="label">Pengaduan Diproses</div>
-                        <div class="value">{{ collect($data)->where('status', 'Diproses')->count() }}</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="label">Pengaduan Pending</div>
-                        <div class="value">{{ collect($data)->where('status', 'Pending')->count() }}</div>
-                    </div>
+                    @if(isset($data['by_status']))
+                        @foreach($data['by_status'] as $status)
+                        <div class="summary-item">
+                            <div class="label">{{ ucfirst($status->status) }}</div>
+                            <div class="value">{{ $status->total }}</div>
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 
-            <!-- Data Pengaduan -->
+            <!-- Data Pengaduan by Category -->
+            @if(isset($data['by_category']) && $data['by_category']->count() > 0)
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kategori</th>
+                        <th>Jumlah</th>
+                        <th>Persentase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data['by_category'] as $index => $item)
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $item->kategori }}</td>
+                        <td>{{ $item->total }}</td>
+                        <td>{{ $data['total'] > 0 ? round(($item->total / $data['total']) * 100, 1) : 0 }}%</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+
+            <!-- Data Pengaduan Terbaru -->
+            @if(isset($data['recent']) && $data['recent']->count() > 0)
+            <div class="page-break"></div>
+            <h3>Data Pengaduan Terbaru</h3>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -345,36 +645,38 @@
                         <th>Judul</th>
                         <th>Nama Pengadu</th>
                         <th>Kategori</th>
+                        <th>Prioritas</th>
                         <th>Status</th>
                         <th>Tanggal</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $index => $item)
+                    @foreach($data['recent'] as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item->judul }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->kategori }}</td>
+                        <td>{{ $item->prioritas ?? '-' }}</td>
                         <td>
                             <span class="status 
                                 @switch($item->status)
-                                    @case('Pending')
+                                    @case('pending')
                                         status-pending
                                         @break
-                                    @case('Diproses')
+                                    @case('processing')
                                         status-processing
                                         @break
-                                    @case('Selesai')
+                                    @case('completed')
                                         status-completed
                                         @break
-                                    @case('Ditolak')
+                                    @case('rejected')
                                         status-rejected
                                         @break
                                     @default
                                         status-pending
                                 @endswitch">
-                                {{ $item->status }}
+                                {{ ucfirst($item->status) }}
                             </span>
                         </td>
                         <td>{{ $item->created_at->format('d/m/Y') }}</td>
@@ -382,6 +684,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         @endif
     </div>
 

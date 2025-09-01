@@ -57,7 +57,7 @@
                     <i class="fas fa-ban text-white"></i>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-red-600">Dibatalkan</p>
+                    <p class="text-sm font-medium text-red-600">Batal</p>
                     <p class="text-2xl font-bold text-red-900">{{ number_format($data['cancelled'] ?? 0) }}</p>
                 </div>
             </div>
@@ -217,7 +217,7 @@ if (document.getElementById('queuesStatusChart')) {
     new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Menunggu', 'Dipanggil', 'Dilayani', 'Dibatalkan'],
+            labels: ['Menunggu', 'Dipanggil', 'Dilayani', 'Batal'],
             datasets: [{
                 data: [
                     {{ $data['waiting'] ?? 0 }},

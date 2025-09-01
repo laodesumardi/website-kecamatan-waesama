@@ -206,6 +206,29 @@
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Success/Error Messages -->
+        @if(session('success'))
+            <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                <div class="flex items-center mb-2">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <strong>Terjadi kesalahan:</strong>
+                </div>
+                <ul class="list-disc list-inside ml-6">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- Featured Services -->
         <section class="mb-16">
             <div class="text-center mb-12">
@@ -400,33 +423,56 @@
 
                     <div class="bg-gray-50 rounded-lg p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-6">Ambil Nomor Antrian</h3>
-                        <form class="space-y-4">
+                        
+                        @if(session('success'))
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        
+                        @if($errors->any())
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                                <ul class="list-disc list-inside">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
+                        <form action="{{ route('public.antrian.store') }}" method="POST" class="space-y-4">
+                            @csrf
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Layanan</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <select name="jenis_layanan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                                     <option value="">Pilih Jenis Layanan</option>
-                                    <option value="surat-domisili">Surat Keterangan Domisili</option>
-                                    <option value="surat-usaha">Surat Keterangan Usaha</option>
-                                    <option value="surat-tidak-mampu">Surat Keterangan Tidak Mampu</option>
-                                    <option value="pengantar-ktp">Surat Pengantar KTP</option>
-                                    <option value="pengantar-nikah">Surat Pengantar Nikah</option>
-                                    <option value="lainnya">Lainnya</option>
+                                    <option value="Surat Domisili" {{ old('jenis_layanan') == 'Surat Domisili' ? 'selected' : '' }}>Surat Keterangan Domisili</option>
+                                    <option value="SKTM" {{ old('jenis_layanan') == 'SKTM' ? 'selected' : '' }}>Surat Keterangan Tidak Mampu</option>
+                                    <option value="Surat Usaha" {{ old('jenis_layanan') == 'Surat Usaha' ? 'selected' : '' }}>Surat Keterangan Usaha</option>
+                                    <option value="Surat Pengantar" {{ old('jenis_layanan') == 'Surat Pengantar' ? 'selected' : '' }}>Surat Pengantar KTP</option>
+                                    <option value="Konsultasi" {{ old('jenis_layanan') == 'Konsultasi' ? 'selected' : '' }}>Konsultasi</option>
+                                    <option value="Lainnya" {{ old('jenis_layanan') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
                                 </select>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama lengkap">
+                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama lengkap" required>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nomor HP">
+                                <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nomor HP" required>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan NIK">
+                                <input type="text" name="nik" value="{{ old('nik') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan NIK (16 digit)" maxlength="16" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Keperluan (Opsional)</label>
+                                <textarea name="keperluan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Jelaskan keperluan Anda" rows="3">{{ old('keperluan') }}</textarea>
                             </div>
 
                             <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
@@ -494,47 +540,69 @@
 
                     <div class="bg-gray-50 rounded-lg p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-6">Form Pengaduan</h3>
-                        <form class="space-y-4">
+                        <form action="{{ route('public.pengaduan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                            @csrf
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Pengaduan</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Pengaduan *</label>
+                                <select name="jenis_pengaduan" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('jenis_pengaduan') border-red-500 @enderror">
                                     <option value="">Pilih Jenis Pengaduan</option>
-                                    <option value="keluhan">Keluhan Pelayanan</option>
-                                    <option value="saran">Saran Perbaikan</option>
-                                    <option value="laporan">Laporan Masalah</option>
-                                    <option value="informasi">Permintaan Informasi</option>
+                                    <option value="keluhan" {{ old('jenis_pengaduan') == 'keluhan' ? 'selected' : '' }}>Keluhan Pelayanan</option>
+                                    <option value="saran" {{ old('jenis_pengaduan') == 'saran' ? 'selected' : '' }}>Saran Perbaikan</option>
+                                    <option value="laporan" {{ old('jenis_pengaduan') == 'laporan' ? 'selected' : '' }}>Laporan Masalah</option>
+                                    <option value="informasi" {{ old('jenis_pengaduan') == 'informasi' ? 'selected' : '' }}>Permintaan Informasi</option>
                                 </select>
+                                @error('jenis_pengaduan')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Masukkan nama lengkap">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
+                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('nama_lengkap') border-red-500 @enderror" placeholder="Masukkan nama lengkap">
+                                @error('nama_lengkap')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                                <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Masukkan email">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                                <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('email') border-red-500 @enderror" placeholder="Masukkan email">
+                                @error('email')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                                <input type="tel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Masukkan nomor HP">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP *</label>
+                                <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('nomor_hp') border-red-500 @enderror" placeholder="Masukkan nomor HP">
+                                @error('nomor_hp')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Subjek</label>
-                                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Masukkan subjek pengaduan">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subjek *</label>
+                                <input type="text" name="subjek" value="{{ old('subjek') }}" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('subjek') border-red-500 @enderror" placeholder="Masukkan subjek pengaduan">
+                                @error('subjek')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Isi Pengaduan</label>
-                                <textarea rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Jelaskan pengaduan Anda secara detail"></textarea>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Isi Pengaduan *</label>
+                                <textarea name="isi_pengaduan" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('isi_pengaduan') border-red-500 @enderror" placeholder="Jelaskan pengaduan Anda secara detail">{{ old('isi_pengaduan') }}</textarea>
+                                @error('isi_pengaduan')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Lampiran (Opsional)</label>
-                                <input type="file" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                                <input type="file" name="lampiran" accept=".jpg,.jpeg,.png,.pdf" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 @error('lampiran') border-red-500 @enderror">
                                 <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG, PDF. Maksimal 5MB</p>
+                                @error('lampiran')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-medium transition-colors">

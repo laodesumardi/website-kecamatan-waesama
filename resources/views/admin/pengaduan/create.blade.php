@@ -1,106 +1,26 @@
-@extends('layouts.admin')
+@extends('layouts.main')
 
 @section('title', 'Tambah Pengaduan')
 
 @section('content')
-<div class="min-h-screen bg-gray-50">
-    <!-- Sidebar -->
-    <div class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" id="sidebar">
-        <div class="flex items-center justify-center h-16 bg-blue-600">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                    <span class="text-blue-600 font-bold text-lg">W</span>
-                </div>
-                <span class="text-white font-bold text-xl">Waesama</span>
+<div class="space-y-6">
+    <!-- Page Header -->
+    <div class="bg-[#003f88] rounded-xl p-6 text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-2xl font-bold mb-2">Tambah Pengaduan</h2>
+                <p class="text-blue-100">Tambah pengaduan baru ke dalam sistem dengan mudah dan efisien.</p>
+            </div>
+            <div class="hidden md:block">
+                <i class="fas fa-plus-circle text-6xl text-blue-200"></i>
             </div>
         </div>
-        
-        <nav class="mt-8">
-            <div class="px-4 space-y-2">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-home w-5 mr-3"></i>
-                    Dashboard
-                </a>
-                <a href="{{ route('admin.penduduk.index') }}" class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-users w-5 mr-3"></i>
-                    Data Penduduk
-                </a>
-                <a href="{{ route('admin.surat.index') }}" class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-file-alt w-5 mr-3"></i>
-                    Layanan Surat
-                </a>
-                <a href="{{ route('admin.antrian.index') }}" class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-clock w-5 mr-3"></i>
-                    Antrian
-                </a>
-                <a href="{{ route('admin.pengaduan.index') }}" class="flex items-center px-4 py-3 text-white bg-blue-600 rounded-lg">
-                    <i class="fas fa-comments w-5 mr-3"></i>
-                    Pengaduan
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-gray-400 rounded-lg cursor-not-allowed">
-                    <i class="fas fa-newspaper w-5 mr-3"></i>
-                    Berita
-                    <span class="ml-auto text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Soon</span>
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-gray-400 rounded-lg cursor-not-allowed">
-                    <i class="fas fa-user-cog w-5 mr-3"></i>
-                    Manajemen User
-                    <span class="ml-auto text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Soon</span>
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-gray-400 rounded-lg cursor-not-allowed">
-                    <i class="fas fa-chart-bar w-5 mr-3"></i>
-                    Laporan
-                    <span class="ml-auto text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Soon</span>
-                </a>
-                <a href="#" class="flex items-center px-4 py-3 text-gray-400 rounded-lg cursor-not-allowed">
-                    <i class="fas fa-cog w-5 mr-3"></i>
-                    Pengaturan
-                    <span class="ml-auto text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Soon</span>
-                </a>
-            </div>
-        </nav>
     </div>
-
-    <!-- Main Content -->
-    <div class="lg:ml-64">
-        <!-- Header -->
-        <header class="bg-white shadow-sm border-b border-gray-200">
-            <div class="flex items-center justify-between px-6 py-4">
-                <div class="flex items-center space-x-4">
-                    <button class="lg:hidden text-gray-600 hover:text-gray-800" onclick="toggleSidebar()">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    <div>
-                        <nav class="flex items-center space-x-2 text-sm text-gray-600 mb-2">
-                            <a href="{{ route('admin.dashboard') }}" class="hover:text-blue-600">Dashboard</a>
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <a href="{{ route('admin.pengaduan.index') }}" class="hover:text-blue-600">Pengaduan</a>
-                            <i class="fas fa-chevron-right text-xs"></i>
-                            <span class="text-gray-800">Tambah</span>
-                        </nav>
-                        <h1 class="text-2xl font-bold text-gray-800">Tambah Pengaduan</h1>
-                        <p class="text-gray-600 text-sm">Tambah pengaduan baru ke dalam sistem</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <button class="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-                            <i class="fas fa-user-circle text-2xl"></i>
-                            <span class="hidden md:block">{{ Auth::user()->name }}</span>
-                            <i class="fas fa-chevron-down text-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Content -->
-        <main class="p-6">
             <form action="{{ route('admin.pengaduan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 
                 <!-- Data Pengadu -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-user text-blue-600 mr-2"></i>
                         Data Pengadu
@@ -142,7 +62,7 @@
                 </div>
                 
                 <!-- Detail Pengaduan -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-comments text-blue-600 mr-2"></i>
                         Detail Pengaduan
@@ -208,7 +128,7 @@
                 </div>
                 
                 <!-- Penanganan -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="bg-white rounded-xl p-6 card-shadow">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-user-cog text-blue-600 mr-2"></i>
                         Penanganan (Opsional)
@@ -267,16 +187,9 @@
                     </div>
                 </div>
             </form>
-        </main>
-    </div>
 </div>
 
 <script>
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('-translate-x-full');
-}
-
 // Auto-generate nomor pengaduan preview
 document.addEventListener('DOMContentLoaded', function() {
     const today = new Date();

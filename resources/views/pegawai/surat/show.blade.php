@@ -2,32 +2,6 @@
 
 @section('title', 'Detail Surat - ' . $surat->nomor_surat)
 
-@section('sidebar-menu')
-    <!-- Dashboard -->
-    <a href="{{ route('pegawai.dashboard') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('pegawai.surat.index') }}" class="nav-item active text-white">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-@endsection
-
 @section('content')
 <div class="p-6">
     <!-- Header Section -->

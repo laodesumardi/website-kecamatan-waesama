@@ -80,6 +80,17 @@ class BeritaSeeder extends Seeder
                 'is_featured' => true,
                 'published_at' => now()->subDays(2),
             ],
+            [
+                'judul' => 'Pengumuman Jadwal Pelayanan Khusus Hari Kemerdekaan',
+                'excerpt' => 'Informasi jadwal pelayanan khusus di Kantor Camat Waesama dalam rangka memperingati Hari Kemerdekaan RI.',
+                'konten' => 'Dalam rangka memperingati Hari Kemerdekaan Republik Indonesia yang ke-80, Kantor Camat Waesama mengumumkan jadwal pelayanan khusus. Pada tanggal 17 Agustus 2025, seluruh pelayanan administrasi diliburkan untuk mengikuti upacara bendera dan kegiatan peringatan kemerdekaan. Pelayanan akan kembali normal pada tanggal 18 Agustus 2025. Masyarakat yang memerlukan layanan mendesak dapat menghubungi nomor darurat yang telah disediakan. Kami mengajak seluruh masyarakat untuk berpartisipasi dalam kegiatan peringatan kemerdekaan di lapangan kecamatan.',
+                'status' => 'Published',
+                'is_featured' => false,
+                'published_at' => \Carbon\Carbon::create(2025, 8, 27, 10, 0, 0),
+                'slug' => 'pengumuman-jadwal-pelayanan-khusus-hari-kemerdekaan',
+                'author_id' => 1,
+                'views' => 216,
+            ],
         ];
 
         foreach ($beritaData as $data) {

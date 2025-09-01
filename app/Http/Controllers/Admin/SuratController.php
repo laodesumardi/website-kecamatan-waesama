@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Surat;
 use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -84,6 +85,26 @@ class SuratController extends Controller
         $validated['nomor_surat'] = $this->generateNomorSurat($validated['jenis_surat']);
         
         $surat = Surat::create($validated);
+        
+        // Create notification for all admin users
+        $adminUsers = User::whereHas('role', function($query) {
+            $query->where('name', 'Admin');
+        })->get();
+        
+        foreach ($adminUsers as $admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'type' => 'surat_baru',
+                'title' => 'Pengajuan Surat Baru',
+                'message' => "Pengajuan surat {$validated['jenis_surat']} dari {$validated['nama_pemohon']} telah dibuat.",
+                'data' => json_encode([
+                    'surat_id' => $surat->id,
+                    'jenis_surat' => $validated['jenis_surat'],
+                    'nama_pemohon' => $validated['nama_pemohon'],
+                    'url' => route('admin.surat.show', $surat)
+                ])
+            ]);
+        }
         
         return redirect()->route('admin.surat.show', $surat)
                         ->with('success', 'Data surat berhasil ditambahkan.');

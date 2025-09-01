@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Berita - Kantor Camat Waesama</title>
-    <meta name="description" content="Berita terbaru dari Kantor Camat Waesama">
+    <meta name="description" content="Berita terbaru dari Kantor Camat Waesama - Melayani dengan sepenuh hati untuk kemajuan masyarakat">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -220,55 +217,8 @@
             <!-- News List -->
             <div class="lg:col-span-3">
                 @if($berita->count() > 0)
-                    <div class="grid gap-6">
-                        @foreach($berita as $item)
-                            <article class="news-card bg-white rounded-xl overflow-hidden fade-in">
-                                <div class="md:flex">
-                                    @if($item->gambar)
-                                        <div class="md:w-1/3">
-                                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}" class="w-full h-48 md:h-full object-cover">
-                                        </div>
-                                    @endif
-
-                                    <div class="p-6 {{ $item->gambar ? 'md:w-2/3' : 'w-full' }}">
-                                        <div class="flex items-center space-x-4 mb-3">
-                                            @if($item->is_featured)
-                                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                    <i class="fas fa-star mr-1"></i> Featured
-                                                </span>
-                                            @endif
-                                            <span class="text-sm text-gray-500">
-                                                <i class="fas fa-calendar mr-1"></i>
-                                                {{ $item->published_at ? $item->published_at->format('d M Y') : $item->created_at->format('d M Y') }}
-                                            </span>
-                                            <span class="text-sm text-gray-500">
-                                                <i class="fas fa-user mr-1"></i>
-                                                {{ $item->author->name }}
-                                            </span>
-                                            <span class="text-sm text-gray-500">
-                                                <i class="fas fa-eye mr-1"></i>
-                                                {{ number_format($item->views) }}
-                                            </span>
-                                        </div>
-
-                                        <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
-                                            <a href="{{ route('public.berita.detail', $item->slug) }}">{{ $item->judul }}</a>
-                                        </h2>
-
-                                        @if($item->excerpt)
-                                            <p class="text-gray-600 mb-4">{{ $item->excerpt }}</p>
-                                        @else
-                                            <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($item->konten), 150) }}</p>
-                                        @endif
-
-                                        <a href="{{ route('public.berita.detail', $item->slug) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors">
-                                            Baca Selengkapnya
-                                            <i class="fas fa-arrow-right ml-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        @endforeach
+                    <div id="news-container" class="grid gap-6">
+                        @include('public.partials.berita-grid', ['berita' => $berita])
                     </div>
 
                     <!-- Pagination -->
@@ -417,7 +367,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="md:col-span-2">
                     <div class="flex items-center space-x-4 mb-4">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23667eea' font-size='40' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Logo" class="h-12 w-12">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23667eea'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Logo" class="h-12 w-12">
                         <div>
                             <h3 class="text-xl font-bold">Kantor Camat Waesama</h3>
                             <p class="text-gray-300">Melayani dengan Sepenuh Hati</p>
@@ -481,6 +431,55 @@
                     menuIcon.classList.add('fa-times');
                 }
             });
+
+            // AJAX Search functionality
+            const searchForm = document.querySelector('form[action*="berita"]');
+            const searchInput = searchForm.querySelector('input[name="search"]');
+            const newsContainer = document.getElementById('news-container');
+            let searchTimeout;
+
+            // Real-time search with debounce
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    performSearch(this.value);
+                }, 500);
+            });
+
+            // Form submission
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                performSearch(searchInput.value);
+            });
+
+            function performSearch(query) {
+                // Show loading state
+                newsContainer.innerHTML = '<div class="text-center py-12"><i class="fas fa-spinner fa-spin text-4xl text-gray-400 mb-4"></i><p class="text-gray-500">Mencari berita...</p></div>';
+
+                // Perform AJAX request
+                fetch(`{{ route('public.berita') }}?search=${encodeURIComponent(query)}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    newsContainer.innerHTML = data.html;
+                    
+                    // Update pagination if exists
+                    const paginationContainer = document.querySelector('.mt-8.flex.justify-center');
+                    if (paginationContainer && data.pagination) {
+                        paginationContainer.innerHTML = data.pagination;
+                    } else if (paginationContainer && !data.pagination) {
+                        paginationContainer.innerHTML = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    newsContainer.innerHTML = '<div class="text-center py-12"><i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4"></i><p class="text-red-500">Terjadi kesalahan saat mencari berita.</p></div>';
+                });
+            }
         });
     </script>
 </body>

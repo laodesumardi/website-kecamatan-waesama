@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('nama_pengadu');
             $table->string('email_pengadu')->nullable();
             $table->string('phone_pengadu');
-            $table->text('alamat_pengadu');
+            $table->text('alamat_pengadu')->nullable();
             $table->string('judul_pengaduan');
             $table->longText('isi_pengaduan');
-            $table->enum('kategori', ['Pelayanan', 'Infrastruktur', 'Keamanan', 'Kebersihan', 'Lainnya']);
+            $table->enum('kategori', ['Infrastruktur', 'Pelayanan Publik', 'Keamanan', 'Kebersihan', 'Administrasi', 'Lainnya']);
             $table->enum('prioritas', ['Rendah', 'Sedang', 'Tinggi', 'Urgent'])->default('Sedang');
-            $table->enum('status', ['Diterima', 'Diproses', 'Ditindaklanjuti', 'Selesai', 'Ditolak'])->default('Diterima');
+            $table->enum('status', ['Baru', 'Diterima', 'Diproses', 'Ditindaklanjuti', 'Selesai', 'Ditolak'])->default('Baru');
             $table->text('tanggapan')->nullable();
             $table->string('lampiran')->nullable(); // file attachment
             $table->foreignId('ditangani_oleh')->nullable()->constrained('users')->onDelete('set null');

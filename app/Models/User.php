@@ -96,4 +96,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pengaduan::class, 'ditangani_oleh');
     }
+
+    /**
+     * Get the bookmarks for the user.
+     */
+    public function bookmarks(): HasMany
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    /**
+     * Get the bookmarked berita for the user.
+     */
+    public function bookmarkedBerita()
+    {
+        return $this->belongsToMany(Berita::class, 'bookmarks')->withTimestamps();
+    }
 }

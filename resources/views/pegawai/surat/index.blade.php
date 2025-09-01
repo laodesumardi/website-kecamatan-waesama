@@ -2,233 +2,224 @@
 
 @section('title', 'Layanan Surat')
 
-@section('sidebar-menu')
-    <!-- Dashboard -->
-    <a href="{{ route('pegawai.dashboard') }}" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="nav-text">Dashboard</span>
-    </a>
-    
-    <!-- Layanan Surat -->
-    <a href="{{ route('pegawai.surat.index') }}" class="nav-item active text-white">
-        <i class="fas fa-file-alt"></i>
-        <span class="nav-text">Layanan Surat</span>
-    </a>
-    
-    <!-- Antrian -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-clock"></i>
-        <span class="nav-text">Antrian</span>
-    </a>
-    
-    <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
-        <i class="fas fa-comments"></i>
-        <span class="nav-text">Pengaduan</span>
-    </a>
-@endsection
-
 @section('content')
 <div class="p-6">
-    <!-- Header Section -->
-    <div class="mb-6">
-        <div class="flex justify-between items-center mb-4">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-800">Layanan Surat</h1>
-                <p class="text-gray-600">Daftar permohonan surat-menyurat dari masyarakat</p>
+    <!-- Welcome Section -->
+    <div class="mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg p-6 text-white">
+            <h1 class="text-2xl font-bold mb-2">Layanan Surat</h1>
+            <p class="text-blue-100">Kelola dan proses permohonan surat-menyurat dari masyarakat</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Surat Saya Proses -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Surat Saya Proses</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['surat_diproses'] ?? 0 }}</p>
+                    <p class="text-xs text-gray-500 mt-1">Hari ini</p>
+                </div>
+                <div class="p-3 bg-blue-100 rounded-full">
+                    <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Surat Selesai -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Surat Selesai</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['surat_selesai'] ?? 0 }}</p>
+                    <p class="text-xs text-gray-500 mt-1">Hari ini</p>
+                </div>
+                <div class="p-3 bg-green-100 rounded-full">
+                    <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Surat Pending -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Surat Pending</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['surat_pending'] ?? 0 }}</p>
+                    <p class="text-xs text-gray-500 mt-1">Menunggu proses</p>
+                </div>
+                <div class="p-3 bg-yellow-100 rounded-full">
+                    <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Filters Section -->
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-        <form method="GET" action="{{ route('pegawai.surat.index') }}" class="space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <!-- Search -->
-                <div>
-                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Pencarian</label>
-                    <input type="text" id="search" name="search" value="{{ request('search') }}" 
-                           placeholder="Nomor surat, nama, NIK..."
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    <!-- Today's Tasks -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Tugas Hari Ini -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Tugas Hari Ini</h3>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-yellow-100 rounded-full">
+                            <i class="fas fa-file-alt text-yellow-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">Proses Surat Baru</p>
+                            <p class="text-sm text-gray-600">{{ $stats['surat_pending'] ?? 0 }} surat menunggu</p>
+                        </div>
+                    </div>
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Urgent</span>
                 </div>
                 
-                <!-- Jenis Surat Filter -->
-                <div>
-                    <label for="jenis_surat" class="block text-sm font-medium text-gray-700 mb-1">Jenis Surat</label>
-                    <select id="jenis_surat" name="jenis_surat" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        <option value="">Semua Jenis</option>
-                        <option value="Domisili" {{ request('jenis_surat') == 'Domisili' ? 'selected' : '' }}>Domisili</option>
-                        <option value="SKTM" {{ request('jenis_surat') == 'SKTM' ? 'selected' : '' }}>SKTM</option>
-                        <option value="Usaha" {{ request('jenis_surat') == 'Usaha' ? 'selected' : '' }}>Usaha</option>
-                        <option value="Pengantar" {{ request('jenis_surat') == 'Pengantar' ? 'selected' : '' }}>Pengantar</option>
-                        <option value="Kematian" {{ request('jenis_surat') == 'Kematian' ? 'selected' : '' }}>Kematian</option>
-                        <option value="Kelahiran" {{ request('jenis_surat') == 'Kelahiran' ? 'selected' : '' }}>Kelahiran</option>
-                        <option value="Pindah" {{ request('jenis_surat') == 'Pindah' ? 'selected' : '' }}>Pindah</option>
-                    </select>
-                </div>
-                
-                <!-- Status Filter -->
-                <div>
-                    <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select id="status" name="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                        <option value="">Semua Status</option>
-                        <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="Diproses" {{ request('status') == 'Diproses' ? 'selected' : '' }}>Diproses</option>
-                        <option value="Selesai" {{ request('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
-                    </select>
-                </div>
-                
-                <!-- Start Date -->
-                <div>
-                    <label for="start_date" class="block text-sm font-medium text-gray-700 mb-1">Dari Tanggal</label>
-                    <input type="date" id="start_date" name="start_date" value="{{ request('start_date') }}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <!-- End Date -->
-                <div>
-                    <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">Sampai Tanggal</label>
-                    <input type="date" id="end_date" name="end_date" value="{{ request('end_date') }}"
-                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-blue-100 rounded-full">
+                            <i class="fas fa-edit text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-800">Review Surat</p>
+                            <p class="text-sm text-gray-600">{{ $stats['surat_diproses'] ?? 0 }} surat dalam proses</p>
+                        </div>
+                    </div>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Normal</span>
                 </div>
             </div>
-            
-            <div class="flex gap-2">
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-                    <i class="fas fa-search"></i>
-                    Cari
-                </button>
-                <a href="{{ route('pegawai.surat.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors flex items-center gap-2">
-                    <i class="fas fa-undo"></i>
-                    Reset
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Aksi Cepat</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <a href="#" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group">
+                    <div class="text-center">
+                        <div class="p-3 bg-blue-100 rounded-full inline-flex mb-2 group-hover:bg-blue-200 transition-colors">
+                            <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700 group-hover:text-blue-700">Proses Surat</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group">
+                    <div class="text-center">
+                        <div class="p-3 bg-green-100 rounded-full inline-flex mb-2 group-hover:bg-green-200 transition-colors">
+                            <i class="fas fa-search text-green-600 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700 group-hover:text-green-700">Cari Surat</p>
+                    </div>
+                </a>
+                
+                <a href="{{ route('pegawai.penduduk.index') }}" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group">
+                    <div class="text-center">
+                        <div class="p-3 bg-purple-100 rounded-full inline-flex mb-2 group-hover:bg-purple-200 transition-colors">
+                            <i class="fas fa-users text-purple-600 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700 group-hover:text-purple-700">Cari Data</p>
+                    </div>
+                </a>
+                
+                <a href="{{ route('pegawai.laporan.index') }}" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-orange-300 hover:bg-orange-50 transition-all duration-200 group">
+                    <div class="text-center">
+                        <div class="p-3 bg-orange-100 rounded-full inline-flex mb-2 group-hover:bg-orange-200 transition-colors">
+                            <i class="fas fa-chart-bar text-orange-600 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-700 group-hover:text-orange-700">Laporan</p>
+                    </div>
                 </a>
             </div>
-        </form>
+        </div>
     </div>
 
-    <!-- Data Table -->
-    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Surat</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Surat</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pemohon</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Keperluan</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($surat as $item)
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $item->nomor_surat }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    @switch($item->jenis_surat)
-                                        @case('Domisili')
-                                            bg-blue-100 text-blue-800
-                                            @break
-                                        @case('SKTM')
-                                            bg-green-100 text-green-800
-                                            @break
-                                        @case('Usaha')
-                                            bg-purple-100 text-purple-800
-                                            @break
-                                        @case('Pengantar')
-                                            bg-yellow-100 text-yellow-800
-                                            @break
-                                        @case('Kematian')
-                                            bg-red-100 text-red-800
-                                            @break
-                                        @case('Kelahiran')
-                                            bg-pink-100 text-pink-800
-                                            @break
-                                        @case('Pindah')
-                                            bg-indigo-100 text-indigo-800
-                                            @break
-                                        @default
-                                            bg-gray-100 text-gray-800
-                                    @endswitch">
-                                    {{ $item->jenis_surat }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm font-medium text-gray-900">{{ $item->nama_pemohon }}</div>
-                                <div class="text-sm text-gray-500">{{ $item->nik_pemohon }}</div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="text-sm text-gray-900">{{ Str::limit($item->keperluan, 50) }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                    @switch($item->status)
-                                        @case('Pending')
-                                            bg-yellow-100 text-yellow-800
-                                            @break
-                                        @case('Diproses')
-                                            bg-blue-100 text-blue-800
-                                            @break
-                                        @case('Selesai')
-                                            bg-green-100 text-green-800
-                                            @break
-                                        @case('Ditolak')
-                                            bg-red-100 text-red-800
-                                            @break
-                                        @default
-                                            bg-gray-100 text-gray-800
-                                    @endswitch">
-                                    {{ $item->status }}
-                                </span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $item->created_at->format('d/m/Y H:i') }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <div class="flex items-center space-x-2">
-                                    <a href="{{ route('pegawai.surat.show', $item) }}" 
-                                       class="text-blue-600 hover:text-blue-900" title="Lihat Detail">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('pegawai.surat.export-pdf', $item) }}" 
-                                       class="text-purple-600 hover:text-purple-900" title="Export PDF">
-                                        <i class="fas fa-file-pdf"></i>
-                                    </a>
-                                    @if($item->status == 'Selesai' && $item->file_surat)
-                                        <a href="{{ route('pegawai.surat.download', $item) }}" 
-                                           class="text-green-600 hover:text-green-900" title="Download Surat">
-                                            <i class="fas fa-download"></i>
-                                        </a>
-                                    @endif
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">
-                                <div class="flex flex-col items-center justify-center py-8">
-                                    <i class="fas fa-file-alt text-gray-300 text-4xl mb-4"></i>
-                                    <p class="text-lg font-medium text-gray-400">Tidak ada data surat</p>
-                                    <p class="text-sm text-gray-400">Belum ada permohonan surat yang masuk</p>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        
-        <!-- Pagination -->
-        @if($surat->hasPages())
-            <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
-                {{ $surat->links() }}
+    <!-- Service Progress & Recent Activities -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Service Progress -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">Progress Layanan</h3>
+                <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
             </div>
-        @endif
+            <div class="space-y-4">
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-medium text-gray-700">Surat Diproses</span>
+                        <span class="text-sm text-gray-500">{{ $stats['progress_surat'] ?? 75 }}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: {{ $stats['progress_surat'] ?? 75 }}%"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-medium text-gray-700">Kepuasan Layanan</span>
+                        <span class="text-sm text-gray-500">{{ $stats['kepuasan'] ?? 92 }}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-green-600 h-2 rounded-full" style="width: {{ $stats['kepuasan'] ?? 92 }}%"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm font-medium text-gray-700">Efisiensi Waktu</span>
+                        <span class="text-sm text-gray-500">{{ $stats['efisiensi'] ?? 88 }}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-yellow-600 h-2 rounded-full" style="width: {{ $stats['efisiensi'] ?? 88 }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h3>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                    <div class="p-2 bg-blue-100 rounded-full">
+                        <i class="fas fa-file-alt text-blue-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Memproses surat domisili</p>
+                        <p class="text-xs text-gray-500">Atas nama Ahmad Fauzi - 2 menit lalu</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="p-2 bg-green-100 rounded-full">
+                        <i class="fas fa-check text-green-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Menyelesaikan surat SKTM</p>
+                        <p class="text-xs text-gray-500">Atas nama Siti Aminah - 15 menit lalu</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="p-2 bg-yellow-100 rounded-full">
+                        <i class="fas fa-edit text-yellow-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Merevisi surat usaha</p>
+                        <p class="text-xs text-gray-500">Atas nama Budi Santoso - 30 menit lalu</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                    <div class="p-2 bg-purple-100 rounded-full">
+                        <i class="fas fa-download text-purple-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-gray-800">Mengunduh surat pengantar</p>
+                        <p class="text-xs text-gray-500">Atas nama Dewi Lestari - 1 jam lalu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
