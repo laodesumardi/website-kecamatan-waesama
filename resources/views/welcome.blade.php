@@ -170,78 +170,89 @@
     </head>
     <body>
       <!-- Navigation -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-bottom: 1px solid #f3f4f6;">
+    <div style="max-width: 80rem; margin: 0 auto; padding: 0 1rem;">
         <!-- Main Navigation Container -->
-        <div class="flex justify-between items-center h-16 lg:h-20">
+        <div style="display: flex; justify-content: space-between; align-items: center; height: 4rem;">
             <!-- Logo Section -->
-            <div class="flex items-center space-x-3 flex-shrink-0">
-                <div class="bg-blue-800 p-2 rounded-lg">
-                    <i class="fas fa-building text-xl text-white"></i>
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;">
+                <div style="background: #1e40af; padding: 0.5rem; border-radius: 0.5rem;">
+                    <i class="fas fa-building" style="font-size: 1.25rem; color: white;"></i>
                 </div>
-                <div class="hidden sm:block">
-                    <h1 class="text-lg font-bold text-gray-900 leading-tight">Kantor Camat Waesama</h1>
-                    <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
-                </div>
-                <div class="sm:hidden">
-                    <h1 class="text-base font-bold text-gray-900">Camat Waesama</h1>
+                <div style="display: block;">
+                    <h1 style="font-size: 1.125rem; font-weight: 700; color: #111827; line-height: 1.25;">Kantor Camat Waesama</h1>
+                    <p style="font-size: 0.875rem; color: #4b5563;">Melayani dengan Sepenuh Hati</p>
                 </div>
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden lg:flex items-center space-x-8">
+            <div style="display: flex; align-items: center; gap: 2rem;">
                 <!-- Navigation Links -->
-                <div class="flex items-center space-x-1">
+                <div style="display: flex; align-items: center; gap: 0.25rem;">
                     <a href="{{ route('welcome') }}"
-                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-home text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                       style="display: flex; align-items: center; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-weight: 500; color: #374151; text-decoration: none; border-radius: 0.5rem; transition: all 0.2s;"
+                       onmouseover="this.style.color='#1e40af'; this.style.backgroundColor='#eff6ff';"
+                       onmouseout="this.style.color='#374151'; this.style.backgroundColor='transparent';">
+                        <i class="fas fa-home" style="font-size: 1rem; margin-right: 0.5rem;"></i>
                         <span>Beranda</span>
                     </a>
 
                     <a href="{{ route('public.profil') }}"
-                       class="group flex items-center px-3 py-2 text-sm font-medium text-blue-800 bg-blue-50 rounded-lg ">
-                        <i class="fas fa-info-circle text-base mr-2"></i>
+                       style="display: flex; align-items: center; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-weight: 500; color: #1e40af; background: #eff6ff; border-radius: 0.5rem; text-decoration: none;">
+                        <i class="fas fa-info-circle" style="font-size: 1rem; margin-right: 0.5rem;"></i>
                         <span>Profil</span>
                     </a>
 
                     <a href="{{ route('public.berita') }}"
-                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-newspaper text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                       style="display: flex; align-items: center; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-weight: 500; color: #374151; text-decoration: none; border-radius: 0.5rem; transition: all 0.2s;"
+                       onmouseover="this.style.color='#1e40af'; this.style.backgroundColor='#eff6ff';"
+                       onmouseout="this.style.color='#374151'; this.style.backgroundColor='transparent';">
+                        <i class="fas fa-newspaper" style="font-size: 1rem; margin-right: 0.5rem;"></i>
                         <span>Berita</span>
                     </a>
 
                     <a href="{{ route('public.layanan') }}"
-                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-cogs text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                       style="display: flex; align-items: center; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-weight: 500; color: #374151; text-decoration: none; border-radius: 0.5rem; transition: all 0.2s;"
+                       onmouseover="this.style.color='#1e40af'; this.style.backgroundColor='#eff6ff';"
+                       onmouseout="this.style.color='#374151'; this.style.backgroundColor='transparent';">
+                        <i class="fas fa-cogs" style="font-size: 1rem; margin-right: 0.5rem;"></i>
                         <span>Layanan</span>
                     </a>
 
                     <a href="{{ route('public.kontak') }}"
-                       class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-phone text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                       style="display: flex; align-items: center; padding: 0.5rem 0.75rem; font-size: 0.875rem; font-weight: 500; color: #374151; text-decoration: none; border-radius: 0.5rem; transition: all 0.2s;"
+                       onmouseover="this.style.color='#1e40af'; this.style.backgroundColor='#eff6ff';"
+                       onmouseout="this.style.color='#374151'; this.style.backgroundColor='transparent';">
+                        <i class="fas fa-phone" style="font-size: 1rem; margin-right: 0.5rem;"></i>
                         <span>Kontak</span>
                     </a>
                 </div>
 
                 <!-- Authentication Section -->
                 @if (Route::has('login'))
-                    <div class="flex items-center space-x-3 pl-6 border-l border-gray-200">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; padding-left: 1.5rem; border-left: 1px solid #e5e7eb;">
                         @auth
                             <a href="{{ url('/dashboard') }}"
-                               class="inline-flex items-center px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
-                                <i class="fas fa-tachometer-alt mr-2"></i>
+                               style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background: #1e40af; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 0.5rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);"
+                               onmouseover="this.style.background='#1e3a8a'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)';"
+                               onmouseout="this.style.background='#1e40af'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
+                                <i class="fas fa-tachometer-alt" style="margin-right: 0.5rem;"></i>
                                 Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}"
-                               class="inline-flex items-center px-4 py-2 border border-blue-800 text-blue-800 text-sm font-medium rounded-lg hover:bg-blue-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200">
-                                <i class="fas fa-sign-in-alt mr-2"></i>
+                               style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; border: 1px solid #1e40af; color: #1e40af; font-size: 0.875rem; font-weight: 500; border-radius: 0.5rem; text-decoration: none; transition: all 0.2s;"
+                               onmouseover="this.style.background='#1e40af'; this.style.color='white';"
+                               onmouseout="this.style.background='transparent'; this.style.color='#1e40af';">
+                                <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>
                                 Masuk
                             </a>
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
-                                   class="inline-flex items-center px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
-                                    <i class="fas fa-user-plus mr-2"></i>
+                                   style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background: #1e40af; color: white; font-size: 0.875rem; font-weight: 500; border-radius: 0.5rem; text-decoration: none; transition: all 0.2s; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);"
+                                   onmouseover="this.style.background='#1e3a8a'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)';"
+                                   onmouseout="this.style.background='#1e40af'; this.style.boxShadow='0 1px 2px 0 rgba(0, 0, 0, 0.05)';">
+                                    <i class="fas fa-user-plus" style="margin-right: 0.5rem;"></i>
                                     Daftar
                                 </a>
                             @endif
@@ -251,18 +262,20 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <div class="lg:hidden">
+            <div style="display: none;">
                 <button id="mobile-menu-btn"
-                        class="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-blue-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                        style="display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem; border-radius: 0.5rem; color: #4b5563; background: transparent; border: none; cursor: pointer; transition: all 0.2s;"
+                        onmouseover="this.style.color='#1e40af'; this.style.backgroundColor='#f3f4f6';"
+                        onmouseout="this.style.color='#4b5563'; this.style.backgroundColor='transparent';"
                         aria-expanded="false"
                         aria-label="Toggle navigation menu">
-                    <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    <i id="menu-icon" class="fas fa-bars" style="font-size: 1.25rem;"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="lg:hidden hidden border-t border-gray-200">
+        <div id="mobile-menu" style="display: none; border-top: 1px solid #e5e7eb;">
             <div class="px-2 pt-4 pb-6 space-y-2">
                 <!-- Mobile Navigation Links -->
                 <div class="space-y-1">
