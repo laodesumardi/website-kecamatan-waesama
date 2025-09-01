@@ -330,7 +330,7 @@
 </nav>
         <!-- Hero Section -->
         <section class="hero-bg" style="padding: 10rem 2rem 6rem; text-align: center; color: white; position: relative; overflow: hidden; background: #003f88; margin-top: 0;">
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); opacity: 0.3;"></div>
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); opacity: 0.1; z-index: 0;"></div>
             <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;" class="animate-fade-in">
                 <h1 style="font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Selamat Datang di<br>Kantor Camat Waesama</h1>
                 <p style="font-size: 1.25rem; margin-bottom: 2.5rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">Kami berkomitmen memberikan pelayanan terbaik untuk masyarakat dengan sistem digital yang modern dan efisien</p>
