@@ -31,7 +31,8 @@ class RoleMiddleware
 
         // Check if user has role
         if (!$user->role) {
-            return redirect()->route('dashboard')->with('error', 'Anda tidak memiliki role yang valid.');
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Anda tidak memiliki role yang valid. Silakan hubungi administrator.');
         }
 
         // Check if user's role is in the allowed roles

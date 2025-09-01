@@ -10,37 +10,37 @@
     </a>
     
     <!-- Ajukan Surat -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('warga.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-file-plus"></i>
         <span class="nav-text">Ajukan Surat</span>
     </a>
     
     <!-- Riwayat Surat -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('warga.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-history"></i>
         <span class="nav-text">Riwayat Surat</span>
     </a>
     
     <!-- Antrian Online -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-clock"></i>
         <span class="nav-text">Antrian Online</span>
     </a>
     
     <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-comments"></i>
         <span class="nav-text">Pengaduan</span>
     </a>
     
     <!-- Berita -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('public.berita') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-newspaper"></i>
         <span class="nav-text">Berita</span>
     </a>
     
     <!-- Profil -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-user"></i>
         <span class="nav-text">Profil Saya</span>
     </a>
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <a href="#" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Riwayat →</a>
+                <a href="{{ route('warga.surat.index') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Riwayat →</a>
             </div>
         </div>
 

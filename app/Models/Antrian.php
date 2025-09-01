@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Antrian extends Model
 {
+    protected $table = 'antrian';
+    
     protected $fillable = [
         'nomor_antrian',
         'nama_pengunjung',

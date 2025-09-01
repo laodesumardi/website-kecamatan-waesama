@@ -10,31 +10,31 @@
     </a>
     
     <!-- Layanan Surat -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('pegawai.surat.index') }}" class="nav-item text-white">
         <i class="fas fa-file-alt"></i>
         <span class="nav-text">Layanan Surat</span>
     </a>
     
     <!-- Antrian -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-clock"></i>
         <span class="nav-text">Antrian</span>
     </a>
     
     <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-comments"></i>
         <span class="nav-text">Pengaduan</span>
     </a>
     
     <!-- Data Penduduk -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-users"></i>
         <span class="nav-text">Data Penduduk</span>
     </a>
     
     <!-- Laporan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="#" class="nav-item text-gray-500 cursor-not-allowed" title="Fitur dalam pengembangan">
         <i class="fas fa-chart-bar"></i>
         <span class="nav-text">Laporan</span>
     </a>
@@ -155,12 +155,12 @@
                 <i class="fas fa-bolt text-gray-400"></i>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <button class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group">
+                <a href="{{ route('pegawai.surat.index') }}" class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group">
                     <div class="text-center">
                         <i class="fas fa-file-plus text-2xl text-gray-400 group-hover:text-blue-600 mb-2"></i>
                         <p class="text-gray-600 group-hover:text-blue-600 font-medium">Proses Surat</p>
                     </div>
-                </button>
+                </a>
                 <button class="p-4 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group">
                     <div class="text-center">
                         <i class="fas fa-user-plus text-2xl text-gray-400 group-hover:text-green-600 mb-2"></i>

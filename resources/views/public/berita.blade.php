@@ -5,79 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berita - Kantor Camat Waesama</title>
     <meta name="description" content="Berita terbaru dari Kantor Camat Waesama">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        
+
         .hero-bg {
             background: #003f88;
         }
-        
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        
+
         .news-card {
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
         }
-        
+
         .news-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             border-color: #d1d5db;
         }
-        
+
         .fade-in {
             animation: fadeIn 0.6s ease-in;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .text-gradient {
                 color: #003f88;
             }
-        
+
         .btn-primary {
             background: #003f88;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
-        
+
         .pagination-btn {
             transition: all 0.3s ease;
         }
-        
+
         .pagination-btn:hover {
             background: #003f88;
             color: white;
         }
-        
+
         /* Standardized Public Navigation Menu */
         .public-nav-item {
             color: #666;
@@ -125,28 +125,30 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-building" style="font-size: 2rem; color: #003f88;"></i>
-                <div>
-                    <h1 style="font-size: 1.5rem; font-weight: 700; margin: 0; color: #333;">Kantor Camat Waesama</h1>
-                    <p style="font-size: 0.875rem; color: #666; margin: 0;">Melayani dengan Sepenuh Hati</p>
-                </div>
-            </div>
-                
-                <!-- Navigation Menu -->
-                <div style="display: flex; align-items: center; gap: 2rem;">
-                    <div style="display: flex; gap: 0.5rem;">
-                        <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home" style="margin-right: 0.5rem;"></i>Beranda</a>
-                        <a href="{{ route('public.profil') }}" class="public-nav-item"><i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>Profil</a>
-                        <a href="{{ route('public.berita') }}" class="public-nav-item active"><i class="fas fa-newspaper" style="margin-right: 0.5rem;"></i>Berita</a>
-                        <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs" style="margin-right: 0.5rem;"></i>Layanan</a>
-                        <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Kontak</a>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-building text-2xl text-blue-800"></i>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Kantor Camat Waesama</h1>
+                        <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
                     </div>
-                    
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="flex space-x-2">
+                        <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
+                        <a href="{{ route('public.profil') }}" class="public-nav-item"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                        <a href="{{ route('public.berita') }}" class="public-nav-item active"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                        <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
+                        <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
+                    </div>
+
                     @if (Route::has('login'))
-                        <div style="display: flex; gap: 1rem; align-items: center;">
+                        <div class="flex space-x-4 items-center">
                             @auth
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
@@ -158,15 +160,47 @@
                         </div>
                     @endif
                 </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-800 focus:outline-none">
+                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
+                    <a href="{{ route('public.profil') }}" class="public-nav-item"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                    <a href="{{ route('public.berita') }}" class="public-nav-item active"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                    <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
+                    <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
+
+                    @if (Route::has('login'))
+                        <div class="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-bg text-white py-16">
+    <section class="hero-bg text-white py-16 pt-[150px]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Berita & Pengumuman</h1>
             <p class="text-xl mb-8 opacity-90 fade-in">Informasi terbaru dari Kantor Camat Waesama</p>
-            
+
             <!-- Search Bar -->
             <div class="max-w-md mx-auto fade-in">
                 <form method="GET" action="{{ route('public.berita') }}" class="relative">
@@ -195,7 +229,7 @@
                                             <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}" class="w-full h-48 md:h-full object-cover">
                                         </div>
                                     @endif
-                                    
+
                                     <div class="p-6 {{ $item->gambar ? 'md:w-2/3' : 'w-full' }}">
                                         <div class="flex items-center space-x-4 mb-3">
                                             @if($item->is_featured)
@@ -216,17 +250,17 @@
                                                 {{ number_format($item->views) }}
                                             </span>
                                         </div>
-                                        
+
                                         <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
                                             <a href="{{ route('public.berita.detail', $item->slug) }}">{{ $item->judul }}</a>
                                         </h2>
-                                        
+
                                         @if($item->excerpt)
                                             <p class="text-gray-600 mb-4">{{ $item->excerpt }}</p>
                                         @else
                                             <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($item->konten), 150) }}</p>
                                         @endif
-                                        
+
                                         <a href="{{ route('public.berita.detail', $item->slug) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors">
                                             Baca Selengkapnya
                                             <i class="fas fa-arrow-right ml-2"></i>
@@ -236,7 +270,7 @@
                             </article>
                         @endforeach
                     </div>
-                    
+
                     <!-- Pagination -->
                     @if($berita->hasPages())
                         <div class="mt-8 flex justify-center">
@@ -251,7 +285,7 @@
                                         <i class="fas fa-chevron-left"></i>
                                     </a>
                                 @endif
-                                
+
                                 {{-- Pagination Elements --}}
                                 @foreach ($berita->getUrlRange(1, $berita->lastPage()) as $page => $url)
                                     @if ($page == $berita->currentPage())
@@ -260,7 +294,7 @@
                                         <a href="{{ $url }}" class="pagination-btn px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-blue-600 hover:text-white">{{ $page }}</a>
                                     @endif
                                 @endforeach
-                                
+
                                 {{-- Next Page Link --}}
                                 @if ($berita->hasMorePages())
                                     <a href="{{ $berita->nextPageUrl() }}" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-blue-600 hover:text-white">
@@ -282,7 +316,7 @@
                     </div>
                 @endif
             </div>
-            
+
             <!-- Sidebar -->
             <div class="lg:col-span-1 space-y-6">
                 <!-- Featured News -->
@@ -316,7 +350,7 @@
                         </div>
                     </div>
                 @endif
-                
+
                 <!-- Quick Links -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
@@ -342,7 +376,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Contact Info -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
@@ -391,7 +425,7 @@
                     </div>
                     <p class="text-gray-300 mb-4">Kantor Camat Waesama berkomitmen memberikan pelayanan terbaik kepada masyarakat dengan mengutamakan transparansi, akuntabilitas, dan profesionalisme.</p>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2">
@@ -402,7 +436,7 @@
                         <li><a href="{{ route('public.kontak') }}" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Media Sosial</h4>
                     <div class="flex space-x-4">
@@ -421,11 +455,33 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p class="text-gray-300">&copy; 2024 Kantor Camat Waesama. Semua hak dilindungi.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+
+                // Toggle icon
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

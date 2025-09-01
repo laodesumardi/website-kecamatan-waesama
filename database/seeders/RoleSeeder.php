@@ -15,17 +15,17 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'admin',
+                'name' => 'Admin',
                 'display_name' => 'Administrator',
                 'description' => 'Administrator sistem dengan akses penuh ke semua fitur'
             ],
             [
-                'name' => 'pegawai',
+                'name' => 'Pegawai',
                 'display_name' => 'Pegawai',
                 'description' => 'Pegawai kantor camat yang dapat mengelola layanan masyarakat'
             ],
             [
-                'name' => 'warga',
+                'name' => 'Warga',
                 'display_name' => 'Warga',
                 'description' => 'Warga yang dapat mengakses layanan publik'
             ]

@@ -10,43 +10,49 @@
     </a>
     
     <!-- Data Penduduk -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.penduduk.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-users"></i>
         <span class="nav-text">Data Penduduk</span>
     </a>
     
     <!-- Layanan Surat -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.surat.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-file-alt"></i>
         <span class="nav-text">Layanan Surat</span>
     </a>
     
     <!-- Antrian -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.antrian.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-clock"></i>
         <span class="nav-text">Antrian</span>
     </a>
     
+    <!-- Dashboard Antrian -->
+    <a href="{{ route('admin.antrian.dashboard') }}" class="nav-item text-gray-700 hover:text-white">
+        <i class="fas fa-chart-line"></i>
+        <span class="nav-text">Dashboard Antrian</span>
+    </a>
+    
     <!-- Berita -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.berita.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-newspaper"></i>
         <span class="nav-text">Berita</span>
     </a>
     
     <!-- Pengaduan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.pengaduan.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-comments"></i>
         <span class="nav-text">Pengaduan</span>
     </a>
     
     <!-- Manajemen User -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.user.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-user-cog"></i>
         <span class="nav-text">Manajemen User</span>
     </a>
     
     <!-- Laporan -->
-    <a href="#" class="nav-item text-gray-700 hover:text-white">
+    <a href="{{ route('admin.laporan.index') }}" class="nav-item text-gray-700 hover:text-white">
         <i class="fas fa-chart-bar"></i>
         <span class="nav-text">Laporan</span>
     </a>
@@ -189,18 +195,22 @@
                 <i class="fas fa-bolt text-gray-400"></i>
             </div>
             <div class="space-y-2">
-                <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="{{ route('admin.user.create') }}" class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors block">
                     <i class="fas fa-plus text-blue-600 mr-2"></i>
                     <span class="text-gray-700">Tambah Pengguna</span>
-                </button>
-                <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                </a>
+                <a href="{{ route('admin.berita.create') }}" class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors block">
                     <i class="fas fa-file-plus text-green-600 mr-2"></i>
                     <span class="text-gray-700">Buat Berita</span>
-                </button>
-                <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                </a>
+                <a href="{{ route('admin.laporan.index') }}" class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors block">
                     <i class="fas fa-chart-line text-purple-600 mr-2"></i>
                     <span class="text-gray-700">Lihat Laporan</span>
-                </button>
+                </a>
+                <a href="{{ route('admin.antrian.dashboard') }}" class="w-full text-left px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors block">
+                    <i class="fas fa-chart-bar text-indigo-600 mr-2"></i>
+                    <span class="text-gray-700">Dashboard Antrian</span>
+                </a>
             </div>
         </div>
     </div>

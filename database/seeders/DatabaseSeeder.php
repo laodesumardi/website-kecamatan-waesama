@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,27 +11,29 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seed roles first
-        $this->call(RoleSeeder::class);
-
-        // Create admin user
-        $adminRole = \App\Models\Role::where('name', 'admin')->first();
+        $this->command->info('🌱 Starting database seeding...');
         
-        User::factory()->create([
-            'name' => 'Administrator',
-            'email' => 'admin@kantorcamat.com',
-            'role_id' => $adminRole->id,
-            'is_active' => true,
+        // Seed in order of dependencies
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            PendudukSeeder::class,
+            BeritaSeeder::class,
+            SuratSeeder::class,
+            AntrianSeeder::class,
+            PengaduanSeeder::class,
         ]);
-
-        // Create test pegawai user
-        $pegawaiRole = \App\Models\Role::where('name', 'pegawai')->first();
         
-        User::factory()->create([
-            'name' => 'Pegawai Test',
-            'email' => 'pegawai@kantorcamat.com',
-            'role_id' => $pegawaiRole->id,
-            'is_active' => true,
-        ]);
+        $this->command->info('✅ Database seeding completed successfully!');
+        $this->command->info('');
+        $this->command->info('📋 Summary:');
+        $this->command->info('- Roles: Admin, Pegawai, Warga');
+        $this->command->info('- Users: 2 Admin, 3 Pegawai, 5 Warga');
+        $this->command->info('- Sample data for all modules created');
+        $this->command->info('');
+        $this->command->info('🔑 Login credentials:');
+        $this->command->info('Admin: admin@waesama.go.id / admin123');
+        $this->command->info('Pegawai: siti.aminah@waesama.go.id / pegawai123');
+        $this->command->info('Warga: budi.santoso@gmail.com / warga123');
     }
 }

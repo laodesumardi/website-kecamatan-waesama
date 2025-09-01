@@ -5,64 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Kantor - Kantor Camat Waesama</title>
     <meta name="description" content="Profil lengkap Kantor Camat Waesama - Visi, Misi, Struktur Organisasi, dan Sejarah">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        
+
         .hero-bg {
             background: #003f88;
         }
-        
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        
+
         .fade-in {
             animation: fadeIn 0.6s ease-in;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .text-gradient {
                 color: #003f88;
             }
-        
+
         .btn-primary {
             background: #003f88;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
-        
+
         .timeline-item {
             position: relative;
             padding-left: 2rem;
         }
-        
+
         .timeline-item::before {
             content: '';
             position: absolute;
@@ -73,7 +73,7 @@
             background: #667eea;
             border-radius: 50%;
         }
-        
+
         .timeline-item::after {
             content: '';
             position: absolute;
@@ -83,11 +83,11 @@
             height: calc(100% - 1.25rem);
             background: #e5e7eb;
         }
-        
+
         .timeline-item:last-child::after {
             display: none;
         }
-        
+
         /* Standardized Public Navigation Menu */
         .public-nav-item {
             color: #666;
@@ -135,28 +135,30 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-building" style="font-size: 2rem; color: #003f88;"></i>
-                <div>
-                    <h1 style="font-size: 1.5rem; font-weight: 700; margin: 0; color: #333;">Kantor Camat Waesama</h1>
-                    <p style="font-size: 0.875rem; color: #666; margin: 0;">Melayani dengan Sepenuh Hati</p>
-                </div>
-            </div>
-                
-                <!-- Navigation Menu -->
-                <div style="display: flex; align-items: center; gap: 2rem;">
-                    <div style="display: flex; gap: 0.5rem;">
-                        <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home" style="margin-right: 0.5rem;"></i>Beranda</a>
-                        <a href="{{ route('public.profil') }}" class="public-nav-item active"><i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>Profil</a>
-                        <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper" style="margin-right: 0.5rem;"></i>Berita</a>
-                        <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs" style="margin-right: 0.5rem;"></i>Layanan</a>
-                        <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Kontak</a>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-building text-2xl text-blue-800"></i>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Kantor Camat Waesama</h1>
+                        <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
                     </div>
-                    
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="flex space-x-2">
+                        <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
+                        <a href="{{ route('public.profil') }}" class="public-nav-item active"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                        <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                        <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
+                        <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
+                    </div>
+
                     @if (Route::has('login'))
-                        <div style="display: flex; gap: 1rem; align-items: center;">
+                        <div class="flex space-x-4 items-center">
                             @auth
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
@@ -168,11 +170,43 @@
                         </div>
                     @endif
                 </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-800 focus:outline-none">
+                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
+                    <a href="{{ route('public.profil') }}" class="public-nav-item active"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                    <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                    <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
+                    <a href="{{ route('public.kontak') }}" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
+
+                    @if (Route::has('login'))
+                        <div class="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-bg text-white py-16">
+   <section class="hero-bg text-white py-16 pt-[150px]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Profil Kantor Camat</h1>
             <p class="text-xl mb-8 opacity-90 fade-in">Mengenal lebih dekat Kantor Camat Waesama</p>
@@ -203,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="fade-in">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Crect x='50' y='50' width='300' height='200' fill='%23667eea' rx='10'/%3E%3Ctext x='200' y='160' text-anchor='middle' fill='white' font-size='24' font-weight='bold'%3EKantor Camat%3C/text%3E%3Ctext x='200' y='185' text-anchor='middle' fill='white' font-size='18'%3EWaesama%3C/text%3E%3C/svg%3E" alt="Kantor Camat Waesama" class="w-full rounded-xl shadow-lg">
                 </div>
@@ -225,7 +259,7 @@
                         "Terwujudnya Kecamatan Waesama yang Maju, Sejahtera, dan Berkeadilan melalui Pelayanan Prima dan Pembangunan Berkelanjutan"
                     </p>
                 </div>
-                
+
                 <!-- Misi -->
                 <div class="bg-white rounded-xl shadow-sm p-8 card-hover fade-in">
                     <div class="flex items-center mb-6">
@@ -262,7 +296,7 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Struktur Organisasi</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Struktur organisasi Kantor Camat Waesama yang terdiri dari berbagai bidang untuk melayani masyarakat</p>
             </div>
-            
+
             <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
                 <!-- Camat -->
                 <div class="text-center mb-8">
@@ -271,7 +305,7 @@
                         <p class="text-blue-100">Drs. Ahmad Suryanto, M.Si</p>
                     </div>
                 </div>
-                
+
                 <!-- Sekretaris Camat -->
                 <div class="text-center mb-8">
                     <div class="inline-block bg-green-600 text-white px-6 py-4 rounded-lg">
@@ -279,7 +313,7 @@
                         <p class="text-green-100">Siti Nurhaliza, S.Sos</p>
                     </div>
                 </div>
-                
+
                 <!-- Bidang-bidang -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-purple-100 p-6 rounded-lg text-center">
@@ -290,7 +324,7 @@
                         <p class="text-sm text-gray-600 mb-3">Menangani urusan administrasi kependudukan dan pemerintahan</p>
                         <p class="text-sm font-medium text-purple-600">Kepala: Budi Santoso, S.AP</p>
                     </div>
-                    
+
                     <div class="bg-orange-100 p-6 rounded-lg text-center">
                         <div class="bg-orange-600 text-white p-3 rounded-lg inline-block mb-4">
                             <i class="fas fa-chart-line text-2xl"></i>
@@ -299,7 +333,7 @@
                         <p class="text-sm text-gray-600 mb-3">Menangani perencanaan dan pelaksanaan pembangunan</p>
                         <p class="text-sm font-medium text-orange-600">Kepala: Ir. Dewi Sartika</p>
                     </div>
-                    
+
                     <div class="bg-teal-100 p-6 rounded-lg text-center">
                         <div class="bg-teal-600 text-white p-3 rounded-lg inline-block mb-4">
                             <i class="fas fa-handshake text-2xl"></i>
@@ -324,7 +358,7 @@
                         Sejak berdiri, Kantor Camat Waesama terus berkomitmen untuk meningkatkan kualitas pelayanan dan pembangunan di wilayah kecamatan melalui berbagai program inovatif dan berkelanjutan.
                     </p>
                 </div>
-                
+
                 <div class="fade-in">
                     <h3 class="text-xl font-bold text-gray-800 mb-6">Timeline Perkembangan</h3>
                     <div class="space-y-6">
@@ -333,25 +367,25 @@
                             <div class="text-gray-800 font-medium">Pembentukan Kecamatan</div>
                             <div class="text-gray-600 text-sm">Kecamatan Waesama resmi dibentuk melalui Perda Kabupaten Buru</div>
                         </div>
-                        
+
                         <div class="timeline-item">
                             <div class="font-semibold text-blue-600">2010</div>
                             <div class="text-gray-800 font-medium">Pembangunan Kantor</div>
                             <div class="text-gray-600 text-sm">Gedung kantor camat permanen mulai dibangun</div>
                         </div>
-                        
+
                         <div class="timeline-item">
                             <div class="font-semibold text-blue-600">2015</div>
                             <div class="text-gray-800 font-medium">Digitalisasi Pelayanan</div>
                             <div class="text-gray-600 text-sm">Implementasi sistem pelayanan berbasis teknologi</div>
                         </div>
-                        
+
                         <div class="timeline-item">
                             <div class="font-semibold text-blue-600">2020</div>
                             <div class="text-gray-800 font-medium">Pelayanan Online</div>
                             <div class="text-gray-600 text-sm">Launching layanan online untuk kemudahan masyarakat</div>
                         </div>
-                        
+
                         <div class="timeline-item">
                             <div class="font-semibold text-blue-600">2024</div>
                             <div class="text-gray-800 font-medium">Modernisasi Sistem</div>
@@ -366,7 +400,7 @@
         <section class="mb-16">
             <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
                 <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Wilayah Kerja</h2>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <div class="text-center">
                         <div class="bg-blue-100 p-4 rounded-lg mb-4">
@@ -376,7 +410,7 @@
                         <p class="text-2xl font-bold text-blue-600">125.5</p>
                         <p class="text-gray-600">km²</p>
                     </div>
-                    
+
                     <div class="text-center">
                         <div class="bg-green-100 p-4 rounded-lg mb-4">
                             <i class="fas fa-home text-green-600 text-3xl"></i>
@@ -385,7 +419,7 @@
                         <p class="text-2xl font-bold text-green-600">12</p>
                         <p class="text-gray-600">Desa</p>
                     </div>
-                    
+
                     <div class="text-center">
                         <div class="bg-purple-100 p-4 rounded-lg mb-4">
                             <i class="fas fa-users text-purple-600 text-3xl"></i>
@@ -394,7 +428,7 @@
                         <p class="text-2xl font-bold text-purple-600">25,432</p>
                         <p class="text-gray-600">Jiwa</p>
                     </div>
-                    
+
                     <div class="text-center">
                         <div class="bg-orange-100 p-4 rounded-lg mb-4">
                             <i class="fas fa-family text-orange-600 text-3xl"></i>
@@ -404,7 +438,7 @@
                         <p class="text-gray-600">Kepala Keluarga</p>
                     </div>
                 </div>
-                
+
                 <div class="bg-gray-50 p-6 rounded-lg">
                     <h4 class="font-bold text-gray-800 mb-4">Desa-desa di Kecamatan Waesama:</h4>
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -482,7 +516,7 @@
                     </div>
                     <p class="text-gray-300 mb-4">Kantor Camat Waesama berkomitmen memberikan pelayanan terbaik kepada masyarakat dengan mengutamakan transparansi, akuntabilitas, dan profesionalisme.</p>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2">
@@ -493,7 +527,7 @@
                         <li><a href="{{ route('public.kontak') }}" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Media Sosial</h4>
                     <div class="flex space-x-4">
@@ -512,11 +546,34 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p class="text-gray-300">&copy; 2024 Kantor Camat Waesama. Semua hak dilindungi.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            if (mobileMenuBtn && mobileMenu && menuIcon) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+
+                    if (mobileMenu.classList.contains('hidden')) {
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    } else {
+                        menuIcon.classList.remove('fa-bars');
+                        menuIcon.classList.add('fa-times');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

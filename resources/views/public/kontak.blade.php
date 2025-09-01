@@ -5,70 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontak - Kantor Camat Waesama</title>
     <meta name="description" content="Hubungi Kantor Camat Waesama - Alamat, telepon, email, dan informasi kontak lengkap">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
-        
+
         .hero-bg {
             background: #003f88;
         }
-        
+
         .card-hover {
             transition: all 0.3s ease;
         }
-        
+
         .card-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        
+
         .contact-card {
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
         }
-        
+
         .contact-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
             border-color: #667eea;
         }
-        
+
         .fade-in {
             animation: fadeIn 0.6s ease-in;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .text-gradient {
                 color: #003f88;
             }
-        
+
         .btn-primary {
             background: #003f88;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
-        
+
         .map-container {
             height: 400px;
             background: #f3f4f6;
@@ -76,7 +76,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .map-placeholder {
             display: flex;
             align-items: center;
@@ -86,7 +86,7 @@
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
-        
+
         /* Standardized Public Navigation Menu */
         .public-nav-item {
             color: #666;
@@ -134,43 +134,78 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1);">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-building" style="font-size: 2rem; color: #003f88;"></i>
-                <div>
-                    <h1 style="font-size: 1.5rem; font-weight: 700; margin: 0; color: #333;">Kantor Camat Waesama</h1>
-                    <p style="font-size: 0.875rem; color: #666; margin: 0;">Melayani dengan Sepenuh Hati</p>
-                </div>
-            </div>
-                
-            <!-- Navigation Menu -->
-            <div style="display: flex; align-items: center; gap: 2rem;">
-                <div style="display: flex; gap: 0.5rem;">
-                    <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home" style="margin-right: 0.5rem;"></i>Beranda</a>
-                    <a href="{{ route('public.profil') }}" class="public-nav-item"><i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>Profil</a>
-                    <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper" style="margin-right: 0.5rem;"></i>Berita</a>
-                    <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs" style="margin-right: 0.5rem;"></i>Layanan</a>
-                    <a href="{{ route('public.kontak') }}" class="public-nav-item active"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Kontak</a>
-                </div>
-                
-                @if (Route::has('login'))
-                    <div style="display: flex; gap: 1rem; align-items: center;">
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                            @endif
-                        @endauth
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-building text-2xl text-blue-800"></i>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Kantor Camat Waesama</h1>
+                        <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
                     </div>
-                @endif
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="flex space-x-2">
+                        <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
+                        <a href="{{ route('public.profil') }}" class="public-nav-item"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                        <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                        <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
+                        <a href="{{ route('public.kontak') }}" class="public-nav-item active"><i class="fas fa-phone mr-2"></i>Kontak</a>
+                    </div>
+
+                    @if (Route::has('login'))
+                        <div class="flex space-x-4 items-center">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-800 focus:outline-none">
+                        <i id="menu-icon" class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="{{ route('welcome') }}" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
+                    <a href="{{ route('public.profil') }}" class="public-nav-item"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                    <a href="{{ route('public.berita') }}" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                    <a href="{{ route('public.layanan') }}" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
+                    <a href="{{ route('public.kontak') }}" class="public-nav-item active"><i class="fas fa-phone mr-2"></i>Kontak</a>
+
+                    @if (Route::has('login'))
+                        <div class="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-bg text-white py-16">
+    <section class="hero-bg text-white py-16 pt-[150px]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Hubungi Kami</h1>
             <p class="text-xl mb-8 opacity-90 fade-in">Kami siap melayani dan membantu kebutuhan administrasi Anda</p>
@@ -185,7 +220,7 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Informasi Kontak</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">Berikut adalah berbagai cara untuk menghubungi Kantor Camat Waesama</p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Alamat -->
                 <div class="contact-card bg-white rounded-xl p-6 text-center fade-in">
@@ -201,7 +236,7 @@
                         97571
                     </p>
                 </div>
-                
+
                 <!-- Telepon -->
                 <div class="contact-card bg-white rounded-xl p-6 text-center fade-in">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -219,7 +254,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Email -->
                 <div class="contact-card bg-white rounded-xl p-6 text-center fade-in">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -237,7 +272,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Jam Operasional -->
                 <div class="contact-card bg-white rounded-xl p-6 text-center fade-in">
                     <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -279,7 +314,7 @@
                                     <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan email">
                                 </div>
                             </div>
-                            
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
@@ -297,24 +332,24 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Subjek *</label>
                                 <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan subjek pesan">
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Pesan *</label>
                                 <textarea rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" placeholder="Tulis pesan Anda di sini..."></textarea>
                             </div>
-                            
+
                             <div class="flex items-start">
                                 <input type="checkbox" id="privacy" class="mt-1 mr-3">
                                 <label for="privacy" class="text-sm text-gray-600">
                                     Saya setuju dengan <a href="#" class="text-blue-600 hover:text-blue-800">kebijakan privasi</a> dan memberikan izin untuk memproses data pribadi saya.
                                 </label>
                             </div>
-                            
+
                             <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
                                 <i class="fas fa-paper-plane mr-2"></i>
                                 Kirim Pesan
@@ -322,12 +357,12 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <!-- Map & Location Info -->
                 <div class="fade-in">
                     <div class="bg-white rounded-xl shadow-sm p-8">
                         <h2 class="text-2xl font-bold text-gray-800 mb-6">Lokasi Kantor</h2>
-                        
+
                         <!-- Map Placeholder -->
                         <div class="map-container mb-6">
                             <div class="map-placeholder">
@@ -338,7 +373,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Location Details -->
                         <div class="space-y-4">
                             <div class="flex items-start">
@@ -348,7 +383,7 @@
                                     <p class="text-gray-600 text-sm">Jl. Raya Waesama No. 123, Kecamatan Waesama, Kabupaten Buru, Provinsi Maluku 97571</p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-start">
                                 <i class="fas fa-route text-green-600 text-lg mr-3 mt-1"></i>
                                 <div>
@@ -356,7 +391,7 @@
                                     <p class="text-gray-600 text-sm">Dapat diakses dengan kendaraan pribadi, angkutan umum, atau ojek. Tersedia area parkir yang luas.</p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-start">
                                 <i class="fas fa-landmark text-purple-600 text-lg mr-3 mt-1"></i>
                                 <div>
@@ -365,7 +400,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Action Buttons -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                             <a href="https://maps.google.com" target="_blank" class="flex items-center justify-center bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">
@@ -386,7 +421,7 @@
         <section class="mb-16">
             <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
                 <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Kontak Cepat</h2>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Emergency Contact -->
                     <div class="text-center p-6 border border-red-200 rounded-lg hover:border-red-400 transition-colors">
@@ -400,7 +435,7 @@
                             Hubungi Sekarang
                         </a>
                     </div>
-                    
+
                     <!-- WhatsApp -->
                     <div class="text-center p-6 border border-green-200 rounded-lg hover:border-green-400 transition-colors">
                         <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -413,7 +448,7 @@
                             Chat Sekarang
                         </a>
                     </div>
-                    
+
                     <!-- Email -->
                     <div class="text-center p-6 border border-blue-200 rounded-lg hover:border-blue-400 transition-colors">
                         <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -434,28 +469,28 @@
         <section class="mb-16">
             <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
                 <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Pertanyaan yang Sering Diajukan</h2>
-                
+
                 <div class="space-y-6">
                     <div class="border border-gray-200 rounded-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3">Bagaimana cara mengurus surat keterangan domisili?</h3>
                         <p class="text-gray-600">Anda dapat mengurus surat keterangan domisili dengan membawa fotocopy KTP, KK, dan surat pengantar RT/RW. Proses pengurusan memakan waktu 1-2 hari kerja dan tidak dikenakan biaya.</p>
                     </div>
-                    
+
                     <div class="border border-gray-200 rounded-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3">Apakah bisa mengurus surat di luar jam kerja?</h3>
                         <p class="text-gray-600">Pelayanan hanya tersedia pada jam kerja (Senin-Jumat, 08:00-16:00 WIT). Untuk keperluan darurat, Anda dapat menghubungi nomor darurat yang tersedia.</p>
                     </div>
-                    
+
                     <div class="border border-gray-200 rounded-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3">Bagaimana cara menggunakan layanan antrian online?</h3>
                         <p class="text-gray-600">Anda dapat mengakses layanan antrian online melalui website ini. Pilih jenis layanan, isi data diri, dan dapatkan nomor antrian. Datang sesuai waktu yang telah ditentukan.</p>
                     </div>
-                    
+
                     <div class="border border-gray-200 rounded-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3">Apakah ada biaya untuk pengurusan surat?</h3>
                         <p class="text-gray-600">Semua layanan surat-menyurat di Kantor Camat Waesama tidak dikenakan biaya (gratis). Kami berkomitmen memberikan pelayanan terbaik tanpa pungutan biaya.</p>
                     </div>
-                    
+
                     <div class="border border-gray-200 rounded-lg p-6">
                         <h3 class="text-lg font-semibold text-gray-800 mb-3">Bagaimana cara menyampaikan pengaduan?</h3>
                         <p class="text-gray-600">Anda dapat menyampaikan pengaduan melalui form online di website, email pengaduan@waesama.go.id, atau datang langsung ke kantor. Setiap pengaduan akan ditindaklanjuti maksimal 3x24 jam.</p>
@@ -497,7 +532,7 @@
                     </div>
                     <p class="text-gray-300 mb-4">Kantor Camat Waesama berkomitmen memberikan pelayanan terbaik kepada masyarakat dengan mengutamakan transparansi, akuntabilitas, dan profesionalisme.</p>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2">
@@ -508,7 +543,7 @@
                         <li><a href="{{ route('public.kontak') }}" class="text-gray-300 hover:text-white transition-colors">Kontak</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Media Sosial</h4>
                     <div class="flex space-x-4">
@@ -527,11 +562,33 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p class="text-gray-300">&copy; 2024 Kantor Camat Waesama. Semua hak dilindungi.</p>
             </div>
         </div>
     </footer>
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            if (mobileMenuBtn && mobileMenu && menuIcon) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+
+                    if (mobileMenu.classList.contains('hidden')) {
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    } else {
+                        menuIcon.classList.remove('fa-bars');
+                        menuIcon.classList.add('fa-times');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

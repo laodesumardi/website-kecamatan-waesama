@@ -87,7 +87,10 @@ class BeritaSeeder extends Seeder
             $data['author_id'] = $admin->id;
             $data['views'] = rand(50, 500);
             
-            Berita::create($data);
+            Berita::firstOrCreate(
+                ['slug' => $data['slug']],
+                $data
+            );
         }
     }
 }

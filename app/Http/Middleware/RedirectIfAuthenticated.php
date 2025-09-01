@@ -25,7 +25,8 @@ class RedirectIfAuthenticated
                 
                 // Check if user has a role assigned
                 if (!$user->role) {
-                    return redirect()->route('dashboard')->with('error', 'Role tidak ditemukan. Silakan hubungi administrator.');
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Role tidak ditemukan. Silakan hubungi administrator.');
                 }
                 
                 // Redirect based on user role
