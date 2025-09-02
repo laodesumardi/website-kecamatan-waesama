@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +20,11 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen(): void
     {
-        $user = User::factory()->create();
+        $role = Role::create(['name' => 'Warga', 'display_name' => 'Warga']);
+        $user = User::factory()->create([
+            'role_id' => $role->id,
+            'is_active' => true
+        ]);
 
         $response = $this->post('/login', [
             'email' => $user->email,
@@ -27,12 +32,16 @@ class AuthenticationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect('/warga/dashboard');
     }
 
     public function test_users_can_not_authenticate_with_invalid_password(): void
     {
-        $user = User::factory()->create();
+        $role = Role::create(['name' => 'Warga', 'display_name' => 'Warga']);
+        $user = User::factory()->create([
+            'role_id' => $role->id,
+            'is_active' => true
+        ]);
 
         $this->post('/login', [
             'email' => $user->email,

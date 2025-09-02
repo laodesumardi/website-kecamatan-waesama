@@ -1,0 +1,29 @@
+﻿DEPLOYMENT INSTRUCTIONS
+=======================
+
+1. Upload all files in this folder to your Hostinger public_html directory
+
+2. Rename .env.example.production to .env
+
+3. Edit .env file with your Hostinger database credentials:
+   - DB_DATABASE=your_database_name
+   - DB_USERNAME=your_database_user
+   - DB_PASSWORD=your_database_password
+   - APP_URL=https://yourdomain.com
+
+4. Copy .htaccess.production to public/.htaccess
+
+5. Run these commands on your server:
+   php artisan key:generate
+   chmod -R 755 storage bootstrap/cache
+   php artisan migrate --force
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   php artisan storage:link
+
+6. Set Document Root in Hostinger panel to: public_html/public
+
+7. Test your application
+
+For detailed instructions, see DEPLOYMENT-CHECKLIST.md

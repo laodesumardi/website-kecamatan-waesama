@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#1e40af" stroke="#1d4ed8" stroke-width="2"/>
+  
+  <!-- Government building icon -->
+  <g fill="white">
+    <!-- Building base -->
+    <rect x="16" y="38" width="32" height="18" rx="1"/>
+    
+    <!-- Columns -->
+    <rect x="20" y="28" width="3" height="20"/>
+    <rect x="26" y="28" width="3" height="20"/>
+    <rect x="32" y="28" width="3" height="20"/>
+    <rect x="38" y="28" width="3" height="20"/>
+    
+    <!-- Roof/Triangle -->
+    <polygon points="32,12 48,28 16,28" fill="white"/>
+    
+    <!-- Flag pole -->
+    <rect x="31" y="8" width="2" height="8"/>
+    
+    <!-- Flag -->
+    <rect x="33" y="8" width="8" height="5" fill="#dc2626"/>
+    
+    <!-- Door -->
+    <rect x="28" y="42" width="8" height="14" fill="#1e40af"/>
+    
+    <!-- Windows -->
+    <rect x="19" y="42" width="4" height="4" fill="#1e40af"/>
+    <rect x="19" y="48" width="4" height="4" fill="#1e40af"/>
+    <rect x="41" y="42" width="4" height="4" fill="#1e40af"/>
+    <rect x="41" y="48" width="4" height="4" fill="#1e40af"/>
+  </g>
+  
+  <!-- Text overlay (optional) -->
+  <text x="32" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="white" font-weight="bold">CAMAT</text>
+</svg>

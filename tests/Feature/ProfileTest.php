@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,7 +13,11 @@ class ProfileTest extends TestCase
 
     public function test_profile_page_is_displayed(): void
     {
-        $user = User::factory()->create();
+        $role = Role::create(['name' => 'Warga', 'display_name' => 'Warga']);
+        $user = User::factory()->create([
+            'role_id' => $role->id,
+            'is_active' => true
+        ]);
 
         $response = $this
             ->actingAs($user)
@@ -23,7 +28,11 @@ class ProfileTest extends TestCase
 
     public function test_profile_information_can_be_updated(): void
     {
-        $user = User::factory()->create();
+        $role = Role::create(['name' => 'Warga', 'display_name' => 'Warga']);
+        $user = User::factory()->create([
+            'role_id' => $role->id,
+            'is_active' => true
+        ]);
 
         $response = $this
             ->actingAs($user)
