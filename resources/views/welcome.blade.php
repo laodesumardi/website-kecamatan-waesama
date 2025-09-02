@@ -225,6 +225,26 @@
         @endif
     </head>
     <body>
+        <!-- Remove any duplicate navigation elements -->
+        <style>
+            /* Hide any duplicate navigation elements that might appear */
+            body > a:first-child,
+            body > div:first-child:not(nav):not(.hero-section) {
+                display: none !important;
+            }
+            
+            /* Ensure proper spacing for fixed navigation */
+            body {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+            }
+            
+            /* Fix any text that appears before navigation */
+            body::before {
+                display: none !important;
+            }
+        </style>
+        
       <!-- Navigation -->
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -245,59 +265,59 @@
             </div>
 
             <!-- Desktop Navigation -->
-            <div class="hidden lg:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-2">
                 <!-- Navigation Links -->
                 <div class="flex items-center space-x-1">
                     <a href="{{ route('welcome') }}"
-                       class="group flex items-center px-3 py-2 text-sm font-medium text-blue-800 bg-blue-50 rounded-lg">
+                       class="group flex items-center px-3 py-2 text-sm font-medium text-blue-800 bg-blue-50 rounded-lg transition-all duration-200">
                         <i class="fas fa-home text-base mr-2"></i>
                         <span>Beranda</span>
                     </a>
 
                     <a href="{{ route('public.profil') }}"
                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-info-circle text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <i class="fas fa-info-circle text-base mr-2"></i>
                         <span>Profil</span>
                     </a>
 
                     <a href="{{ route('public.berita') }}"
                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-newspaper text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <i class="fas fa-newspaper text-base mr-2"></i>
                         <span>Berita</span>
                     </a>
 
                     <a href="{{ route('public.layanan') }}"
                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-cogs text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <i class="fas fa-cogs text-base mr-2"></i>
                         <span>Layanan</span>
                     </a>
 
                     <a href="{{ route('public.kontak') }}"
                        class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                        <i class="fas fa-phone text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                        <i class="fas fa-phone text-base mr-2"></i>
                         <span>Kontak</span>
                     </a>
                 </div>
 
                 <!-- Authentication Section -->
                 @if (Route::has('login'))
-                    <div class="flex items-center space-x-3 pl-6 border-l border-gray-200">
+                    <div class="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
                         @auth
                             <a href="{{ url('/dashboard') }}"
                                class="group flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg text-sm font-medium hover:bg-blue-900 transition-all duration-200 shadow-sm hover:shadow-md">
-                                <i class="fas fa-tachometer-alt mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                                <i class="fas fa-tachometer-alt mr-2"></i>
                                 Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}"
-                               class="group flex items-center px-4 py-2 border border-blue-800 text-blue-800 rounded-lg text-sm font-medium hover:bg-blue-800 hover:text-white transition-all duration-200">
-                                <i class="fas fa-sign-in-alt mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                               class="group flex items-center px-3 py-2 border border-blue-800 text-blue-800 rounded-lg text-sm font-medium hover:bg-blue-800 hover:text-white transition-all duration-200">
+                                <i class="fas fa-sign-in-alt mr-2"></i>
                                 Masuk
                             </a>
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
-                                   class="group flex items-center px-4 py-2 bg-blue-800 text-white rounded-lg text-sm font-medium hover:bg-blue-900 transition-all duration-200 shadow-sm hover:shadow-md">
-                                    <i class="fas fa-user-plus mr-2 group-hover:scale-110 transition-transform duration-200"></i>
+                                   class="group flex items-center px-3 py-2 bg-blue-800 text-white rounded-lg text-sm font-medium hover:bg-blue-900 transition-all duration-200 shadow-sm hover:shadow-md">
+                                    <i class="fas fa-user-plus mr-2"></i>
                                     Daftar
                                 </a>
                             @endif
