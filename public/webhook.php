@@ -5,7 +5,7 @@
  */
 
 // Konfigurasi
-$secret = 'your-webhook-secret-key'; // Ganti dengan secret key yang aman
+$secret = 'KantorCamatWaesama2024!SecureKey'; // Secret key untuk GitHub webhook
 $branch = 'main'; // Branch yang akan di-deploy
 $projectPath = dirname(__DIR__); // Path ke root project
 
