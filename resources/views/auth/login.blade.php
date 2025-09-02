@@ -11,9 +11,16 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
+    <!-- Mobile CSS Fixes -->
+    <link href="{{ asset('css/mobile-fix.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/form-fixes.css') }}" rel="stylesheet">
+    
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('css/auth-colors.css') }}">
+    
+    <!-- Mobile Responsive JavaScript -->
+    <script src="{{ asset('js/mobile-responsive.js') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen gradient-bg flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
