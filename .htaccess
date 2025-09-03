@@ -1,44 +1,51 @@
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
     RewriteEngine On
 
-    # Redirect to public folder if not already there
+    # Handle Angular and other frontend routes - send to index.html if file exists
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteCond %{DOCUMENT_ROOT}/index.html -f
+    RewriteRule ^(.*)$ /index.html [L]
+
+    # Handle Laravel routes - send to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/index.php -f
+    RewriteRule ^(.*)$ /index.php [L]
+
+    # If we have a public folder, redirect to it for assets
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+    RewriteRule ^(.*)$ /public/$1 [L]
+
+    # Redirect to public folder for Laravel if it exists and we're not already there
     RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{DOCUMENT_ROOT}/public/index.php -f
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ /public/$1 [L,R=301]
-
-    # Force HTTPS (uncomment for production)
-    # RewriteCond %{HTTPS} off
-    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-    # Security Headers
-    <IfModule mod_headers.c>
-        Header always set X-Content-Type-Options nosniff
-        Header always set X-Frame-Options DENY
-        Header always set X-XSS-Protection "1; mode=block"
-        Header always set Referrer-Policy "strict-origin-when-cross-origin"
-        Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-    </IfModule>
-
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-    # Handle X-XSRF-Token Header
-    RewriteCond %{HTTP:x-xsrf-token} .
-    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
-
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
-
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    RewriteRule ^(.*)$ /public/index.php [L]
 </IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Prevent access to sensitive files
+<FilesMatch "\.(env|log|htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent access to vendor and other sensitive directories
+RedirectMatch 403 ^/vendor/.*$
+RedirectMatch 403 ^/storage/.*$
+RedirectMatch 403 ^/bootstrap/cache/.*$
+RedirectMatch 403 ^/config/.*$
+RedirectMatch 403 ^/database/.*$

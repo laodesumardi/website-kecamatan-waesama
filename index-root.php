@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Laravel Application Entry Point for Root Directory Deployment
+ * 
+ * This file should be placed in the root directory of your hosting
+ * when the hosting provider doesn't allow setting document root to public folder.
+ * 
+ * Usage:
+ * 1. Upload all Laravel files to root directory
+ * 2. Move contents of 'public' folder to root directory
+ * 3. Replace this file as 'index.php' in root directory
+ * 4. Update paths below if needed
+ */
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
@@ -10,15 +23,14 @@ define('LARAVEL_START', microtime(true));
 | Auto-detect Hosting Environment
 |--------------------------------------------------------------------------
 |
-| Detect if we're running in a shared hosting environment where the
-| document root is not set to the public folder. This allows the same
-| codebase to work in both standard Laravel setup and shared hosting.
+| This file is designed for shared hosting environments where the document
+| root cannot be set to the public folder. It automatically detects the
+| correct paths and works with the same codebase as standard Laravel setup.
 |
 */
 
-// Check if we're in public folder or root folder
-$isInPublicFolder = basename(__DIR__) === 'public';
-$basePath = $isInPublicFolder ? __DIR__.'/..' : __DIR__;
+// For shared hosting, we're typically in the root directory
+$basePath = __DIR__;
 
 /*
 |--------------------------------------------------------------------------

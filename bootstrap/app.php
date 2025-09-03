@@ -4,10 +4,19 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
-return Application::configure(basePath: dirname(__DIR__))
+// Auto-detect base path for different hosting environments
+$detectedBasePath = dirname(__DIR__);
+
+// If we're in a shared hosting environment where files are in root
+// Check if we have Laravel structure in current directory
+if (file_exists(__DIR__.'/app') && file_exists(__DIR__.'/config')) {
+    $detectedBasePath = __DIR__;
+}
+
+return Application::configure(basePath: $detectedBasePath)
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        commands: __DIR__.'/../routes/console.php',
+        web: $detectedBasePath.'/routes/web.php',
+        commands: $detectedBasePath.'/routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
