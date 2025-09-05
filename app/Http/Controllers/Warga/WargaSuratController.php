@@ -130,6 +130,15 @@ class WargaSuratController extends Controller
             route('admin.surat.show', $surat)
         );
         
+        // Send notification to pegawai about new surat from warga
+        NotificationHelper::notifyStaff(
+            'Pengajuan Surat Baru dari Warga',
+            "Pengajuan surat {$validated['jenis_surat']} dari {$user->name} telah dibuat dan menunggu verifikasi.",
+            'high',
+            route('pegawai.surat.show', $surat),
+            $user->id
+        );
+        
         return redirect()->route('warga.surat.show', $surat)
                         ->with('success', 'Pengajuan surat berhasil dibuat. Silakan tunggu proses verifikasi.');
     }

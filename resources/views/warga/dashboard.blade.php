@@ -26,12 +26,12 @@
                     <p class="text-gray-500 text-sm font-medium">Surat Saya</p>
                     <p class="text-3xl font-bold text-gray-800 mt-1">{{ number_format($stats['my_surat']) }}</p>
                 </div>
-                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-alt text-primary-900 text-xl"></i>
                 </div>
             </div>
             <div class="mt-4">
-                <a href="{{ route('warga.surat.list') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Riwayat →</a>
+                <a href="{{ route('warga.surat.list') }}" class="text-primary-900 hover:text-primary-700 text-sm font-medium">Lihat Riwayat →</a>
             </div>
         </div>
 
@@ -75,10 +75,10 @@
             <i class="fas fa-rocket text-gray-400"></i>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Domisili']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group block">
+            <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Domisili']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-all duration-200 group block">
                 <div class="text-center">
-                    <i class="fas fa-id-card text-3xl text-gray-400 group-hover:text-blue-600 mb-3"></i>
-                    <p class="text-gray-600 group-hover:text-blue-600 font-medium text-sm">Surat Keterangan Domisili</p>
+                    <i class="fas fa-id-card text-3xl text-gray-400 group-hover:text-primary-900 mb-3"></i>
+                    <p class="text-gray-600 group-hover:text-primary-900 font-medium text-sm">Surat Keterangan Domisili</p>
                 </div>
             </a>
             <a href="{{ route('warga.surat.create', ['jenis' => 'Surat Keterangan Usaha']) }}" class="p-6 rounded-lg border-2 border-dashed border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group block">
@@ -108,7 +108,7 @@
         <div class="bg-white rounded-xl p-6 card-shadow">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-800">Berita Terbaru</h3>
-                <a href="{{ route('warga.berita.index') }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
+                <a href="{{ route('warga.berita.index') }}" class="text-primary-900 hover:text-primary-700 text-sm font-medium">Lihat Semua</a>
             </div>
             <div class="space-y-4">
                 @forelse($recentNews as $news)
@@ -158,12 +158,12 @@
                         </div>
                         <span class="bg-yellow-200 text-yellow-800 text-xs font-medium px-2 py-1 rounded">Proses</span>
                     </div>
-                    <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-user-clock text-blue-600"></i>
+                    <div class="flex items-center justify-between p-3 bg-primary-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-clock text-primary-900"></i>
                             <span class="text-gray-700 text-sm">Antrian A-025</span>
                         </div>
-                        <span class="bg-blue-200 text-blue-800 text-xs font-medium px-2 py-1 rounded">Menunggu</span>
+                        <span class="bg-primary-200 text-primary-900 text-xs font-medium px-2 py-1 rounded">Menunggu</span>
                     </div>
                 </div>
             </div>
@@ -206,7 +206,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="text-center p-4 rounded-lg hover:bg-gray-50 transition-colors">
-                <i class="fas fa-phone text-2xl text-blue-600 mb-3"></i>
+                <i class="fas fa-phone text-2xl text-primary-900 mb-3"></i>
                 <p class="text-gray-800 font-medium mb-1">Telepon</p>
                 <p class="text-gray-500 text-sm">(0274) 123-4567</p>
             </div>

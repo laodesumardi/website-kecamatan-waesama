@@ -150,9 +150,10 @@
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
                                 <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif
+                                {{-- Registration disabled - only admin and pegawai access --}}
+                                 {{-- @if (Route::has('register'))
+                                     <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                 @endif --}}
                             @endauth
                         </div>
                     @endif
@@ -231,7 +232,7 @@
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                 @else
-                                    <a href="{{ $berita->previousPageUrl() }}" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-blue-600 hover:text-white">
+                                    <a href="{{ $berita->previousPageUrl() }}" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-primary-900 hover:text-white">
                                         <i class="fas fa-chevron-left"></i>
                                     </a>
                                 @endif
@@ -241,13 +242,13 @@
                                     @if ($page == $berita->currentPage())
                                         <span class="px-4 py-2 text-white bg-blue-600 rounded-lg font-medium">{{ $page }}</span>
                                     @else
-                                        <a href="{{ $url }}" class="pagination-btn px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-blue-600 hover:text-white">{{ $page }}</a>
+                                        <a href="{{ $url }}" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-primary-900 hover:text-white">{{ $page }}</a>
                                     @endif
                                 @endforeach
 
                                 {{-- Next Page Link --}}
                                 @if ($berita->hasMorePages())
-                                    <a href="{{ $berita->nextPageUrl() }}" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-blue-600 hover:text-white">
+                                    <a href="{{ $berita->nextPageUrl() }}" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-primary-900 hover:text-white">
                                         <i class="fas fa-chevron-right"></i>
                                     </a>
                                 @else

@@ -7,7 +7,7 @@
     <!-- Header -->
     <div class="mb-6">
         <div class="flex items-center gap-4 mb-4">
-            <a href="{{ route('warga.pengaduan.index') }}" class="text-blue-600 hover:text-blue-800">
+            <a href="{{ route('warga.pengaduan.index') }}" class="text-primary-600 hover:text-primary-800">
                 <i class="fas fa-arrow-left text-xl"></i>
             </a>
             <div>
@@ -35,7 +35,7 @@
                     Judul Pengaduan <span class="text-red-500">*</span>
                 </label>
                 <input type="text" id="judul_pengaduan" name="judul_pengaduan" 
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                        placeholder="Masukkan judul pengaduan"
                        value="{{ old('judul_pengaduan') }}" required>
                 @error('judul_pengaduan')
@@ -49,7 +49,7 @@
                     Kategori <span class="text-red-500">*</span>
                 </label>
                 <select id="kategori" name="kategori" 
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" required>
                     <option value="">Pilih Kategori</option>
                     <option value="Infrastruktur" {{ old('kategori') == 'Infrastruktur' ? 'selected' : '' }}>Infrastruktur</option>
                     <option value="Pelayanan Publik" {{ old('kategori') == 'Pelayanan Publik' ? 'selected' : '' }}>Pelayanan Publik</option>
@@ -69,7 +69,7 @@
                     Prioritas <span class="text-red-500">*</span>
                 </label>
                 <select id="prioritas" name="prioritas" 
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" required>
                     <option value="">Pilih Prioritas</option>
                     <option value="Rendah" {{ old('prioritas') == 'Rendah' ? 'selected' : '' }}>Rendah</option>
                     <option value="Sedang" {{ old('prioritas') == 'Sedang' ? 'selected' : '' }}>Sedang</option>
@@ -87,7 +87,7 @@
                     Isi Pengaduan <span class="text-red-500">*</span>
                 </label>
                 <textarea id="isi_pengaduan" name="isi_pengaduan" rows="6"
-                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                           placeholder="Jelaskan detail pengaduan Anda..." required>{{ old('isi_pengaduan') }}</textarea>
                 @error('isi_pengaduan')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -100,7 +100,7 @@
                     Lampiran (Opsional)
                 </label>
                 <input type="file" id="lampiran" name="lampiran" 
-                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                        accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
                 <p class="mt-1 text-sm text-gray-500">Format yang didukung: JPG, PNG, PDF, DOC, DOCX. Maksimal 2MB.</p>
                 @error('lampiran')
@@ -109,10 +109,10 @@
             </div>
 
             <!-- Information Box -->
-            <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="mb-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
                 <div class="flex items-start">
-                    <i class="fas fa-info-circle text-blue-500 mt-1 mr-3"></i>
-                    <div class="text-sm text-blue-700">
+                    <i class="fas fa-info-circle text-primary-500 mt-1 mr-3"></i>
+                    <div class="text-sm text-primary-700">
                         <p class="font-medium mb-1">Informasi Penting:</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>Pengaduan akan diproses dalam 1-3 hari kerja</li>
@@ -126,7 +126,7 @@
 
             <!-- Submit Buttons -->
             <div class="flex gap-4">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center gap-2">
+                <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center gap-2">
                     <i class="fas fa-paper-plane"></i>
                     Kirim Pengaduan
                 </button>

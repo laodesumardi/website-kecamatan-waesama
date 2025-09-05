@@ -5,7 +5,7 @@
 @section('content')
 <div class="space-y-6">
     <!-- Welcome Section -->
-    <div class="bg-[#003f88] rounded-xl p-6 text-white">
+    <div class="bg-[#001d3d]  rounded-xl p-6 text-white">
         <div class="flex items-center justify-between">
             <div>
                 <h2 class="text-2xl font-bold mb-2">Laporan Statistik, {{ auth()->user()->name }}!</h2>
@@ -36,28 +36,28 @@
                     <option value="user" {{ $type === 'user' ? 'selected' : '' }}>Manajemen User</option>
                 </select>
             </div>
-            
+
             <div>
                 <label for="start_date" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Mulai</label>
-                <input type="date" id="start_date" name="start_date" value="{{ $startDate }}" 
+                <input type="date" id="start_date" name="start_date" value="{{ $startDate }}"
                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
-            
+
             <div>
                 <label for="end_date" class="block text-sm font-medium text-gray-700 mb-2">Tanggal Akhir</label>
-                <input type="date" id="end_date" name="end_date" value="{{ $endDate }}" 
+                <input type="date" id="end_date" name="end_date" value="{{ $endDate }}"
                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
-            
+
             <div class="flex items-end space-x-2">
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                     <i class="fas fa-filter mr-2"></i>Filter
                 </button>
-                <a href="{{ route('admin.laporan.export') }}?type={{ $type }}&start_date={{ $startDate }}&end_date={{ $endDate }}&format=pdf" 
+                <a href="{{ route('admin.laporan.export') }}?type={{ $type }}&start_date={{ $startDate }}&end_date={{ $endDate }}&format=pdf"
                    class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
                     <i class="fas fa-file-pdf mr-2"></i>PDF
                 </a>
-                <a href="{{ route('admin.laporan.export') }}?type={{ $type }}&start_date={{ $startDate }}&end_date={{ $endDate }}&format=excel" 
+                <a href="{{ route('admin.laporan.export') }}?type={{ $type }}&start_date={{ $startDate }}&end_date={{ $endDate }}&format=excel"
                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
                     <i class="fas fa-file-excel mr-2"></i>Excel
                 </a>
@@ -95,13 +95,13 @@ document.getElementById('type').addEventListener('change', function() {
 window.addEventListener('DOMContentLoaded', function() {
     const startDate = document.getElementById('start_date');
     const endDate = document.getElementById('end_date');
-    
+
     if (!startDate.value) {
         const firstDay = new Date();
         firstDay.setDate(1);
         startDate.value = firstDay.toISOString().split('T')[0];
     }
-    
+
     if (!endDate.value) {
         endDate.value = new Date().toISOString().split('T')[0];
     }

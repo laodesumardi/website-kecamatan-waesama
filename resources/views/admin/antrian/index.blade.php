@@ -5,8 +5,8 @@
 @section('content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-[#003f88] rounded-xl p-6 text-white">
-        <div class="flex items-center justify-between">
+    <div class="bg-[#001d3d] rounded-xl p-6 text-white">
+        <div class="flex items-center justify-between bg-[#001d3d] ">
             <div>
                 <h2 class="text-2xl font-bold mb-2">Manajemen Antrian</h2>
                 <p class="text-blue-100">Kelola antrian layanan kantor camat dengan mudah dan efisien.</p>
@@ -36,8 +36,8 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Pencarian</label>
-                            <input type="text" name="search" value="{{ request('search') }}" 
-                                   placeholder="Cari nomor antrian, nama, NIK, atau telepon..." 
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                   placeholder="Cari nomor antrian, nama, NIK, atau telepon..."
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div>
@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal</label>
-                            <input type="date" name="tanggal" value="{{ request('tanggal') }}" 
+                            <input type="date" name="tanggal" value="{{ request('tanggal') }}"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="flex flex-col sm:flex-row items-stretch sm:items-end space-y-2 sm:space-y-0 sm:space-x-2 lg:col-span-1">
@@ -165,7 +165,7 @@
                                             <a href="{{ route('admin.antrian.edit', $antrian) }}" class="text-green-600 hover:text-green-900" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            
+
                                             <!-- Quick Actions -->
                                             @if($antrian->status === 'Menunggu')
                                                 <form action="{{ route('admin.antrian.call', $antrian) }}" method="POST" class="inline">
@@ -175,7 +175,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            
+
                                             @if(in_array($antrian->status, ['Menunggu', 'Dipanggil']))
                                                 <form action="{{ route('admin.antrian.serve', $antrian) }}" method="POST" class="inline">
                                                     @csrf
@@ -184,7 +184,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            
+
                                             @if($antrian->status === 'Dilayani')
                                                 <form action="{{ route('admin.antrian.complete', $antrian) }}" method="POST" class="inline">
                                                     @csrf
@@ -193,7 +193,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            
+
                                             @if(in_array($antrian->status, ['Menunggu', 'Dipanggil']))
                                                 <form action="{{ route('admin.antrian.cancel', $antrian) }}" method="POST" class="inline">
                                                     @csrf
@@ -202,7 +202,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                            
+
                                             <form action="{{ route('admin.antrian.destroy', $antrian) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -256,7 +256,7 @@
                                     @endif
                                 </div>
                             </div>
-                            
+
                             <div class="grid grid-cols-2 gap-4 mb-3 text-sm">
                                 <div>
                                     <div class="text-gray-500 text-xs uppercase tracking-wider mb-1">Layanan</div>
@@ -274,14 +274,14 @@
                                     @endif
                                 </div>
                             </div>
-                            
+
                             @if($antrian->server)
                                 <div class="text-sm mb-3">
                                     <span class="text-gray-500">Dilayani oleh:</span>
                                     <span class="text-gray-900 font-medium">{{ $antrian->server->name }}</span>
                                 </div>
                             @endif
-                            
+
                             <!-- Mobile Actions -->
                             <div class="flex flex-wrap gap-2">
                                 <a href="{{ route('admin.antrian.show', $antrian) }}" class="inline-flex items-center px-3 py-1.5 bg-blue-100 text-blue-700 text-xs font-medium rounded-lg hover:bg-blue-200">
@@ -290,7 +290,7 @@
                                 <a href="{{ route('admin.antrian.edit', $antrian) }}" class="inline-flex items-center px-3 py-1.5 bg-green-100 text-green-700 text-xs font-medium rounded-lg hover:bg-green-200">
                                     <i class="fas fa-edit mr-1"></i>Edit
                                 </a>
-                                
+
                                 @if($antrian->status === 'Menunggu')
                                     <form action="{{ route('admin.antrian.call', $antrian) }}" method="POST" class="inline">
                                         @csrf
@@ -299,7 +299,7 @@
                                         </button>
                                     </form>
                                 @endif
-                                
+
                                 @if(in_array($antrian->status, ['Menunggu', 'Dipanggil']))
                                     <form action="{{ route('admin.antrian.serve', $antrian) }}" method="POST" class="inline">
                                         @csrf
@@ -308,7 +308,7 @@
                                         </button>
                                     </form>
                                 @endif
-                                
+
                                 @if($antrian->status === 'Dilayani')
                                     <form action="{{ route('admin.antrian.complete', $antrian) }}" method="POST" class="inline">
                                         @csrf
@@ -317,7 +317,7 @@
                                         </button>
                                     </form>
                                 @endif
-                                
+
                                 @if(in_array($antrian->status, ['Menunggu', 'Dipanggil']))
                                     <form action="{{ route('admin.antrian.cancel', $antrian) }}" method="POST" class="inline">
                                         @csrf
@@ -326,7 +326,7 @@
                                         </button>
                                     </form>
                                 @endif
-                                
+
                                 <form action="{{ route('admin.antrian.destroy', $antrian) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')

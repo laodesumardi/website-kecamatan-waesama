@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->nullable()->constrained('roles')->onDelete('set null');
-            $table->string('phone')->nullable();
+            // Skip phone and is_active as they already exist from previous migration
             $table->text('address')->nullable();
             $table->string('nik', 16)->nullable()->unique();
             $table->date('birth_date')->nullable();
             $table->enum('gender', ['L', 'P'])->nullable();
-            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -29,7 +28,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['role_id']);
-            $table->dropColumn(['role_id', 'phone', 'address', 'nik', 'birth_date', 'gender', 'is_active']);
+            $table->dropColumn(['role_id', 'address', 'nik', 'birth_date', 'gender']);
         });
     }
 };

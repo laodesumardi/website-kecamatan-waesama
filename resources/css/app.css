@@ -1,3 +1,109 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom CSS Variables untuk Konsistensi Warna */
+:root {
+    --primary-color: #001d3d;
+    --primary-light: #003566;
+    --primary-dark: #000814;
+    --primary-50: #f0f4f8;
+    --primary-100: #d9e2ec;
+    --primary-200: #bcccdc;
+    --primary-300: #9fb3c8;
+    --primary-400: #829ab1;
+    --primary-500: #627d98;
+    --primary-600: #486581;
+    --primary-700: #334e68;
+    --primary-800: #243b53;
+    --primary-900: #001d3d;
+    --primary-950: #000814;
+}
+
+/* Custom Utility Classes */
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.border-primary {
+    border-color: var(--primary-color);
+}
+
+.hover\:bg-primary:hover {
+    background-color: var(--primary-color);
+}
+
+.hover\:text-primary:hover {
+    color: var(--primary-color);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(2, 48, 71, 0.3);
+}
+
+/* Navigation Styles */
+.nav-primary {
+    background-color: var(--primary-color);
+}
+
+.nav-link {
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+/* Card Styles */
+.card-primary {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Form Styles */
+.form-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(2, 48, 71, 0.1);
+}
+
+/* Badge Styles */
+.badge-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+}
+
+/* Alert Styles */
+.alert-primary {
+    background-color: var(--primary-50);
+    border-color: var(--primary-200);
+    color: var(--primary-800);
+}
+
+/* Table Styles */
+.table-primary thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.table-primary tbody tr:hover {
+    background-color: var(--primary-50);
+}

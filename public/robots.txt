@@ -1,2 +1,21 @@
 User-agent: *
-Disallow:
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /bootstrap/
+Disallow: /config/
+Disallow: /database/
+Disallow: /resources/
+Disallow: /routes/
+Disallow: /tests/
+Disallow: /.env
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /package.json
+Disallow: /artisan
+Disallow: /webhook.php
+
+Allow: /
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /favicon.ico

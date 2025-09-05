@@ -22,8 +22,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="flex items-center">
-                <div class="p-3 rounded-full bg-blue-100">
-                    <i class="fas fa-file-text text-blue-600 text-xl"></i>
+                <div class="p-3 rounded-full bg-primary-100">
+                    <i class="fas fa-file-text text-primary-600 text-xl"></i>
                 </div>
                 <div class="ml-4">
                     <p class="text-sm font-medium text-gray-600">Total Content</p>
@@ -77,10 +77,10 @@
                 <div class="flex items-center space-x-3">
                     <div class="relative">
                         <input type="text" placeholder="Cari content..." 
-                               class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                               class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
                         <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
-                    <select class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <select class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
                         <option>Semua Status</option>
                         <option>Published</option>
                         <option>Draft</option>
@@ -117,7 +117,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                                 Panduan
                             </span>
                         </td>
@@ -135,7 +135,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex items-center space-x-2">
-                                <button class="text-blue-600 hover:text-blue-900">
+                                <button class="text-primary-600 hover:text-primary-900">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="text-green-600 hover:text-green-900">

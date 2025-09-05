@@ -120,12 +120,12 @@
             </div>
 
             <!-- Information Box -->
-            <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="mb-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
                 <div class="flex items-start">
-                    <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-primary-900 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <div class="text-sm text-blue-800">
+                    <div class="text-sm text-primary-800">
                         <p class="font-medium mb-1">Informasi Penting:</p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>Jam pelayanan: 08:00 - 16:00 WIB (Senin - Jumat)</li>
@@ -141,7 +141,7 @@
             <!-- Submit Buttons -->
             <div class="flex gap-4">
                 <button type="submit" 
-                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-colors duration-200 flex items-center justify-center gap-2">
+                        class="flex-1 bg-primary-900 hover:bg-primary-800 text-white px-6 py-3 rounded-md font-medium transition-colors duration-200 flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>

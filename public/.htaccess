@@ -14,9 +14,6 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Webhook endpoint for auto-deployment
-    RewriteRule ^webhook/?$ webhook.php [L]
-    
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -34,22 +31,35 @@
     # Prevent clickjacking
     Header always set X-Frame-Options DENY
     
-    # Strict Transport Security (HTTPS only)
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-    
     # Referrer Policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (adjust as needed)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
 </IfModule>
 
 # Disable server signature
 ServerSignature Off
 
-# Hide PHP version
+# Hide Apache version
 <IfModule mod_headers.c>
-    Header unset X-Powered-By
+    Header unset Server
+    Header always unset X-Powered-By
 </IfModule>
 
-# Compress files for better performance
+# Protect sensitive files
+<FilesMatch "\.(env|log|htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Protect directories
+<DirectoryMatch "\.(git|svn|hg|bzr)">
+    Order Allow,Deny
+    Deny from all
+</DirectoryMatch>
+
+# Enable compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -62,55 +72,22 @@ ServerSignature Off
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
 
-# Set cache headers for static files
+# Browser caching
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/svg+xml "access plus 1 year"
-    ExpiresByType image/x-icon "access plus 1 year"
-    ExpiresByType application/pdf "access plus 1 year"
-    ExpiresByType application/x-shockwave-flash "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
 </IfModule>
 
-# Prevent access to sensitive files
-<Files ".env">
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files "composer.json">
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files "composer.lock">
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files "package.json">
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files "*.md">
-    Order allow,deny
-    Deny from all
-</Files>
-
-# Prevent access to directories
-Options -Indexes
-
-# PHP settings for Laravel
-<IfModule mod_php.c>
-    php_value upload_max_filesize 64M
-    php_value post_max_size 64M
-    php_value memory_limit 256M
-    php_value max_execution_time 300
-    php_value max_input_vars 3000
-</IfModule>
+# Force HTTPS (uncomment when SSL is ready)
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{HTTPS} off
+#     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>

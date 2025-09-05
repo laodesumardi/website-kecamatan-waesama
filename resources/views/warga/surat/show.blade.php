@@ -7,7 +7,7 @@
     <div class="bg-white rounded-xl p-6 card-shadow">
         <div class="flex items-center gap-4">
             <a href="{{ route('warga.surat.list') }}" 
-               class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+               class="text-primary-900 hover:text-primary-800 transition-colors duration-200">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
@@ -36,7 +36,7 @@
                     
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Surat</label>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-900">
                             {{ $surat->jenis_surat }}
                         </span>
                     </div>
@@ -51,7 +51,7 @@
                                 Pending
                             </span>
                         @elseif($surat->status == 'Diproses')
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-900">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
                                 </svg>
@@ -96,13 +96,13 @@
             </div>
             
             <!-- Keperluan -->
-            <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+            <div class="bg-white rounded-xl p-6 card-shadow mb-6">
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">Keperluan</h2>
                 <p class="text-gray-700 leading-relaxed">{{ $surat->keperluan }}</p>
             </div>
             
             <!-- Data Pemohon -->
-            <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+            <div class="bg-white rounded-xl p-6 card-shadow mb-6">
                 <h2 class="text-lg font-semibold text-gray-800 mb-4">Data Pemohon</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -195,8 +195,8 @@
                 <div class="space-y-4">
                     <!-- Pengajuan -->
                     <div class="flex items-start gap-3">
-                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex-shrink-0 w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-primary-900" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
@@ -209,13 +209,13 @@
                     <!-- Pending/Diproses -->
                     @if($surat->status != 'Pending')
                     <div class="flex items-start gap-3">
-                        <div class="flex-shrink-0 w-8 h-8 {{ $surat->status == 'Ditolak' ? 'bg-red-100' : 'bg-blue-100' }} rounded-full flex items-center justify-center">
+                        <div class="flex-shrink-0 w-8 h-8 {{ $surat->status == 'Ditolak' ? 'bg-red-100' : 'bg-primary-100' }} rounded-full flex items-center justify-center">
                             @if($surat->status == 'Ditolak')
                                 <svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
                                 </svg>
                             @else
-                                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 text-primary-900" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
                                 </svg>
                             @endif

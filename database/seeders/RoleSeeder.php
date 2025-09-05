@@ -2,40 +2,33 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $roles = [
             [
                 'name' => 'Admin',
                 'display_name' => 'Administrator',
-                'description' => 'Administrator sistem dengan akses penuh ke semua fitur'
+                'description' => 'Full access to all system features'
             ],
             [
                 'name' => 'Pegawai',
                 'display_name' => 'Pegawai',
-                'description' => 'Pegawai kantor camat yang dapat mengelola layanan masyarakat'
+                'description' => 'Staff access to manage daily operations'
             ],
             [
                 'name' => 'Warga',
                 'display_name' => 'Warga',
-                'description' => 'Warga yang dapat mengakses layanan publik'
+                'description' => 'Citizen access for services'
             ]
         ];
 
         foreach ($roles as $role) {
-            Role::firstOrCreate(
-                ['name' => $role['name']],
-                $role
-            );
+            Role::firstOrCreate(['name' => $role['name']], $role);
         }
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AntrianController;
 use App\Http\Controllers\Admin\PengaduanController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Pegawai\PegawaiController;
 use App\Http\Controllers\Pegawai\SuratController as PegawaiSuratController;
 use App\Http\Controllers\Pegawai\PegawaiAntrianController;
@@ -29,21 +30,22 @@ use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+// Welcome Page
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Dashboard redirect based on role
 Route::get('/dashboard', function () {
     $user = Auth::user();
-    
+
     if (!$user) {
-        return redirect()->route('login');
+        return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
     }
-    
-    // Check if user has a role assigned
-    if (!$user->role) {
-        return redirect()->route('login')->with('error', 'Role tidak ditemukan. Silakan hubungi administrator.');
+
+    if (!$user->role || !$user->role->name) {
+        Auth::logout();
+        return redirect()->route('login')->with('error', 'Role tidak valid. Silakan hubungi administrator.');
     }
-    
+
     switch ($user->role->name) {
         case 'Admin':
             return redirect()->route('admin.dashboard');
@@ -52,152 +54,197 @@ Route::get('/dashboard', function () {
         case 'Warga':
             return redirect()->route('warga.dashboard');
         default:
-            return redirect()->route('login');
+            Auth::logout();
+            return redirect()->route('login')->with('error', 'Role tidak dikenal.');
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Admin Routes
 Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    
-    // Berita routes with explicit parameter names
-    Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
-    Route::get('berita/create', [BeritaController::class, 'create'])->name('berita.create');
-    Route::post('berita', [BeritaController::class, 'store'])->name('berita.store');
-    Route::get('berita/{berita}', [BeritaController::class, 'show'])->name('berita.show');
-    Route::get('berita/{berita}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
-    Route::put('berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
-    Route::delete('berita/{berita}', [BeritaController::class, 'destroy'])->name('berita.destroy');
-    
-    Route::resource('penduduk', PendudukController::class);
-    Route::post('penduduk/import', [PendudukController::class, 'import'])->name('penduduk.import');
-    Route::resource('surat', SuratController::class);
-    
-    // Additional surat routes
-    Route::post('surat/{surat}/process', [SuratController::class, 'process'])->name('surat.process');
-    Route::post('surat/{surat}/complete', [SuratController::class, 'complete'])->name('surat.complete');
-    Route::get('surat/{surat}/download', [SuratController::class, 'download'])->name('surat.download');
-    Route::get('surat/{surat}/export-pdf', [SuratController::class, 'exportPdf'])->name('surat.export-pdf');
-    
-    Route::resource('antrian', AntrianController::class);
-    
-    // Additional antrian routes
-    Route::get('antrian-dashboard', [AntrianController::class, 'dashboard'])->name('antrian.dashboard');
-    Route::post('antrian/{antrian}/call', [AntrianController::class, 'call'])->name('antrian.call');
-    Route::post('antrian/{antrian}/serve', [AntrianController::class, 'serve'])->name('antrian.serve');
-    Route::post('antrian/{antrian}/complete', [AntrianController::class, 'complete'])->name('antrian.complete');
-    Route::post('antrian/{antrian}/cancel', [AntrianController::class, 'cancel'])->name('antrian.cancel');
-    
-    Route::resource('pengaduan', PengaduanController::class);
-    
-    // Additional pengaduan routes
-    Route::post('pengaduan/{pengaduan}/process', [PengaduanController::class, 'process'])->name('pengaduan.process');
-    Route::post('pengaduan/{pengaduan}/followup', [PengaduanController::class, 'followup'])->name('pengaduan.followup');
-    Route::post('pengaduan/{pengaduan}/complete', [PengaduanController::class, 'complete'])->name('pengaduan.complete');
-    Route::post('pengaduan/{pengaduan}/reject', [PengaduanController::class, 'reject'])->name('pengaduan.reject');
-    Route::get('pengaduan/{pengaduan}/download', [PengaduanController::class, 'download'])->name('pengaduan.download');
-    Route::get('pengaduan/{pengaduan}/export-pdf', [PengaduanController::class, 'exportPdf'])->name('pengaduan.export-pdf');
-    
-    Route::resource('user', UserController::class);
-    
-    // Additional user routes
-    Route::patch('user/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggle-status');
-    Route::patch('user/{user}/reset-password', [UserController::class, 'resetPassword'])->name('user.reset-password');
-    
-    // Laporan routes
-    Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
-    Route::get('laporan/export', [LaporanController::class, 'export'])->name('laporan.export');
-    
-    // Settings routes
-    Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings.index');
-    Route::put('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('settings.update');
-    Route::post('settings/update-realtime', [\App\Http\Controllers\Admin\SettingsController::class, 'updateRealtime'])->name('settings.update-realtime');
-    Route::post('settings/clear-cache', [\App\Http\Controllers\Admin\SettingsController::class, 'clearCache'])->name('settings.clear-cache');
-    Route::get('settings/backup', [\App\Http\Controllers\Admin\SettingsController::class, 'backup'])->name('settings.backup');
-    Route::get('settings/system-info', [\App\Http\Controllers\Admin\SettingsController::class, 'systemInfo'])->name('settings.system-info');
-});
 
-// Content Routes (accessible by all authenticated users)
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/content', function () {
-        return view('content.index');
-    })->name('content.index');
+    // Berita Management
+    Route::prefix('berita')->name('berita.')->group(function () {
+        Route::get('/', [BeritaController::class, 'index'])->name('index');
+        Route::get('/create', [BeritaController::class, 'create'])->name('create');
+        Route::post('/', [BeritaController::class, 'store'])->name('store');
+        Route::get('/{berita}', [BeritaController::class, 'show'])->name('show')->where('berita', '[0-9]+');
+        Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit')->where('berita', '[0-9]+');
+        Route::put('/{berita}', [BeritaController::class, 'update'])->name('update')->where('berita', '[0-9]+');
+        Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy')->where('berita', '[0-9]+');
+    });
+
+    // Penduduk Management
+    Route::prefix('penduduk')->name('penduduk.')->group(function () {
+        Route::get('/', [PendudukController::class, 'index'])->name('index');
+        Route::get('/create', [PendudukController::class, 'create'])->name('create');
+        Route::post('/', [PendudukController::class, 'store'])->name('store');
+        Route::get('/{penduduk}', [PendudukController::class, 'show'])->name('show')->where('penduduk', '[0-9]+');
+        Route::get('/{penduduk}/edit', [PendudukController::class, 'edit'])->name('edit')->where('penduduk', '[0-9]+');
+        Route::put('/{penduduk}', [PendudukController::class, 'update'])->name('update')->where('penduduk', '[0-9]+');
+        Route::delete('/{penduduk}', [PendudukController::class, 'destroy'])->name('destroy')->where('penduduk', '[0-9]+');
+        Route::post('/import', [PendudukController::class, 'import'])->name('import');
+    });
+
+    // Surat Management
+    Route::prefix('surat')->name('surat.')->group(function () {
+        Route::get('/', [SuratController::class, 'index'])->name('index');
+        Route::get('/create', [SuratController::class, 'create'])->name('create');
+        Route::post('/', [SuratController::class, 'store'])->name('store');
+        Route::get('/{surat}', [SuratController::class, 'show'])->name('show')->where('surat', '[0-9]+');
+        Route::get('/{surat}/edit', [SuratController::class, 'edit'])->name('edit')->where('surat', '[0-9]+');
+        Route::put('/{surat}', [SuratController::class, 'update'])->name('update')->where('surat', '[0-9]+');
+        Route::delete('/{surat}', [SuratController::class, 'destroy'])->name('destroy')->where('surat', '[0-9]+');
+        Route::post('/{surat}/process', [SuratController::class, 'process'])->name('process')->where('surat', '[0-9]+');
+        Route::post('/{surat}/complete', [SuratController::class, 'complete'])->name('complete')->where('surat', '[0-9]+');
+        Route::get('/{surat}/download', [SuratController::class, 'download'])->name('download')->where('surat', '[0-9]+');
+        Route::get('/{surat}/export-pdf', [SuratController::class, 'exportPdf'])->name('export-pdf')->where('surat', '[0-9]+');
+    });
+
+    // Antrian Management
+    Route::prefix('antrian')->name('antrian.')->group(function () {
+        Route::get('/', [AntrianController::class, 'index'])->name('index');
+        Route::get('/create', [AntrianController::class, 'create'])->name('create');
+        Route::post('/', [AntrianController::class, 'store'])->name('store');
+        Route::get('/dashboard', [AntrianController::class, 'dashboard'])->name('dashboard');
+        Route::get('/{antrian}', [AntrianController::class, 'show'])->name('show')->where('antrian', '[0-9]+');
+        Route::get('/{antrian}/edit', [AntrianController::class, 'edit'])->name('edit')->where('antrian', '[0-9]+');
+        Route::put('/{antrian}', [AntrianController::class, 'update'])->name('update')->where('antrian', '[0-9]+');
+        Route::delete('/{antrian}', [AntrianController::class, 'destroy'])->name('destroy')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/call', [AntrianController::class, 'call'])->name('call')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/serve', [AntrianController::class, 'serve'])->name('serve')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/complete', [AntrianController::class, 'complete'])->name('complete')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/cancel', [AntrianController::class, 'cancel'])->name('cancel')->where('antrian', '[0-9]+');
+    });
+
+    // Pengaduan Management
+    Route::prefix('pengaduan')->name('pengaduan.')->group(function () {
+        Route::get('/', [PengaduanController::class, 'index'])->name('index');
+        Route::get('/create', [PengaduanController::class, 'create'])->name('create');
+        Route::post('/', [PengaduanController::class, 'store'])->name('store');
+        Route::get('/{pengaduan}', [PengaduanController::class, 'show'])->name('show')->where('pengaduan', '[0-9]+');
+        Route::get('/{pengaduan}/edit', [PengaduanController::class, 'edit'])->name('edit')->where('pengaduan', '[0-9]+');
+        Route::put('/{pengaduan}', [PengaduanController::class, 'update'])->name('update')->where('pengaduan', '[0-9]+');
+        Route::delete('/{pengaduan}', [PengaduanController::class, 'destroy'])->name('destroy')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/process', [PengaduanController::class, 'process'])->name('process')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/followup', [PengaduanController::class, 'followup'])->name('followup')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/complete', [PengaduanController::class, 'complete'])->name('complete')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/reject', [PengaduanController::class, 'reject'])->name('reject')->where('pengaduan', '[0-9]+');
+        Route::get('/{pengaduan}/download', [PengaduanController::class, 'download'])->name('download')->where('pengaduan', '[0-9]+');
+        Route::get('/{pengaduan}/export-pdf', [PengaduanController::class, 'exportPdf'])->name('export-pdf')->where('pengaduan', '[0-9]+');
+    });
+
+    // User Management
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::get('/{user}', [UserController::class, 'show'])->name('show')->where('user', '[0-9]+');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit')->where('user', '[0-9]+');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update')->where('user', '[0-9]+');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy')->where('user', '[0-9]+');
+        Route::patch('/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('toggle-status')->where('user', '[0-9]+');
+        Route::patch('/{user}/reset-password', [UserController::class, 'resetPassword'])->name('reset-password')->where('user', '[0-9]+');
+    });
+
+    // Laporan Management
+    Route::prefix('laporan')->name('laporan.')->group(function () {
+        Route::get('/', [LaporanController::class, 'index'])->name('index');
+        Route::get('/export', [LaporanController::class, 'export'])->name('export');
+    });
+
+    // Settings Management
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('/', [SettingsController::class, 'index'])->name('index');
+        Route::put('/', [SettingsController::class, 'update'])->name('update');
+        Route::post('/update-realtime', [SettingsController::class, 'updateRealtime'])->name('update-realtime');
+        Route::post('/clear-cache', [SettingsController::class, 'clearCache'])->name('clear-cache');
+        Route::get('/backup', [SettingsController::class, 'backup'])->name('backup');
+        Route::get('/system-info', [SettingsController::class, 'systemInfo'])->name('system-info');
+    });
 });
 
 // Pegawai Routes
 Route::middleware(['auth', 'verified', 'role:Pegawai'])->prefix('pegawai')->name('pegawai.')->group(function () {
     Route::get('/dashboard', [PegawaiController::class, 'dashboard'])->name('dashboard');
-    
-    // Surat routes
-    Route::get('/surat', [PegawaiSuratController::class, 'index'])->name('surat.index');
-    Route::get('/surat/{surat}', [PegawaiSuratController::class, 'show'])->name('surat.show');
-    Route::get('/surat/{surat}/download', [PegawaiSuratController::class, 'download'])->name('surat.download');
-    Route::get('/surat/{surat}/export-pdf', [PegawaiSuratController::class, 'exportPdf'])->name('surat.export-pdf');
-    
-    // Antrian routes
-    Route::get('/antrian', [PegawaiAntrianController::class, 'index'])->name('antrian.index');
-    Route::get('/antrian/{antrian}', [PegawaiAntrianController::class, 'show'])->name('antrian.show');
-    Route::post('/antrian/{antrian}/call', [PegawaiAntrianController::class, 'call'])->name('antrian.call');
-    Route::post('/antrian/{antrian}/serve', [PegawaiAntrianController::class, 'serve'])->name('antrian.serve');
-    Route::post('/antrian/{antrian}/complete', [PegawaiAntrianController::class, 'complete'])->name('antrian.complete');
-    Route::post('/antrian/{antrian}/cancel', [PegawaiAntrianController::class, 'cancel'])->name('antrian.cancel');
-    Route::get('/antrian/stats/my', [PegawaiAntrianController::class, 'myStats'])->name('antrian.my-stats');
-    
-    // Pengaduan routes
-    Route::get('/pengaduan', [PegawaiPengaduanController::class, 'index'])->name('pengaduan.index');
-    Route::get('/pengaduan/{pengaduan}', [PegawaiPengaduanController::class, 'show'])->name('pengaduan.show');
-    Route::get('/pengaduan/{pengaduan}/download', [PegawaiPengaduanController::class, 'download'])->name('pengaduan.download');
-    Route::post('/pengaduan/{pengaduan}/process', [PegawaiPengaduanController::class, 'process'])->name('pengaduan.process');
-    Route::post('/pengaduan/{pengaduan}/follow-up', [PegawaiPengaduanController::class, 'followUp'])->name('pengaduan.follow-up');
-    Route::post('/pengaduan/{pengaduan}/complete', [PegawaiPengaduanController::class, 'complete'])->name('pengaduan.complete');
-    Route::post('/pengaduan/{pengaduan}/reject', [PegawaiPengaduanController::class, 'reject'])->name('pengaduan.reject');
-    Route::post('/pengaduan/{pengaduan}/take', [PegawaiPengaduanController::class, 'take'])->name('pengaduan.take');
-    Route::get('/pengaduan/stats/my', [PegawaiPengaduanController::class, 'myStats'])->name('pengaduan.my-stats');
-    
-    // Data Penduduk routes
-    Route::get('/penduduk', [PegawaiPendudukController::class, 'index'])->name('penduduk.index');
-    Route::get('/penduduk/{penduduk}', [PegawaiPendudukController::class, 'show'])->name('penduduk.show');
-    Route::get('/penduduk/search/api', [PegawaiPendudukController::class, 'search'])->name('penduduk.search');
-    Route::get('/penduduk/stats/api', [PegawaiPendudukController::class, 'stats'])->name('penduduk.stats');
-    Route::post('/penduduk/import', [PegawaiPendudukController::class, 'import'])->name('penduduk.import');
-    
-    // Laporan routes
-    Route::get('/laporan', [PegawaiLaporanController::class, 'index'])->name('laporan.index');
-    Route::get('/laporan/export', [PegawaiLaporanController::class, 'export'])->name('laporan.export');
+
+    Route::prefix('surat')->name('surat.')->group(function () {
+        Route::get('/', [PegawaiSuratController::class, 'index'])->name('index');
+        Route::get('/{surat}', [PegawaiSuratController::class, 'show'])->name('show')->where('surat', '[0-9]+');
+        Route::get('/{surat}/download', [PegawaiSuratController::class, 'download'])->name('download')->where('surat', '[0-9]+');
+        Route::get('/{surat}/export-pdf', [PegawaiSuratController::class, 'exportPdf'])->name('export-pdf')->where('surat', '[0-9]+');
+    });
+
+    Route::prefix('antrian')->name('antrian.')->group(function () {
+        Route::get('/', [PegawaiAntrianController::class, 'index'])->name('index');
+        Route::get('/{antrian}', [PegawaiAntrianController::class, 'show'])->name('show')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/call', [PegawaiAntrianController::class, 'call'])->name('call')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/serve', [PegawaiAntrianController::class, 'serve'])->name('serve')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/complete', [PegawaiAntrianController::class, 'complete'])->name('complete')->where('antrian', '[0-9]+');
+        Route::post('/{antrian}/cancel', [PegawaiAntrianController::class, 'cancel'])->name('cancel')->where('antrian', '[0-9]+');
+        Route::get('/stats/my', [PegawaiAntrianController::class, 'myStats'])->name('my-stats');
+    });
+
+    Route::prefix('pengaduan')->name('pengaduan.')->group(function () {
+        Route::get('/', [PegawaiPengaduanController::class, 'index'])->name('index');
+        Route::get('/{pengaduan}', [PegawaiPengaduanController::class, 'show'])->name('show')->where('pengaduan', '[0-9]+');
+        Route::get('/{pengaduan}/download', [PegawaiPengaduanController::class, 'download'])->name('download')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/process', [PegawaiPengaduanController::class, 'process'])->name('process')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/follow-up', [PegawaiPengaduanController::class, 'followUp'])->name('follow-up')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/complete', [PegawaiPengaduanController::class, 'complete'])->name('complete')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/reject', [PegawaiPengaduanController::class, 'reject'])->name('reject')->where('pengaduan', '[0-9]+');
+        Route::post('/{pengaduan}/take', [PegawaiPengaduanController::class, 'take'])->name('take')->where('pengaduan', '[0-9]+');
+        Route::get('/stats/my', [PegawaiPengaduanController::class, 'myStats'])->name('my-stats');
+    });
+
+    Route::prefix('penduduk')->name('penduduk.')->group(function () {
+        Route::get('/', [PegawaiPendudukController::class, 'index'])->name('index');
+        Route::get('/{penduduk}', [PegawaiPendudukController::class, 'show'])->name('show')->where('penduduk', '[0-9]+');
+        Route::get('/search/api', [PegawaiPendudukController::class, 'search'])->name('search');
+        Route::get('/stats/api', [PegawaiPendudukController::class, 'stats'])->name('stats');
+        Route::post('/import', [PegawaiPendudukController::class, 'import'])->name('import');
+    });
+
+    Route::prefix('laporan')->name('laporan.')->group(function () {
+        Route::get('/', [PegawaiLaporanController::class, 'index'])->name('index');
+        Route::get('/export', [PegawaiLaporanController::class, 'export'])->name('export');
+    });
 });
 
 // Warga Routes
 Route::middleware(['auth', 'verified', 'role:Warga'])->prefix('warga')->name('warga.')->group(function () {
     Route::get('/dashboard', [WargaController::class, 'dashboard'])->name('dashboard');
-    
-    // Surat routes
-    Route::get('/surat', [WargaSuratController::class, 'index'])->name('surat.index');
-    Route::get('/surat/list', [WargaSuratController::class, 'list'])->name('surat.list');
-    Route::get('/surat/create', [WargaSuratController::class, 'create'])->name('surat.create');
-    Route::post('/surat', [WargaSuratController::class, 'store'])->name('surat.store');
-    Route::get('/surat/{surat}', [WargaSuratController::class, 'show'])->name('surat.show');
-    Route::get('/surat/{surat}/download', [WargaSuratController::class, 'download'])->name('surat.download');
-    Route::get('/surat/{surat}/export-pdf', [WargaSuratController::class, 'exportPdf'])->name('surat.export-pdf');
-    
-    // Berita route
+
+    Route::prefix('surat')->name('surat.')->group(function () {
+        Route::get('/', [WargaSuratController::class, 'index'])->name('index');
+        Route::get('/list', [WargaSuratController::class, 'list'])->name('list');
+        Route::get('/create', [WargaSuratController::class, 'create'])->name('create');
+        Route::post('/', [WargaSuratController::class, 'store'])->name('store');
+        Route::get('/{surat}', [WargaSuratController::class, 'show'])->name('show')->where('surat', '[0-9]+');
+        Route::get('/{surat}/download', [WargaSuratController::class, 'download'])->name('download')->where('surat', '[0-9]+');
+        Route::get('/{surat}/export-pdf', [WargaSuratController::class, 'exportPdf'])->name('export-pdf')->where('surat', '[0-9]+');
+    });
+
     Route::get('/berita', [WargaController::class, 'berita'])->name('berita.index');
-    
-    // Bookmark routes
-    Route::get('/bookmarks', [WargaBookmarkController::class, 'index'])->name('bookmarks.index');
-    Route::post('/bookmark/{berita}', [WargaBookmarkController::class, 'toggle'])->name('bookmark.toggle');
-    
-    // Antrian routes
-    Route::get('/antrian', [WargaAntrianController::class, 'index'])->name('antrian.index');
-    Route::get('/antrian/create', [WargaAntrianController::class, 'create'])->name('antrian.create');
-    Route::post('/antrian', [WargaAntrianController::class, 'store'])->name('antrian.store');
-    Route::put('/antrian/{id}/cancel', [WargaAntrianController::class, 'cancel'])->name('antrian.cancel');
-    
-    // Pengaduan routes
-    Route::get('/pengaduan', [WargaPengaduanController::class, 'index'])->name('pengaduan.index');
-    Route::get('/pengaduan/create', [WargaPengaduanController::class, 'create'])->name('pengaduan.create');
-    Route::post('/pengaduan', [WargaPengaduanController::class, 'store'])->name('pengaduan.store');
-    
-    // Profil routes
+
+    Route::prefix('bookmarks')->name('bookmarks.')->group(function () {
+        Route::get('/', [WargaBookmarkController::class, 'index'])->name('index');
+    });
+    Route::post('/bookmark/{berita}', [WargaBookmarkController::class, 'toggle'])->name('bookmark.toggle')->where('berita', '[0-9]+');
+
+    Route::prefix('antrian')->name('antrian.')->group(function () {
+        Route::get('/', [WargaAntrianController::class, 'index'])->name('index');
+        Route::get('/create', [WargaAntrianController::class, 'create'])->name('create');
+        Route::post('/', [WargaAntrianController::class, 'store'])->name('store');
+        Route::put('/{id}/cancel', [WargaAntrianController::class, 'cancel'])->name('cancel')->where('id', '[0-9]+');
+    });
+
+    Route::prefix('pengaduan')->name('pengaduan.')->group(function () {
+        Route::get('/', [WargaPengaduanController::class, 'index'])->name('index');
+        Route::get('/create', [WargaPengaduanController::class, 'create'])->name('create');
+        Route::post('/', [WargaPengaduanController::class, 'store'])->name('store');
+    });
+
     Route::get('/profil', [WargaController::class, 'profil'])->name('profil');
     Route::put('/profil', [WargaController::class, 'updateProfil'])->name('profil.update');
     Route::put('/profil/password', [WargaController::class, 'updatePassword'])->name('profil.password');
@@ -209,35 +256,40 @@ Route::get('/berita/{slug}', [PublicController::class, 'beritaDetail'])->name('p
 Route::get('/profil', [PublicController::class, 'profil'])->name('public.profil');
 Route::get('/kontak', [PublicController::class, 'kontak'])->name('public.kontak');
 Route::get('/layanan', [PublicController::class, 'layanan'])->name('public.layanan');
-
-// Public pengaduan route
 Route::post('/pengaduan/submit', [PublicPengaduanController::class, 'store'])->name('public.pengaduan.store');
-
-// Public Antrian Routes
 Route::post('/antrian/submit', [PublicAntrianController::class, 'store'])->name('public.antrian.store');
-
-// Public Kontak Routes
 Route::post('/kontak/submit', [PublicKontakController::class, 'store'])->name('public.kontak.store');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    // Notification routes
-Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
-Route::get('/notifications/page', function() { return view('notifications.index'); })->name('notifications.page');
-Route::get('/notifications/unread-count', [NotificationController::class, 'unreadCount'])->name('notifications.unread-count');
-Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
-Route::patch('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
-Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
-Route::post('/notifications/send', [NotificationController::class, 'sendNotification'])->name('notifications.send');
-    Route::post('/notifications/send-to-role', [NotificationController::class, 'sendToRole'])->name('notifications.send-to-role');
-    
-    // API routes for notifications
-    Route::get('/api/users', function() {
-        return response()->json(\App\Models\User::select('id', 'name', 'email')->get());
+// Profile & Notification Routes
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('notifications')->name('notifications.')->group(function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
+        Route::get('/page', function () {
+            return view('notifications.index');
+        })->name('page');
+        Route::get('/unread-count', [NotificationController::class, 'unreadCount'])->name('unread-count');
+        Route::patch('/{notification}/read', [NotificationController::class, 'markAsRead'])->name('read')->where('notification', '[0-9]+');
+        Route::patch('/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-read');
+        Route::delete('/{notification}', [NotificationController::class, 'destroy'])->name('destroy')->where('notification', '[0-9]+');
+        Route::post('/send', [NotificationController::class, 'sendNotification'])->name('send');
+        Route::post('/send-to-role', [NotificationController::class, 'sendToRole'])->name('send-to-role');
+    });
+
+    Route::prefix('api')->name('api.')->group(function () {
+        Route::get('/users', function () {
+            try {
+                return response()->json(\App\Models\User::select('id', 'name', 'email')->get());
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Unable to fetch users'], 500);
+            }
+        })->name('users');
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

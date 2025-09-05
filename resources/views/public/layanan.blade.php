@@ -131,7 +131,7 @@
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <i class="fas fa-building text-2xl text-blue-800"></i>
+                    <i class="fas fa-building text-2xl text-primary-800"></i>
                     <div>
                         <h1 class="text-xl font-bold text-gray-900">Kantor Camat Waesama</h1>
                         <p class="text-sm text-gray-600">Melayani dengan Sepenuh Hati</p>
@@ -154,9 +154,10 @@
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
                                 <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif
+                                {{-- Registration disabled - only admin and pegawai access --}}
+                                 {{-- @if (Route::has('register'))
+                                     <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                 @endif --}}
                             @endauth
                         </div>
                     @endif
@@ -164,7 +165,7 @@
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-blue-800 focus:outline-none">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary-800 focus:outline-none">
                         <i id="menu-icon" class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -239,8 +240,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Layanan Surat -->
                 <div class="service-card bg-white rounded-xl p-8 text-center fade-in">
-                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-file-alt text-blue-600 text-3xl"></i>
+                    <div class="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-file-alt text-primary-600 text-3xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Layanan Surat</h3>
                     <p class="text-gray-600 mb-6">Pengurusan berbagai jenis surat keterangan dan dokumen administrasi</p>
@@ -279,8 +280,8 @@
         <section id="layanan-surat" class="mb-16">
             <div class="bg-white rounded-xl shadow-sm p-8 fade-in">
                 <div class="flex items-center mb-8">
-                    <div class="bg-blue-100 p-4 rounded-lg mr-6">
-                        <i class="fas fa-file-alt text-blue-600 text-3xl"></i>
+                    <div class="bg-primary-100 p-4 rounded-lg mr-6">
+                        <i class="fas fa-file-alt text-primary-600 text-3xl"></i>
                     </div>
                     <div>
                         <h2 class="text-3xl font-bold text-gray-800 mb-2">Layanan Surat-Menyurat</h2>
@@ -289,7 +290,7 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                    <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary-300 transition-colors">
                         <h4 class="font-bold text-gray-800 mb-3">Surat Keterangan Domisili</h4>
                         <p class="text-gray-600 text-sm mb-4">Surat keterangan tempat tinggal untuk berbagai keperluan</p>
                         <div class="text-sm text-gray-500">
@@ -298,7 +299,7 @@
                         </div>
                     </div>
 
-                    <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary-300 transition-colors">
                         <h4 class="font-bold text-gray-800 mb-3">Surat Keterangan Usaha</h4>
                         <p class="text-gray-600 text-sm mb-4">Surat keterangan untuk keperluan usaha dan bisnis</p>
                         <div class="text-sm text-gray-500">
@@ -307,7 +308,7 @@
                         </div>
                     </div>
 
-                    <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary-300 transition-colors">
                         <h4 class="font-bold text-gray-800 mb-3">Surat Keterangan Tidak Mampu</h4>
                         <p class="text-gray-600 text-sm mb-4">Surat keterangan untuk bantuan sosial dan beasiswa</p>
                         <div class="text-sm text-gray-500">
@@ -316,7 +317,7 @@
                         </div>
                     </div>
 
-                    <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary-300 transition-colors">
                         <h4 class="font-bold text-gray-800 mb-3">Surat Pengantar KTP</h4>
                         <p class="text-gray-600 text-sm mb-4">Surat pengantar untuk pembuatan KTP baru atau perpanjangan</p>
                         <div class="text-sm text-gray-500">
@@ -325,7 +326,7 @@
                         </div>
                     </div>
 
-                    <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary-300 transition-colors">
                         <h4 class="font-bold text-gray-800 mb-3">Surat Pengantar Nikah</h4>
                         <p class="text-gray-600 text-sm mb-4">Surat pengantar untuk keperluan pernikahan</p>
                         <div class="text-sm text-gray-500">
@@ -334,7 +335,7 @@
                         </div>
                     </div>
 
-                    <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary-300 transition-colors">
                         <h4 class="font-bold text-gray-800 mb-3">Surat Keterangan Lainnya</h4>
                         <p class="text-gray-600 text-sm mb-4">Berbagai surat keterangan sesuai kebutuhan</p>
                         <div class="text-sm text-gray-500">
@@ -360,9 +361,9 @@
                         <div>
                             <h4 class="font-semibold text-gray-800 mb-3">Ketentuan:</h4>
                             <ul class="space-y-2 text-gray-600">
-                                <li class="flex items-center"><i class="fas fa-info-circle text-blue-500 mr-2"></i>Pemohon harus WNI dan berdomisili di Kecamatan Waesama</li>
-                                <li class="flex items-center"><i class="fas fa-info-circle text-blue-500 mr-2"></i>Dokumen asli dibawa untuk verifikasi</li>
-                                <li class="flex items-center"><i class="fas fa-info-circle text-blue-500 mr-2"></i>Pengambilan surat sesuai jadwal yang ditentukan</li>
+                                <li class="flex items-center"><i class="fas fa-info-circle text-primary-500 mr-2"></i>Pemohon harus WNI dan berdomisili di Kecamatan Waesama</li>
+                                <li class="flex items-center"><i class="fas fa-info-circle text-primary-500 mr-2"></i>Dokumen asli dibawa untuk verifikasi</li>
+                                <li class="flex items-center"><i class="fas fa-info-circle text-primary-500 mr-2"></i>Pengambilan surat sesuai jadwal yang ditentukan</li>
                             </ul>
                         </div>
                     </div>
@@ -444,7 +445,7 @@
                             @csrf
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Layanan</label>
-                                <select name="jenis_layanan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <select name="jenis_layanan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" required>
                                     <option value="">Pilih Jenis Layanan</option>
                                     <option value="Surat Domisili" {{ old('jenis_layanan') == 'Surat Domisili' ? 'selected' : '' }}>Surat Keterangan Domisili</option>
                                     <option value="SKTM" {{ old('jenis_layanan') == 'SKTM' ? 'selected' : '' }}>Surat Keterangan Tidak Mampu</option>
@@ -457,22 +458,22 @@
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama lengkap" required>
+                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Masukkan nama lengkap" required>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                                <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nomor HP" required>
+                                <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Masukkan nomor HP" required>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">NIK</label>
-                                <input type="text" name="nik" value="{{ old('nik') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan NIK (16 digit)" maxlength="16" required>
+                                <input type="text" name="nik" value="{{ old('nik') }}" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Masukkan NIK (16 digit)" maxlength="16" required>
                             </div>
                             
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Keperluan (Opsional)</label>
-                                <textarea name="keperluan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Jelaskan keperluan Anda" rows="3">{{ old('keperluan') }}</textarea>
+                                <textarea name="keperluan" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500" placeholder="Jelaskan keperluan Anda" rows="3">{{ old('keperluan') }}</textarea>
                             </div>
 
                             <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
@@ -481,16 +482,16 @@
                             </button>
                         </form>
 
-                        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
-                            <h4 class="font-semibold text-blue-800 mb-2">Informasi Antrian Hari Ini</h4>
+                        <div class="mt-6 p-4 bg-primary-50 rounded-lg">
+                            <h4 class="font-semibold text-primary-800 mb-2">Informasi Antrian Hari Ini</h4>
                             <div class="grid grid-cols-2 gap-4 text-sm">
                                 <div>
-                                    <p class="text-blue-600">Nomor Sekarang:</p>
-                                    <p class="font-bold text-blue-800">A-15</p>
+                                    <p class="text-primary-600">Nomor Sekarang:</p>
+                                    <p class="font-bold text-primary-800">A-15</p>
                                 </div>
                                 <div>
-                                    <p class="text-blue-600">Estimasi Tunggu:</p>
-                                    <p class="font-bold text-blue-800">~30 menit</p>
+                                    <p class="text-primary-600">Estimasi Tunggu:</p>
+                                    <p class="font-bold text-primary-800">~30 menit</p>
                                 </div>
                             </div>
                         </div>
@@ -622,11 +623,11 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="text-center">
-                        <div class="bg-blue-100 p-6 rounded-lg mb-6">
-                            <i class="fas fa-clock text-blue-600 text-4xl mb-4"></i>
+                        <div class="bg-primary-100 p-6 rounded-lg mb-6">
+                            <i class="fas fa-clock text-primary-600 text-4xl mb-4"></i>
                             <h3 class="text-xl font-bold text-gray-800 mb-2">Hari Kerja</h3>
                             <p class="text-gray-600">Senin - Jumat</p>
-                            <p class="text-2xl font-bold text-blue-600 mt-2">08:00 - 16:00</p>
+                            <p class="text-2xl font-bold text-primary-600 mt-2">08:00 - 16:00</p>
                             <p class="text-sm text-gray-500">Istirahat: 12:00 - 13:00</p>
                         </div>
                     </div>
@@ -665,11 +666,11 @@
                 <h2 class="text-3xl font-bold mb-4">Butuh Bantuan Lebih Lanjut?</h2>
                 <p class="text-xl mb-8 opacity-90">Tim kami siap membantu Anda dengan pelayanan terbaik</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('public.kontak') }}" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    <a href="{{ route('public.kontak') }}" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                         <i class="fas fa-phone mr-2"></i>
                         Hubungi Kami
                     </a>
-                    <a href="#antrian-online" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    <a href="#antrian-online" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors">
                         <i class="fas fa-ticket-alt mr-2"></i>
                         Ambil Antrian
                     </a>
@@ -684,7 +685,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="md:col-span-2">
                     <div class="flex items-center space-x-4 mb-4">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23667eea' font-size='40' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Logo" class="h-12 w-12">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='%23003f88' font-size='40' font-weight='bold'%3EW%3C/text%3E%3C/svg%3E" alt="Logo" class="h-12 w-12">
                         <div>
                             <h3 class="text-xl font-bold">Kantor Camat Waesama</h3>
                             <p class="text-gray-300">Melayani dengan Sepenuh Hati</p>

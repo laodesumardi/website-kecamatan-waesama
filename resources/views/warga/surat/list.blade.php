@@ -11,7 +11,7 @@
             <p class="text-gray-600">Kelola dan pantau status pengajuan surat Anda</p>
         </div>
         <a href="{{ route('warga.surat.create') }}" 
-           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2">
+           class="bg-primary-900 hover:bg-primary-800 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
             </svg>
@@ -114,7 +114,7 @@
             </div>
             
             <div class="flex items-end">
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200">
+                <button type="submit" class="w-full bg-primary-900 hover:bg-primary-800 text-white px-4 py-2 rounded-md transition-colors duration-200">
                     <i class="fas fa-search mr-2"></i>Filter
                 </button>
             </div>
@@ -166,7 +166,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div class="flex space-x-2">
                                     <a href="{{ route('warga.surat.show', $item) }}" 
-                                       class="text-blue-600 hover:text-blue-900 transition-colors">
+                                       class="text-primary-900 hover:text-primary-700 transition-colors">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     @if($item->status === 'Selesai' && $item->file_surat)

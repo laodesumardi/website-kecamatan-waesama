@@ -130,7 +130,7 @@
             <div class="flex justify-between items-center h-16 lg:h-20">
                 <!-- Logo Section -->
                 <div class="flex items-center space-x-3 flex-shrink-0">
-                    <div class="bg-blue-800 p-2 rounded-lg">
+                    <div class="bg-primary-800 p-2 rounded-lg">
                         <i class="fas fa-building text-xl text-white"></i>
                     </div>
                     <div class="hidden sm:block">
@@ -147,31 +147,31 @@
                     <!-- Navigation Links -->
                     <div class="flex items-center space-x-1">
                         <a href="{{ route('welcome') }}"
-                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
                             <i class="fas fa-home text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
                             <span>Beranda</span>
                         </a>
 
                         <a href="{{ route('public.profil') }}"
-                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
                             <i class="fas fa-info-circle text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
                             <span>Profil</span>
                         </a>
 
                         <a href="{{ route('public.berita') }}"
-                           class="group flex items-center px-3 py-2 text-sm font-medium text-blue-800 bg-blue-50 rounded-lg">
+                           class="group flex items-center px-3 py-2 text-sm font-medium text-primary-800 bg-primary-50 rounded-lg">
                             <i class="fas fa-newspaper text-base mr-2"></i>
                             <span>Berita</span>
                         </a>
 
                         <a href="{{ route('public.layanan') }}"
-                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
                             <i class="fas fa-cogs text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
                             <span>Layanan</span>
                         </a>
 
                         <a href="{{ route('public.kontak') }}"
-                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
+                           class="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
                             <i class="fas fa-phone text-base mr-2 group-hover:scale-110 transition-transform duration-200"></i>
                             <span>Kontak</span>
                         </a>
@@ -182,23 +182,24 @@
                         <div class="flex items-center space-x-3 pl-6 border-l border-gray-200">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
-                                   class="inline-flex items-center px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
+                                   class="inline-flex items-center px-4 py-2 bg-primary-800 text-white text-sm font-medium rounded-lg hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
                                     <i class="fas fa-tachometer-alt mr-2"></i>
                                     Dashboard
                                 </a>
                             @else
                                 <a href="{{ route('login') }}"
-                                   class="inline-flex items-center px-4 py-2 border border-blue-800 text-blue-800 text-sm font-medium rounded-lg hover:bg-blue-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200">
+                                   class="inline-flex items-center px-4 py-2 border border-primary-800 text-primary-800 text-sm font-medium rounded-lg hover:bg-primary-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200">
                                     <i class="fas fa-sign-in-alt mr-2"></i>
                                     Masuk
                                 </a>
-                                @if (Route::has('register'))
+                                {{-- Registration disabled - only admin and pegawai access --}}
+                                {{-- @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                       class="inline-flex items-center px-4 py-2 bg-blue-800 text-white text-sm font-medium rounded-lg hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
+                                       class="inline-flex items-center px-4 py-2 bg-primary-800 text-white text-sm font-medium rounded-lg hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200 shadow-sm hover:shadow-md">
                                         <i class="fas fa-user-plus mr-2"></i>
                                         Daftar
                                     </a>
-                                @endif
+                                @endif --}}
                             @endauth
                         </div>
                     @endif
@@ -207,7 +208,7 @@
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden">
                     <button id="mobile-menu-btn"
-                            class="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-blue-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                            class="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-primary-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
                             aria-expanded="false"
                             aria-label="Toggle navigation menu">
                         <i id="menu-icon" class="fas fa-bars text-xl"></i>
@@ -221,33 +222,33 @@
                     <!-- Mobile Navigation Links -->
                     <div class="space-y-1">
                         <a href="{{ route('welcome') }}"
-                           class="group flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                            <i class="fas fa-home text-lg mr-3 text-gray-500 group-hover:text-blue-600"></i>
+                           class="group flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-home text-lg mr-3 text-gray-500 group-hover:text-primary-600"></i>
                             <span>Beranda</span>
                         </a>
 
                         <a href="{{ route('public.profil') }}"
-                           class="flex items-center px-3 py-3 text-base font-medium text-gray-700 rounded-lg hover:text-blue-600 hover:bg-gray-100 transition duration-200">
+                           class="flex items-center px-3 py-3 text-base font-medium text-gray-700 rounded-lg hover:text-primary-600 hover:bg-gray-100 transition duration-200">
                             <i class="fas fa-info-circle text-lg mr-3 text-gray-500"></i>
                             <span>Profil</span>
-                            <i class="fas fa-chevron-right text-sm ml-auto text-gray-400 group-hover:text-blue-600"></i>
+                            <i class="fas fa-chevron-right text-sm ml-auto text-gray-400 group-hover:text-primary-600"></i>
                         </a>
 
                         <a href="{{ route('public.berita') }}"
-                           class="group flex items-center px-3 py-3 text-base font-medium text-blue-800 bg-blue-50 rounded-lg">
-                            <i class="fas fa-newspaper text-lg mr-3 text-blue-600"></i>
+                           class="group flex items-center px-3 py-3 text-base font-medium text-primary-800 bg-primary-50 rounded-lg">
+                            <i class="fas fa-newspaper text-lg mr-3 text-primary-600"></i>
                             <span>Berita</span>
                         </a>
 
                         <a href="{{ route('public.layanan') }}"
-                           class="group flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                            <i class="fas fa-cogs text-lg mr-3 text-gray-500 group-hover:text-blue-600"></i>
+                           class="group flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-cogs text-lg mr-3 text-gray-500 group-hover:text-primary-600"></i>
                             <span>Layanan</span>
                         </a>
 
                         <a href="{{ route('public.kontak') }}"
-                           class="group flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200">
-                            <i class="fas fa-phone text-lg mr-3 text-gray-500 group-hover:text-blue-600"></i>
+                           class="group flex items-center px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-800 hover:bg-primary-50 rounded-lg transition-all duration-200">
+                            <i class="fas fa-phone text-lg mr-3 text-gray-500 group-hover:text-primary-600"></i>
                             <span>Kontak</span>
                         </a>
                     </div>
@@ -257,23 +258,24 @@
                         <div class="pt-4 border-t border-gray-200 space-y-2">
                             @auth
                                 <a href="{{ url('/dashboard') }}"
-                                   class="flex items-center px-3 py-3 text-base font-medium text-white bg-blue-800 rounded-lg hover:bg-blue-900 transition-all duration-200">
+                                   class="flex items-center px-3 py-3 text-base font-medium text-white bg-primary-800 rounded-lg hover:bg-primary-900 transition-all duration-200">
                                     <i class="fas fa-tachometer-alt text-lg mr-3"></i>
                                     <span>Dashboard</span>
                                 </a>
                             @else
                                 <a href="{{ route('login') }}"
-                                   class="flex items-center px-3 py-3 text-base font-medium text-blue-800 border border-blue-800 rounded-lg hover:bg-blue-800 hover:text-white transition-all duration-200">
+                                   class="flex items-center px-3 py-3 text-base font-medium text-primary-800 border border-primary-800 rounded-lg hover:bg-primary-800 hover:text-white transition-all duration-200">
                                     <i class="fas fa-sign-in-alt text-lg mr-3"></i>
                                     <span>Masuk</span>
                                 </a>
-                                @if (Route::has('register'))
+                                {{-- Registration disabled - only admin and pegawai access --}}
+                                {{-- @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                       class="flex items-center px-3 py-3 text-base font-medium text-white bg-blue-800 rounded-lg hover:bg-blue-900 transition-all duration-200">
+                                       class="flex items-center px-3 py-3 text-base font-medium text-white bg-primary-800 rounded-lg hover:bg-primary-900 transition-all duration-200">
                                         <i class="fas fa-user-plus text-lg mr-3"></i>
                                         <span>Daftar</span>
                                     </a>
-                                @endif
+                                @endif --}}
                             @endauth
                         </div>
                     @endif
@@ -286,9 +288,9 @@
     <div class="bg-white border-b mt-16 lg:mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav class="flex items-center space-x-2 text-sm">
-                <a href="{{ url('/') }}" class="text-gray-500 hover:text-blue-600 transition-colors">Beranda</a>
+                <a href="{{ url('/') }}" class="text-gray-500 hover:text-primary-600 transition-colors">Beranda</a>
                 <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                <a href="{{ route('public.berita') }}" class="text-gray-500 hover:text-blue-600 transition-colors">Berita</a>
+                <a href="{{ route('public.berita') }}" class="text-gray-500 hover:text-primary-600 transition-colors">Berita</a>
                 <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                 <span class="text-gray-800 font-medium">{{ Str::limit($berita->judul, 50) }}</span>
             </nav>
@@ -383,7 +385,7 @@
                                             <i class="fas fa-calendar mr-2"></i>
                                             <span>{{ $related->published_at ? $related->published_at->format('d M Y') : $related->created_at->format('d M Y') }}</span>
                                         </div>
-                                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+                                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors">
                                             <a href="{{ route('public.berita.detail', $related->slug) }}">{{ $related->judul }}</a>
                                         </h3>
                                         @if($related->excerpt)
@@ -392,7 +394,7 @@
                                             <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($related->konten), 100) }}</p>
                                         @endif
                                         
-                                        <a href="{{ route('public.berita.detail', $related->slug) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors">
+                                        <a href="{{ route('public.berita.detail', $related->slug) }}" class="inline-flex items-center text-primary-600 hover:text-primary-800 font-medium transition-colors">
                                             Baca Selengkapnya
                                             <i class="fas fa-arrow-right ml-2"></i>
                                         </a>
@@ -421,7 +423,7 @@
                         <div class="space-y-4">
                             @foreach($latestNews as $latest)
                                 <article class="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
-                                    <h4 class="text-sm font-medium text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+                                    <h4 class="text-sm font-medium text-gray-900 mb-2 hover:text-primary-600 transition-colors">
                                         <a href="{{ route('public.berita.detail', $latest->slug) }}">{{ Str::limit($latest->judul, 60) }}</a>
                                     </h4>
                                     <div class="flex items-center text-xs text-gray-500">
@@ -443,7 +445,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <div class="bg-blue-600 p-2 rounded-lg">
+                        <div class="bg-primary-600 p-2 rounded-lg">
                             <i class="fas fa-building text-xl text-white"></i>
                         </div>
                         <div>

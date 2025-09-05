@@ -163,9 +163,10 @@
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
                                 <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif
+                                {{-- Registration disabled - only admin and pegawai access --}}
+                                 {{-- @if (Route::has('register'))
+                                     <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
+                                 @endif --}}
                             @endauth
                         </div>
                     @endif
@@ -225,8 +226,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Alamat -->
                 <div class="contact-card bg-white rounded-xl p-6 text-center fade-in">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-map-marker-alt text-blue-600 text-2xl"></i>
+                    <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marker-alt text-primary-600 text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-bold text-gray-800 mb-2">Alamat</h3>
                     <p class="text-gray-600 text-sm leading-relaxed">
@@ -247,7 +248,7 @@
                     <div class="space-y-2 text-sm">
                         <p class="text-gray-600">
                             <span class="font-medium">Kantor:</span><br>
-                            <a href="tel:+6291234567890" class="text-blue-600 hover:text-blue-800">(0912) 345-6789</a>
+                            <a href="tel:+6291234567890" class="text-primary-600 hover:text-primary-800">(0912) 345-6789</a>
                         </p>
                         <p class="text-gray-600">
                             <span class="font-medium">WhatsApp:</span><br>
@@ -265,11 +266,11 @@
                     <div class="space-y-2 text-sm">
                         <p class="text-gray-600">
                             <span class="font-medium">Resmi:</span><br>
-                            <a href="mailto:camat@waesama.go.id" class="text-blue-600 hover:text-blue-800">camat@waesama.go.id</a>
+                            <a href="mailto:camat@waesama.go.id" class="text-primary-600 hover:text-primary-800">camat@waesama.go.id</a>
                         </p>
                         <p class="text-gray-600">
                             <span class="font-medium">Pengaduan:</span><br>
-                            <a href="mailto:pengaduan@waesama.go.id" class="text-blue-600 hover:text-blue-800">pengaduan@waesama.go.id</a>
+                            <a href="mailto:pengaduan@waesama.go.id" class="text-primary-600 hover:text-primary-800">pengaduan@waesama.go.id</a>
                         </p>
                     </div>
                 </div>
@@ -332,22 +333,22 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
-                                    <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nama_lengkap') border-red-500 @enderror" placeholder="Masukkan nama lengkap">
+                                    <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent @error('nama_lengkap') border-red-500 @enderror" placeholder="Masukkan nama lengkap">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                                    <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('email') border-red-500 @enderror" placeholder="Masukkan email">
+                                    <input type="email" name="email" value="{{ old('email') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent @error('email') border-red-500 @enderror" placeholder="Masukkan email">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                                    <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('nomor_hp') border-red-500 @enderror" placeholder="Masukkan nomor HP">
+                                    <input type="tel" name="nomor_hp" value="{{ old('nomor_hp') }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent @error('nomor_hp') border-red-500 @enderror" placeholder="Masukkan nomor HP">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Kategori</label>
-                                    <select name="kategori" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('kategori') border-red-500 @enderror">
+                                    <select name="kategori" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent @error('kategori') border-red-500 @enderror">
                                         <option value="">Pilih Kategori</option>
                                         <option value="informasi" {{ old('kategori') == 'informasi' ? 'selected' : '' }}>Permintaan Informasi</option>
                                         <option value="keluhan" {{ old('kategori') == 'keluhan' ? 'selected' : '' }}>Keluhan</option>
@@ -360,18 +361,18 @@
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Subjek *</label>
-                                <input type="text" name="subjek" value="{{ old('subjek') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('subjek') border-red-500 @enderror" placeholder="Masukkan subjek pesan">
+                                <input type="text" name="subjek" value="{{ old('subjek') }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent @error('subjek') border-red-500 @enderror" placeholder="Masukkan subjek pesan">
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Pesan *</label>
-                                <textarea name="pesan" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none @error('pesan') border-red-500 @enderror" placeholder="Tulis pesan Anda di sini...">{{ old('pesan') }}</textarea>
+                                <textarea name="pesan" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none @error('pesan') border-red-500 @enderror" placeholder="Tulis pesan Anda di sini...">{{ old('pesan') }}</textarea>
                             </div>
 
                             <div class="flex items-start">
                                 <input type="checkbox" id="privacy" class="mt-1 mr-3">
                                 <label for="privacy" class="text-sm text-gray-600">
-                                    Saya setuju dengan <a href="#" class="text-blue-600 hover:text-blue-800">kebijakan privasi</a> dan memberikan izin untuk memproses data pribadi saya.
+                                    Saya setuju dengan <a href="#" class="text-primary-600 hover:text-primary-800">kebijakan privasi</a> dan memberikan izin untuk memproses data pribadi saya.
                                 </label>
                             </div>
 
@@ -411,7 +412,7 @@
                         <!-- Location Details -->
                         <div class="space-y-4">
                             <div class="flex items-start">
-                                <i class="fas fa-map-marker-alt text-blue-600 text-lg mr-3 mt-1"></i>
+                                <i class="fas fa-map-marker-alt text-primary-600 text-lg mr-3 mt-1"></i>
                                 <div>
                                     <h4 class="font-semibold text-gray-800 mb-1">Alamat Lengkap</h4>
                                     <p class="text-gray-600 text-sm">Jl. Raya Waesama No. 123, Kecamatan Waesama, Kabupaten Buru Selatan, Provinsi Maluku 97571</p>
@@ -437,7 +438,7 @@
 
                         <!-- Action Buttons -->
                         <div class="mt-6">
-                            <a href="https://www.google.com/maps/place/Waesama,+Kabupaten+Buru+Selatan,+Maluku/@-3.6,127.1,15z" target="_blank" class="flex items-center justify-center bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors w-full">
+                            <a href="https://www.google.com/maps/place/Waesama,+Kabupaten+Buru+Selatan,+Maluku/@-3.6,127.1,15z" target="_blank" class="flex items-center justify-center bg-primary-600 text-white py-3 px-4 rounded-lg hover:bg-primary-700 transition-colors w-full">
                                 <i class="fas fa-map mr-2"></i>
                                 Buka di Google Maps
                             </a>
@@ -480,13 +481,13 @@
                     </div>
 
                     <!-- Email -->
-                    <div class="text-center p-6 border border-blue-200 rounded-lg hover:border-blue-400 transition-colors">
-                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-envelope text-blue-600 text-2xl"></i>
+                    <div class="text-center p-6 border border-primary-200 rounded-lg hover:border-primary-400 transition-colors">
+                        <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-envelope text-primary-600 text-2xl"></i>
                         </div>
                         <h3 class="text-lg font-bold text-gray-800 mb-2">Email</h3>
                         <p class="text-gray-600 text-sm mb-4">Untuk pertanyaan formal dan dokumen</p>
-                        <a href="mailto:camat@waesama.go.id" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-block">
+                        <a href="mailto:camat@waesama.go.id" class="bg-primary-600 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition-colors inline-block">
                             <i class="fas fa-envelope mr-2"></i>
                             Kirim Email
                         </a>
@@ -535,11 +536,11 @@
                 <h2 class="text-3xl font-bold mb-4">Masih Ada Pertanyaan?</h2>
                 <p class="text-xl mb-8 opacity-90">Jangan ragu untuk menghubungi kami. Tim kami siap membantu Anda 24/7</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://wa.me/6281234567890" target="_blank" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    <a href="https://wa.me/6281234567890" target="_blank" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                         <i class="fab fa-whatsapp mr-2"></i>
                         Chat WhatsApp
                     </a>
-                    <a href="tel:+6291234567890" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    <a href="tel:+6291234567890" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors">
                         <i class="fas fa-phone mr-2"></i>
                         Telepon Langsung
                     </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Warga;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
+use App\Helpers\NotificationHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -89,6 +90,24 @@ class WargaPengaduanController extends Controller
             'status' => 'Baru',
             'lampiran' => $lampiranPath,
         ]);
+        
+        // Send notification to admins about new pengaduan from warga
+        NotificationHelper::notifyAdmins(
+            'Pengaduan Baru dari Warga',
+            "Pengaduan baru dari {$user->name}: {$validated['judul_pengaduan']} (Kategori: {$validated['kategori']}, Prioritas: {$validated['prioritas']})",
+            $validated['prioritas'] === 'Mendesak' ? 'high' : 'medium',
+            route('admin.pengaduan.show', $pengaduan),
+            $user->id
+        );
+        
+        // Send notification to pegawai about new pengaduan from warga
+        NotificationHelper::notifyStaff(
+            'Pengaduan Baru dari Warga',
+            "Pengaduan baru dari {$user->name}: {$validated['judul_pengaduan']} (Kategori: {$validated['kategori']}, Prioritas: {$validated['prioritas']})",
+            $validated['prioritas'] === 'Mendesak' ? 'high' : 'medium',
+            route('pegawai.pengaduan.show', $pengaduan),
+            $user->id
+        );
         
         return redirect()->route('warga.pengaduan.index')
             ->with('success', 'Pengaduan berhasil diajukan dengan nomor: ' . $nomorPengaduan);

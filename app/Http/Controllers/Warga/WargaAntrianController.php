@@ -133,6 +133,15 @@ class WargaAntrianController extends Controller
             route('admin.antrian.show', $antrian->id)
         );
         
+        // Notify pegawai about new antrian
+        NotificationHelper::notifyStaff(
+            'Antrian Baru dari Warga',
+            "Antrian baru nomor {$antrian->nomor_antrian} untuk layanan '{$antrian->jenis_layanan}' telah dibuat oleh {$user->name} pada {$antrian->tanggal_kunjungan} jam {$antrian->jam_kunjungan}.",
+            'medium',
+            route('pegawai.antrian.show', $antrian->id),
+            $user->id
+        );
+        
         return redirect()->route('warga.antrian.index')
             ->with('success', 'Antrian berhasil dibuat dengan nomor: ' . $nomorAntrian);
     }

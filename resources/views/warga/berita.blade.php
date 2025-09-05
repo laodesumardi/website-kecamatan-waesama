@@ -40,7 +40,7 @@
                 </select>
                 <button type="button" 
                         id="filterButton"
-                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        class="px-4 py-2 bg-primary-900 text-white rounded-lg hover:bg-primary-800 transition-colors">
                     <i class="fas fa-filter mr-2"></i>Filter
                 </button>
                 <button type="button" 
@@ -78,7 +78,7 @@
                     {{ Str::limit(strip_tags($featuredNews->konten), 200) }}
                 </p>
                 <a href="{{ route('public.berita.detail', $featuredNews->slug) }}" 
-                   class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+                   class="inline-flex items-center text-primary-900 hover:text-primary-800 font-medium">
                     Baca Selengkapnya
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
@@ -96,7 +96,7 @@
                      alt="{{ $item->judul }}" 
                      class="w-full h-48 object-cover">
                 <div class="absolute top-3 left-3">
-                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
                         {{ ucfirst($item->kategori ?? 'Umum') }}
                     </span>
                 </div>
@@ -116,7 +116,7 @@
                     {{ Str::limit(strip_tags($item->konten), 120) }}
                 </p>
                 <a href="{{ route('public.berita.detail', $item->slug) }}" 
-                   class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
+                   class="inline-flex items-center text-primary-900 hover:text-primary-800 font-medium text-sm">
                     Baca Selengkapnya
                     <i class="fas fa-arrow-right ml-1 text-xs"></i>
                 </a>

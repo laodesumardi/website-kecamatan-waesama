@@ -33,12 +33,12 @@
         <div class="lg:col-span-1">
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <div class="text-center">
-                    <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-user text-blue-600 text-3xl"></i>
+                    <div class="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user text-primary-600 text-3xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ $user->name }}</h3>
                     <p class="text-gray-600 mb-2">{{ $user->email }}</p>
-                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                    <span class="inline-block bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
                         {{ $user->role->name ?? 'Warga' }}
                     </span>
                 </div>
@@ -66,7 +66,7 @@
                 <!-- Tabs -->
                 <div class="border-b border-gray-200">
                     <nav class="flex space-x-8 px-6" aria-label="Tabs">
-                        <button class="tab-button active border-b-2 border-blue-500 py-4 px-1 text-sm font-medium text-blue-600" 
+                        <button class="tab-button active border-b-2 border-primary-500 py-4 px-1 text-sm font-medium text-primary-600" 
                                 data-tab="profile">
                             <i class="fas fa-user mr-2"></i>Informasi Profil
                         </button>
@@ -92,7 +92,7 @@
                                        id="name" 
                                        name="name" 
                                        value="{{ old('name', $user->name) }}"
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                        required>
                             </div>
                             
@@ -104,7 +104,7 @@
                                        id="email" 
                                        name="email" 
                                        value="{{ old('email', $user->email) }}"
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                        required>
                             </div>
                             
@@ -116,7 +116,7 @@
                                        id="nik" 
                                        name="nik" 
                                        value="{{ old('nik', $user->nik) }}"
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                        maxlength="16"
                                        required>
                             </div>
@@ -129,7 +129,7 @@
                                        id="no_hp" 
                                        name="no_hp" 
                                        value="{{ old('no_hp', $user->phone) }}"
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
                             </div>
                             
                             <div class="md:col-span-2">
@@ -139,13 +139,13 @@
                                 <textarea id="alamat" 
                                           name="alamat" 
                                           rows="3"
-                                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">{{ old('alamat', $user->address) }}</textarea>
+                                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">{{ old('alamat', $user->address) }}</textarea>
                             </div>
                         </div>
                         
                         <div class="flex justify-end mt-6">
                             <button type="submit" 
-                                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
+                                    class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200">
                                 <i class="fas fa-save mr-2"></i>Simpan Perubahan
                             </button>
                         </div>
@@ -166,7 +166,7 @@
                                 <input type="password" 
                                        id="current_password" 
                                        name="current_password" 
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                        required>
                             </div>
                             
@@ -177,7 +177,7 @@
                                 <input type="password" 
                                        id="password" 
                                        name="password" 
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                        required>
                                 <p class="text-sm text-gray-500 mt-1">Minimal 8 karakter</p>
                             </div>
@@ -189,7 +189,7 @@
                                 <input type="password" 
                                        id="password_confirmation" 
                                        name="password_confirmation" 
-                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                        required>
                             </div>
                         </div>
@@ -219,12 +219,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Remove active class from all buttons
             tabButtons.forEach(btn => {
-                btn.classList.remove('active', 'border-blue-500', 'text-blue-600');
+                btn.classList.remove('active', 'border-primary-500', 'text-primary-600');
                 btn.classList.add('border-transparent', 'text-gray-500');
             });
             
             // Add active class to clicked button
-            this.classList.add('active', 'border-blue-500', 'text-blue-600');
+            this.classList.add('active', 'border-primary-500', 'text-primary-600');
             this.classList.remove('border-transparent', 'text-gray-500');
             
             // Hide all tab contents

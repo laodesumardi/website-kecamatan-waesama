@@ -169,7 +169,7 @@ document.getElementById('gambar').addEventListener('change', function(e) {
         const reader = new FileReader();
         reader.onload = function(e) {
             // You can add image preview functionality here
-            console.log('Image selected:', file.name);
+            // Image selected
         };
         reader.readAsDataURL(file);
     }

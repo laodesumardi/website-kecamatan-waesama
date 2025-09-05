@@ -31,7 +31,7 @@ class SettingsHelper
         return [
             'site_name' => self::get('site_name', 'Kantor Camat Waesama'),
             'site_description' => self::get('site_description', 'Sistem Informasi Kantor Camat Waesama'),
-            'contact_email' => self::get('contact_email', 'info@kecamatangwaesama.id'),
+            'contact_email' => self::get('contact_email', 'info@waesama.go.id'),
             'contact_phone' => self::get('contact_phone', '(0123) 456-7890'),
             'office_address' => self::get('office_address', 'Jl. Raya Waesama No. 123, Waesama'),
             'office_hours' => self::get('office_hours', 'Senin - Jumat: 08:00 - 16:00'),

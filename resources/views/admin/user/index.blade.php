@@ -5,7 +5,7 @@
 @section('content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-[#003f88] rounded-xl p-6 text-white">
+    <div class="bg-[#001d3d]  rounded-xl p-6 text-white">
         <div class="flex items-center justify-between">
             <div>
                 <h2 class="text-2xl font-bold mb-2">Manajemen User</h2>
@@ -38,15 +38,15 @@
                 <div class="flex flex-col md:flex-row gap-4">
                     <!-- Search -->
                     <div class="flex-1">
-                        <input 
-                            type="text" 
-                            name="search" 
+                        <input
+                            type="text"
+                            name="search"
                             value="{{ request('search') }}"
                             placeholder="Cari nama, email, NIK, atau telepon..."
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         >
                     </div>
-                    
+
                     <!-- Role Filter -->
                     <div class="w-full md:w-48">
                         <select name="role" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -58,7 +58,7 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
                     <!-- Status Filter -->
                     <div class="w-full md:w-48">
                         <select name="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -68,7 +68,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="flex gap-2">
                     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                         <i class="fas fa-search mr-2"></i>Cari
@@ -78,7 +78,7 @@
                     </a>
                 </div>
             </form>
-            
+
             <!-- Add Button -->
             <div class="flex gap-2">
                 <a href="{{ route('admin.user.create') }}" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
@@ -188,7 +188,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <!-- Pagination -->
         @if($users->hasPages())
             <div class="bg-white px-4 py-3 border-t border-gray-200">

@@ -9,7 +9,7 @@
         <div class="flex items-center justify-between">
             <div>
                 <h2 class="text-2xl font-bold mb-2">Selamat Datang, {{ auth()->user()->name }}!</h2>
-                <p class="text-blue-100">Kelola pengajuan surat dan pantau status layanan Anda dengan mudah.</p>
+                <p class="text-primary-100">Kelola pengajuan surat dan pantau status layanan Anda dengan mudah.</p>
             </div>
             <div class="hidden md:block">
                 <i class="fas fa-user text-6xl text-blue-200"></i>
@@ -26,9 +26,9 @@
                     <p class="text-gray-500 text-sm font-medium">Total Surat</p>
                     <p class="text-3xl font-bold text-gray-800 mt-1">{{ number_format($stats['total']) }}</p>
                 </div>
-                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-file-alt text-blue-600 text-xl"></i>
-                </div>
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                     <i class="fas fa-file-alt text-primary-600 text-xl"></i>
+                 </div>
             </div>
             <div class="mt-4 flex items-center text-sm">
                 <span class="text-gray-500">Semua pengajuan surat Anda</span>
@@ -89,9 +89,9 @@
     <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Aksi Cepat</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <a href="{{ route('warga.surat.create') }}" class="flex items-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+            <a href="{{ route('warga.surat.create') }}" class="flex items-center p-4 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors duration-200">
                 <div class="flex-shrink-0">
-                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                    <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
                         <i class="fas fa-plus text-white"></i>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
     <div class="bg-white rounded-lg shadow-sm border p-6">
         <div class="flex items-center justify-between mb-4">
             <h3 class="text-lg font-semibold text-gray-900">Aktivitas Terbaru</h3>
-            <a href="{{ route('warga.surat.list') }}" class="text-sm text-blue-600 hover:text-blue-800">Lihat Semua</a>
+            <a href="{{ route('warga.surat.list') }}" class="text-sm text-primary-600 hover:text-primary-800">Lihat Semua</a>
         </div>
         
         <div class="space-y-4">

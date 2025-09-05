@@ -4,8 +4,8 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 mb-6">
-    <h1 class="text-2xl font-bold text-white mb-2">Dashboard Antrian</h1>
+<div class="bg-gradient-to-r bg-[#001d3d]  from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 mb-6">
+    <h1 class="text-2xl font-bold text-white  mb-2">Dashboard Antrian</h1>
     <p class="text-blue-100">Kelola dan pantau antrian secara real-time</p>
 </div>
 

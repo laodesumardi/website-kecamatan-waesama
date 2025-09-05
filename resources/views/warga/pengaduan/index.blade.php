@@ -10,7 +10,7 @@
             <h1 class="text-3xl font-bold text-gray-800">Pengaduan Saya</h1>
             <p class="text-gray-600 mt-2">Kelola dan pantau status pengaduan Anda</p>
         </div>
-        <a href="{{ route('warga.pengaduan.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center gap-2">
+        <a href="{{ route('warga.pengaduan.create') }}" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center gap-2">
             <i class="fas fa-plus"></i>
             Ajukan Pengaduan
         </a>
@@ -20,7 +20,7 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex items-center">
-                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                <div class="p-3 rounded-full bg-primary-100 text-primary-600">
                     <i class="fas fa-list text-xl"></i>
                 </div>
                 <div class="ml-4">
@@ -114,7 +114,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @php
                                         $statusColors = [
-                                            'Baru' => 'bg-blue-100 text-blue-800',
+                                            'Baru' => 'bg-primary-100 text-primary-800',
                                             'Sedang Diproses' => 'bg-yellow-100 text-yellow-800',
                                             'Selesai' => 'bg-green-100 text-green-800',
                                             'Ditolak' => 'bg-red-100 text-red-800'
@@ -142,7 +142,7 @@
                 <i class="fas fa-exclamation-triangle text-4xl text-gray-400 mb-4"></i>
                 <h3 class="text-lg font-medium text-gray-900 mb-2">Belum Ada Pengaduan</h3>
                 <p class="text-gray-500 mb-6">Anda belum mengajukan pengaduan apapun.</p>
-                <a href="{{ route('warga.pengaduan.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 inline-flex items-center gap-2">
+                <a href="{{ route('warga.pengaduan.create') }}" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 inline-flex items-center gap-2">
                     <i class="fas fa-plus"></i>
                     Ajukan Pengaduan Pertama
                 </a>

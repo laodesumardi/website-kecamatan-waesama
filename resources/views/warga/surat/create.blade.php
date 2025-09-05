@@ -42,7 +42,7 @@
                     Jenis Surat <span class="text-red-500">*</span>
                 </label>
                 <select id="jenis_surat" name="jenis_surat" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 @error('jenis_surat') border-red-500 @enderror">
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 @error('jenis_surat') border-red-500 @enderror">
                     <option value="">Pilih Jenis Surat</option>
                     <option value="Domisili" {{ (old('jenis_surat') == 'Domisili' || $jenisSurat == 'Domisili') ? 'selected' : '' }}>Surat Keterangan Domisili</option>
                     <option value="SKTM" {{ (old('jenis_surat') == 'SKTM' || $jenisSurat == 'SKTM') ? 'selected' : '' }}>Surat Keterangan Tidak Mampu</option>
@@ -64,7 +64,7 @@
                 </label>
                 <textarea id="keperluan" name="keperluan" rows="4" required
                           placeholder="Jelaskan keperluan surat ini..."
-                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 @error('keperluan') border-red-500 @enderror">{{ old('keperluan') }}</textarea>
+                          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 @error('keperluan') border-red-500 @enderror">{{ old('keperluan') }}</textarea>
                 @error('keperluan')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
@@ -112,7 +112,7 @@
             <!-- Submit Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
                 <button type="submit" 
-                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-colors duration-200 flex items-center justify-center gap-2">
+                        class="flex-1 bg-primary-900 hover:bg-primary-800 text-white px-6 py-3 rounded-md font-medium transition-colors duration-200 flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                     </svg>

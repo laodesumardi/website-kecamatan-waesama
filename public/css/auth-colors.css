@@ -1,14 +1,14 @@
 /* Color Palette untuk Halaman Autentikasi */
 :root {
     /* Primary Colors */
-    --primary-blue: #1e40af;
-    --primary-purple: #1e3a8a;
+    --primary-blue: #023047;
+    --primary-purple: #0369a1;
     --primary-gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
     
     /* Secondary Colors */
-    --secondary-blue: #1e40af;
-    --secondary-blue-hover: #1e3a8a;
-    --secondary-blue-light: rgba(30, 64, 175, 0.1);
+    --secondary-blue: #023047;
+    --secondary-blue-hover: #0369a1;
+    --secondary-blue-light: rgba(2, 48, 71, 0.1);
     
     /* Glass Effect Colors */
     --glass-bg: rgba(255, 255, 255, 0.95);
@@ -23,11 +23,11 @@
     /* Input Colors */
     --input-border: #d1d5db;
     --input-focus-border: var(--primary-blue);
-    --input-focus-shadow: rgba(30, 64, 175, 0.1);
+    --input-focus-shadow: rgba(2, 48, 71, 0.1);
     
     /* Button Colors */
     --btn-primary-bg: var(--primary-gradient);
-    --btn-primary-shadow: rgba(30, 64, 175, 0.3);
+    --btn-primary-shadow: rgba(2, 48, 71, 0.3);
     --btn-primary-hover-shadow: 0 10px 25px var(--btn-primary-shadow);
     
     /* Icon Colors */

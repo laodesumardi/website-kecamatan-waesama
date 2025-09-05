@@ -39,7 +39,7 @@
                         <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($item->konten), 150) }}</p>
                     @endif
 
-                    <a href="{{ route('public.berita.detail', $item->slug) }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors">
+                    <a href="{{ route('public.berita.detail', $item->slug) }}" class="inline-flex items-center text-primary-900 hover:text-primary-800 font-medium transition-colors">
                         Baca Selengkapnya
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
