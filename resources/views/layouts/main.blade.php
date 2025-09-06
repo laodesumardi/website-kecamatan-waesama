@@ -16,6 +16,9 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="{{ asset('js/mobile-responsive.js') }}"></script>
+    <script src="{{ asset('js/notifications.js') }}"></script>
+    <script src="{{ asset('js/csrf-handler.js') }}"></script>
 
     <style>
         :root {

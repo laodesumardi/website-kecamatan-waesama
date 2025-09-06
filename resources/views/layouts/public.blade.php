@@ -53,8 +53,9 @@
                     <a href="{{ route('dashboard') }}" class="mobile-nav-link smooth-link">Dashboard</a>
                 @else
                     <a href="{{ route('login') }}" class="mobile-nav-link smooth-link">Login</a>
-                    {{-- Registration disabled - only admin and pegawai access --}}
-                {{-- <a href="{{ route('register') }}" class="mobile-nav-link smooth-link">Daftar</a> --}}
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="mobile-nav-link smooth-link">Daftar</a>
+                    @endif
                 @endauth
             </div>
         </div>

@@ -378,15 +378,16 @@
                         </button>
                     </div>
 
-                    <!-- Registration disabled - only admin and pegawai access -->
-                    {{-- <div class="text-center pt-4 border-t border-gray-200">
-                        <p class="text-sm text-gray-600">
-                            Belum punya akun?
-                            <a href="{{ route('register') }}" class="link-primary font-medium">
-                                Daftar sekarang
-                            </a>
-                        </p>
-                    </div> --}}
+                    @if (Route::has('register'))
+                        <div class="text-center pt-4 border-t border-gray-200">
+                            <p class="text-sm text-gray-600">
+                                Belum punya akun?
+                                <a href="{{ route('register') }}" class="link-primary font-medium">
+                                    Daftar sekarang
+                                </a>
+                            </p>
+                        </div>
+                    @endif
                 </form>
             </div>
 

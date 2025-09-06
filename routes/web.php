@@ -260,6 +260,11 @@ Route::post('/pengaduan/submit', [PublicPengaduanController::class, 'store'])->n
 Route::post('/antrian/submit', [PublicAntrianController::class, 'store'])->name('public.antrian.store');
 Route::post('/kontak/submit', [PublicKontakController::class, 'store'])->name('public.kontak.store');
 
+// CSRF token refresh route
+Route::get('/csrf-token', function () {
+    return response()->json(['token' => csrf_token()]);
+})->name('csrf.token');
+
 // Profile & Notification Routes
 Route::middleware(['auth'])->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {

@@ -26,11 +26,17 @@ return Application::configure(basePath: $detectedBasePath)
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
             'share.notifications' => \App\Http\Middleware\ShareNotificationData::class,
             'security' => \App\Http\Middleware\SecurityMiddleware::class,
+            'csrf.handler' => \App\Http\Middleware\HandleCsrfErrors::class,
+            'exception.handler' => \App\Http\Middleware\ExceptionHandlerMiddleware::class,
         ]);
+        
+        // Add global middleware
+        $middleware->append(\App\Http\Middleware\ExceptionHandlerMiddleware::class);
         
         // Add security middleware to web group
         $middleware->web(append: [
             \App\Http\Middleware\SecurityMiddleware::class,
+            \App\Http\Middleware\HandleCsrfErrors::class,
         ]);
         
         // Add security middleware to API group

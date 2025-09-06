@@ -194,10 +194,9 @@
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
                                 <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                {{-- Registration disabled - only admin and pegawai access --}}
-                                {{-- @if (Route::has('register'))
+                                @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif --}}
+                                @endif
                             @endauth
                         </div>
                     @endif
@@ -226,10 +225,9 @@
                                 <a href="{{ url('/dashboard') }}" class="public-nav-btn primary">Dashboard</a>
                             @else
                                 <a href="{{ route('login') }}" class="public-nav-btn secondary">Masuk</a>
-                                {{-- Registration disabled - only admin and pegawai access --}}
-                                {{-- @if (Route::has('register'))
+                                @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="public-nav-btn primary">Daftar</a>
-                                @endif --}}
+                                @endif
                             @endauth
                         </div>
                     @endif

@@ -145,10 +145,11 @@
                         </a>
                     @else
                         <a href="{{ route('login') }}" class="public-nav-btn text-gray-600 hover:text-blue-600">Masuk</a>
-                        {{-- Registration disabled - only admin and pegawai access --}}
-                {{-- <a href="{{ route('register') }}" class="public-nav-btn bg-blue-600 text-white hover:bg-blue-700">
-                    Daftar
-                </a> --}}
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="public-nav-btn bg-blue-600 text-white hover:bg-blue-700">
+                                Daftar
+                            </a>
+                        @endif
                     @endauth
                 </div>
                 

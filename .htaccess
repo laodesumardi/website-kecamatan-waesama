@@ -1,31 +1,22 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Handle Angular and other frontend routes - send to index.html if file exists
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !^/api/
-    RewriteCond %{DOCUMENT_ROOT}/index.html -f
-    RewriteRule ^(.*)$ /index.html [L]
+    # Force HTTPS (uncomment when SSL is ready)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Handle Laravel routes - send to index.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{DOCUMENT_ROOT}/index.php -f
-    RewriteRule ^(.*)$ /index.php [L]
-
-    # If we have a public folder, redirect to it for assets
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
-    RewriteRule ^(.*)$ /public/$1 [L]
-
-    # Redirect to public folder for Laravel if it exists and we're not already there
+    # Redirect to public folder for Laravel
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteCond %{DOCUMENT_ROOT}/public/index.php -f
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ /public/index.php [L]
+    RewriteRule ^(.*)$ /public/$1 [L]
+
+    # Handle Laravel routes in public folder
+    RewriteCond %{REQUEST_URI} ^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^public/(.*)$ /public/index.php [L]
 </IfModule>
 
 # Security headers
