@@ -14,10 +14,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get roles
+        // Get roles with error handling
         $adminRole = Role::where('name', 'Admin')->first();
         $pegawaiRole = Role::where('name', 'Pegawai')->first();
         $wargaRole = Role::where('name', 'Warga')->first();
+
+        // Check if roles exist
+        if (!$adminRole || !$pegawaiRole || !$wargaRole) {
+            $this->command->error('Required roles not found. Please run RoleSeeder first.');
+            return;
+        }
 
         // Create Admin users
         $adminUsers = [
@@ -41,7 +47,7 @@ class UserSeeder extends Seeder
                 'role_id' => $adminRole->id,
                 'phone' => '081234567891',
                 'address' => 'Kantor Camat Waesama, Jl. Raya Waesama No. 1',
-                'nik' => '7301010101800001',
+                'nik' => '7301010101800002',
                 'birth_date' => '1980-01-01',
                 'gender' => 'L',
                 'is_active' => true,
@@ -58,7 +64,7 @@ class UserSeeder extends Seeder
                 'role_id' => $pegawaiRole->id,
                 'phone' => '081234567892',
                 'address' => 'Jl. Melati No. 15, Waesama',
-                'nik' => '7301010101900001',
+                'nik' => '7301010101900003',
                 'birth_date' => '1990-05-15',
                 'gender' => 'P',
                 'is_active' => true,
@@ -71,7 +77,7 @@ class UserSeeder extends Seeder
                 'role_id' => $pegawaiRole->id,
                 'phone' => '081234567893',
                 'address' => 'Jl. Mawar No. 22, Waesama',
-                'nik' => '7301010101880001',
+                'nik' => '7301010101880004',
                 'birth_date' => '1988-08-20',
                 'gender' => 'L',
                 'is_active' => true,
@@ -84,7 +90,7 @@ class UserSeeder extends Seeder
                 'role_id' => $pegawaiRole->id,
                 'phone' => '081234567894',
                 'address' => 'Jl. Anggrek No. 8, Waesama',
-                'nik' => '7301010101920001',
+                'nik' => '7301010101920005',
                 'birth_date' => '1992-03-10',
                 'gender' => 'P',
                 'is_active' => true,
@@ -101,7 +107,7 @@ class UserSeeder extends Seeder
                 'role_id' => $wargaRole->id,
                 'phone' => '081234567895',
                 'address' => 'Jl. Kenanga No. 45, Desa Waesama',
-                'nik' => '7301010101950001',
+                'nik' => '7301010101950006',
                 'birth_date' => '1995-07-12',
                 'gender' => 'L',
                 'is_active' => true,
@@ -114,7 +120,7 @@ class UserSeeder extends Seeder
                 'role_id' => $wargaRole->id,
                 'phone' => '081234567896',
                 'address' => 'Jl. Dahlia No. 12, Desa Waesama',
-                'nik' => '7301010101930001',
+                'nik' => '7301010101930007',
                 'birth_date' => '1993-11-25',
                 'gender' => 'P',
                 'is_active' => true,
@@ -127,7 +133,7 @@ class UserSeeder extends Seeder
                 'role_id' => $wargaRole->id,
                 'phone' => '081234567897',
                 'address' => 'Jl. Cempaka No. 33, Desa Waesama',
-                'nik' => '7301010101870001',
+                'nik' => '7301010101870008',
                 'birth_date' => '1987-04-18',
                 'gender' => 'L',
                 'is_active' => true,
@@ -140,7 +146,7 @@ class UserSeeder extends Seeder
                 'role_id' => $wargaRole->id,
                 'phone' => '081234567898',
                 'address' => 'Jl. Tulip No. 7, Desa Waesama',
-                'nik' => '7301010101910001',
+                'nik' => '7301010101910009',
                 'birth_date' => '1991-09-05',
                 'gender' => 'P',
                 'is_active' => true,
@@ -153,7 +159,7 @@ class UserSeeder extends Seeder
                 'role_id' => $wargaRole->id,
                 'phone' => '081234567899',
                 'address' => 'Jl. Sakura No. 19, Desa Waesama',
-                'nik' => '7301010101940001',
+                'nik' => '7301010101940010',
                 'birth_date' => '1994-12-30',
                 'gender' => 'L',
                 'is_active' => true,
@@ -161,26 +167,55 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        // Insert all users
-        foreach ($adminUsers as $userData) {
-            User::firstOrCreate(
-                ['email' => $userData['email']],
-                $userData
-            );
+        // Validate data before insertion
+        $allUsers = array_merge($adminUsers, $pegawaiUsers, $wargaUsers);
+        $emails = array_column($allUsers, 'email');
+        $niks = array_column($allUsers, 'nik');
+        
+        if (count($emails) !== count(array_unique($emails))) {
+            $this->command->error('Duplicate emails found in seeder data.');
+            return;
+        }
+        
+        if (count($niks) !== count(array_unique($niks))) {
+            $this->command->error('Duplicate NIKs found in seeder data.');
+            return;
         }
 
-        foreach ($pegawaiUsers as $userData) {
-            User::firstOrCreate(
-                ['email' => $userData['email']],
-                $userData
-            );
-        }
+        // Insert all users with error handling
+        try {
+            foreach ($adminUsers as $userData) {
+                $user = User::firstOrCreate(
+                    ['email' => $userData['email']],
+                    $userData
+                );
+                if ($user->wasRecentlyCreated) {
+                    $this->command->info('Created admin user: ' . $userData['name']);
+                }
+            }
 
-        foreach ($wargaUsers as $userData) {
-            User::firstOrCreate(
-                ['email' => $userData['email']],
-                $userData
-            );
+            foreach ($pegawaiUsers as $userData) {
+                $user = User::firstOrCreate(
+                    ['email' => $userData['email']],
+                    $userData
+                );
+                if ($user->wasRecentlyCreated) {
+                    $this->command->info('Created pegawai user: ' . $userData['name']);
+                }
+            }
+
+            foreach ($wargaUsers as $userData) {
+                $user = User::firstOrCreate(
+                    ['email' => $userData['email']],
+                    $userData
+                );
+                if ($user->wasRecentlyCreated) {
+                    $this->command->info('Created warga user: ' . $userData['name']);
+                }
+            }
+        } catch (\Exception $e) {
+            $this->command->error('Error creating users: ' . $e->getMessage());
+            return;
         }
 
         $this->command->info('Users seeded successfully!');

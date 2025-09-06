@@ -30,6 +30,7 @@ class User extends Authenticatable
         'birth_date',
         'gender',
         'is_active',
+        'email_verified_at',
     ];
 
     /**
