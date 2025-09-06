@@ -639,4 +639,4 @@
     </script>
     </body>
 </html>
-<?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views\welcome.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views/welcome.blade.php ENDPATH**/ ?>

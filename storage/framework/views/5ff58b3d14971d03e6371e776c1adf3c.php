@@ -109,4 +109,4 @@
         }
     </script>
 </body>
-</html><?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views\errors\500.blade.php ENDPATH**/ ?>
+</html><?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views/errors/500.blade.php ENDPATH**/ ?>

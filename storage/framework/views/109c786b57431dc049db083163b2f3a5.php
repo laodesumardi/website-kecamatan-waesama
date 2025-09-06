@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Berita - Kantor Camat Waesama</title>
-    <meta name="description" content="Berita terbaru dari Kantor Camat Waesama - Melayani dengan sepenuh hati untuk kemajuan masyarakat">
+    <title>Profil - Kantor Camat Waesama</title>
+    <meta name="description" content="Profil lengkap Kantor Camat Waesama - Visi, Misi, Struktur Organisasi, dan Sejarah">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -32,12 +32,12 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        .news-card {
+        .profile-card {
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
         }
 
-        .news-card:hover {
+        .profile-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             border-color: #d1d5db;
@@ -64,15 +64,6 @@
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .pagination-btn {
-            transition: all 0.3s ease;
-        }
-
-        .pagination-btn:hover {
-            background: #003f88;
-            color: white;
         }
 
         /* Standardized Public Navigation Menu */
@@ -138,8 +129,8 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <div class="flex space-x-2">
                         <a href="<?php echo e(route('welcome')); ?>" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
-                        <a href="<?php echo e(route('public.profil')); ?>" class="public-nav-item"><i class="fas fa-info-circle mr-2"></i>Profil</a>
-                        <a href="<?php echo e(route('public.berita')); ?>" class="public-nav-item active"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                        <a href="<?php echo e(route('public.profil')); ?>" class="public-nav-item active"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                        <a href="<?php echo e(route('public.berita')); ?>" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
                         <a href="<?php echo e(route('public.layanan')); ?>" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
                         <a href="<?php echo e(route('public.kontak')); ?>" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
                     </div>
@@ -170,8 +161,8 @@
             <div id="mobile-menu" class="md:hidden hidden pb-4">
                 <div class="flex flex-col space-y-2">
                     <a href="<?php echo e(route('welcome')); ?>" class="public-nav-item"><i class="fas fa-home mr-2"></i>Beranda</a>
-                    <a href="<?php echo e(route('public.profil')); ?>" class="public-nav-item"><i class="fas fa-info-circle mr-2"></i>Profil</a>
-                    <a href="<?php echo e(route('public.berita')); ?>" class="public-nav-item active"><i class="fas fa-newspaper mr-2"></i>Berita</a>
+                    <a href="<?php echo e(route('public.profil')); ?>" class="public-nav-item active"><i class="fas fa-info-circle mr-2"></i>Profil</a>
+                    <a href="<?php echo e(route('public.berita')); ?>" class="public-nav-item"><i class="fas fa-newspaper mr-2"></i>Berita</a>
                     <a href="<?php echo e(route('public.layanan')); ?>" class="public-nav-item"><i class="fas fa-cogs mr-2"></i>Layanan</a>
                     <a href="<?php echo e(route('public.kontak')); ?>" class="public-nav-item"><i class="fas fa-phone mr-2"></i>Kontak</a>
 
@@ -195,114 +186,183 @@
     <!-- Hero Section -->
     <section class="hero-bg text-white py-16 pt-[150px]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Berita & Pengumuman</h1>
-            <p class="text-xl mb-8 opacity-90 fade-in">Informasi terbaru dari Kantor Camat Waesama</p>
-
-            <!-- Search Bar -->
-            <div class="max-w-md mx-auto fade-in">
-                <form method="GET" action="<?php echo e(route('public.berita')); ?>" class="relative">
-                    <input type="text" name="search" value="<?php echo e(request('search')); ?>" placeholder="Cari berita..." class="w-full px-4 py-3 pl-12 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white">
-                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                    <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors">
-                        Cari
-                    </button>
-                </form>
-            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Profil Kantor</h1>
+            <p class="text-xl mb-8 opacity-90 fade-in">Mengenal lebih dekat Kantor Camat Waesama</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <!-- News List -->
+            <!-- Profile Content -->
             <div class="lg:col-span-3">
-                <?php if($berita->count() > 0): ?>
-                    <div id="news-container" class="grid gap-6">
-                        <?php echo $__env->make('public.partials.berita-grid', ['berita' => $berita], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                    </div>
-
-                    <!-- Pagination -->
-                    <?php if($berita->hasPages()): ?>
-                        <div class="mt-8 flex justify-center">
-                            <nav class="flex items-center space-x-2">
-                                
-                                <?php if($berita->onFirstPage()): ?>
-                                    <span class="pagination-btn px-3 py-2 text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                <?php else: ?>
-                                    <a href="<?php echo e($berita->previousPageUrl()); ?>" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-primary-900 hover:text-white">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </a>
-                                <?php endif; ?>
-
-                                
-                                <?php $__currentLoopData = $berita->getUrlRange(1, $berita->lastPage()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($page == $berita->currentPage()): ?>
-                                        <span class="px-4 py-2 text-white bg-blue-600 rounded-lg font-medium"><?php echo e($page); ?></span>
-                                    <?php else: ?>
-                                        <a href="<?php echo e($url); ?>" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-primary-900 hover:text-white"><?php echo e($page); ?></a>
-                                    <?php endif; ?>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                
-                                <?php if($berita->hasMorePages()): ?>
-                                    <a href="<?php echo e($berita->nextPageUrl()); ?>" class="pagination-btn px-3 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-primary-900 hover:text-white">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </a>
-                                <?php else: ?>
-                                    <span class="pagination-btn px-3 py-2 text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-                                <?php endif; ?>
-                            </nav>
+                <!-- Visi Misi -->
+                <div class="bg-white rounded-xl shadow-sm p-8 mb-8 profile-card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-eye text-blue-600 mr-3"></i>
+                        Visi & Misi
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-4">Visi</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Terwujudnya pelayanan publik yang prima, transparan, dan akuntabel untuk kesejahteraan masyarakat Waesama.
+                            </p>
                         </div>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <div class="text-center py-12">
-                        <i class="fas fa-newspaper text-6xl text-gray-300 mb-4"></i>
-                        <h3 class="text-xl font-semibold text-gray-600 mb-2">Belum Ada Berita</h3>
-                        <p class="text-gray-500">Berita akan ditampilkan di sini ketika sudah tersedia.</p>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-600 mb-4">Misi</h3>
+                            <ul class="text-gray-700 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                    Memberikan pelayanan publik yang berkualitas
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                    Meningkatkan transparansi dan akuntabilitas
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                    Memberdayakan masyarakat secara optimal
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i>
+                                    Menjaga ketertiban dan keamanan wilayah
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                <?php endif; ?>
+                </div>
+
+                <!-- Sejarah -->
+                <div class="bg-white rounded-xl shadow-sm p-8 mb-8 profile-card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-history text-amber-600 mr-3"></i>
+                        Sejarah Singkat
+                    </h2>
+                    <div class="text-gray-700 leading-relaxed space-y-4">
+                        <p>
+                            Kantor Camat Waesama didirikan pada tahun 1965 sebagai bagian dari pembentukan Kabupaten Buru. 
+                            Kecamatan Waesama merupakan salah satu kecamatan yang memiliki peran strategis dalam pengembangan 
+                            wilayah Kabupaten Buru.
+                        </p>
+                        <p>
+                            Seiring dengan perkembangan zaman dan tuntutan pelayanan publik yang semakin baik, Kantor Camat 
+                            Waesama terus melakukan pembenahan dan peningkatan kualitas pelayanan kepada masyarakat.
+                        </p>
+                        <p>
+                            Saat ini, Kantor Camat Waesama telah menerapkan sistem pelayanan digital untuk memudahkan 
+                            masyarakat dalam mengakses berbagai layanan administrasi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Struktur Organisasi -->
+                <div class="bg-white rounded-xl shadow-sm p-8 mb-8 profile-card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-sitemap text-purple-600 mr-3"></i>
+                        Struktur Organisasi
+                    </h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="text-center p-4 border border-gray-200 rounded-lg">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-user-tie text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">Camat</h4>
+                            <p class="text-sm text-gray-600">Kepala Kecamatan</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-user-cog text-green-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">Sekretaris Camat</h4>
+                            <p class="text-sm text-gray-600">Koordinator Administrasi</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-users text-purple-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">Kepala Seksi</h4>
+                            <p class="text-sm text-gray-600">Pelayanan Masyarakat</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-clipboard-list text-red-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">Kepala Seksi</h4>
+                            <p class="text-sm text-gray-600">Pemerintahan</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg">
+                            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-chart-line text-yellow-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">Kepala Seksi</h4>
+                            <p class="text-sm text-gray-600">Pemberdayaan</p>
+                        </div>
+                        <div class="text-center p-4 border border-gray-200 rounded-lg">
+                            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-shield-alt text-indigo-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">Kepala Seksi</h4>
+                            <p class="text-sm text-gray-600">Ketertiban</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wilayah Kerja -->
+                <div class="bg-white rounded-xl shadow-sm p-8 profile-card">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-map-marked-alt text-green-600 mr-3"></i>
+                        Wilayah Kerja
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Data Wilayah</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Luas Wilayah:</span>
+                                    <span class="font-medium">125,5 km²</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Jumlah Desa:</span>
+                                    <span class="font-medium">12 Desa</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Jumlah Penduduk:</span>
+                                    <span class="font-medium">15.234 Jiwa</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Kepadatan:</span>
+                                    <span class="font-medium">121 Jiwa/km²</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Batas Wilayah</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Utara:</span>
+                                    <span class="font-medium">Kec. Namlea</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Selatan:</span>
+                                    <span class="font-medium">Laut Banda</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Timur:</span>
+                                    <span class="font-medium">Kec. Waplau</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Barat:</span>
+                                    <span class="font-medium">Kec. Batabual</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Sidebar -->
             <div class="lg:col-span-1 space-y-6">
-                <!-- Featured News -->
-                <?php if($featuredNews->count() > 0): ?>
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                            Berita Unggulan
-                        </h3>
-                        <div class="space-y-4">
-                            <?php $__currentLoopData = $featuredNews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $featured): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <article class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
-                                    <?php if($featured->gambar): ?>
-                                        <img src="<?php echo e(asset('storage/' . $featured->gambar)); ?>" alt="<?php echo e($featured->judul); ?>" class="w-full h-32 object-cover rounded-lg mb-3">
-                                    <?php endif; ?>
-                                    <h4 class="font-semibold text-gray-800 mb-2 hover:text-blue-600 transition-colors">
-                                        <a href="<?php echo e(route('public.berita.detail', $featured->slug)); ?>"><?php echo e(Str::limit($featured->judul, 60)); ?></a>
-                                    </h4>
-                                    <div class="flex items-center text-xs text-gray-500 space-x-3">
-                                        <span>
-                                            <i class="fas fa-calendar mr-1"></i>
-                                            <?php echo e($featured->published_at ? $featured->published_at->format('d M Y') : $featured->created_at->format('d M Y')); ?>
-
-                                        </span>
-                                        <span>
-                                            <i class="fas fa-eye mr-1"></i>
-                                            <?php echo e(number_format($featured->views)); ?>
-
-                                        </span>
-                                    </div>
-                                </article>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Quick Links -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
@@ -322,9 +382,9 @@
                             <i class="fas fa-comments w-5 mr-3"></i>
                             Pengaduan
                         </a>
-                        <a href="<?php echo e(route('public.profil')); ?>" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
-                            <i class="fas fa-info-circle w-5 mr-3"></i>
-                            Profil Kantor
+                        <a href="<?php echo e(route('public.berita')); ?>" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+                            <i class="fas fa-newspaper w-5 mr-3"></i>
+                            Berita Terbaru
                         </a>
                     </div>
                 </div>
@@ -356,6 +416,28 @@
                                 <p class="font-medium text-gray-800">Email</p>
                                 <p class="text-gray-600">info@waesama.go.id</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jam Operasional -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-clock text-orange-500 mr-2"></i>
+                        Jam Operasional
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Senin - Kamis</span>
+                            <span class="font-medium">08:00 - 16:00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Jumat</span>
+                            <span class="font-medium">08:00 - 11:30</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Sabtu - Minggu</span>
+                            <span class="font-medium text-red-500">Tutup</span>
                         </div>
                     </div>
                 </div>
@@ -433,57 +515,8 @@
                     menuIcon.classList.add('fa-times');
                 }
             });
-
-            // AJAX Search functionality
-            const searchForm = document.querySelector('form[action*="berita"]');
-            const searchInput = searchForm.querySelector('input[name="search"]');
-            const newsContainer = document.getElementById('news-container');
-            let searchTimeout;
-
-            // Real-time search with debounce
-            searchInput.addEventListener('input', function() {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(() => {
-                    performSearch(this.value);
-                }, 500);
-            });
-
-            // Form submission
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                performSearch(searchInput.value);
-            });
-
-            function performSearch(query) {
-                // Show loading state
-                newsContainer.innerHTML = '<div class="text-center py-12"><i class="fas fa-spinner fa-spin text-4xl text-gray-400 mb-4"></i><p class="text-gray-500">Mencari berita...</p></div>';
-
-                // Perform AJAX request
-                fetch(`<?php echo e(route('public.berita')); ?>?search=${encodeURIComponent(query)}`, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    newsContainer.innerHTML = data.html;
-                    
-                    // Update pagination if exists
-                    const paginationContainer = document.querySelector('.mt-8.flex.justify-center');
-                    if (paginationContainer && data.pagination) {
-                        paginationContainer.innerHTML = data.pagination;
-                    } else if (paginationContainer && !data.pagination) {
-                        paginationContainer.innerHTML = '';
-                    }
-                })
-                .catch(error => {
-                    console.error('Search error:', error);
-                    newsContainer.innerHTML = '<div class="text-center py-12"><i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4"></i><p class="text-red-500">Terjadi kesalahan saat mencari berita.</p></div>';
-                });
-            }
         });
     </script>
 </body>
 </html>
-<?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views\public\berita.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views/public/profil.blade.php ENDPATH**/ ?>
