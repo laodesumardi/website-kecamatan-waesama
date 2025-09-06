@@ -1,0 +1,175 @@
+<?php if (isset($component)) { $__componentOriginal91fdd17964e43374ae18c674f95cdaa3 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal91fdd17964e43374ae18c674f95cdaa3 = $attributes; } ?>
+<?php $component = App\View\Components\AdminLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('admin-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\AdminLayout::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+     <?php $__env->slot('header', null, []); ?> 
+        Detail Data Penduduk
+     <?php $__env->endSlot(); ?>
+
+    <div class="space-y-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-medium text-gray-900">Detail Penduduk</h3>
+                        <div class="space-x-2">
+                            <a href="<?php echo e(route('admin.citizens.edit', $citizen)); ?>" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                Edit
+            </a>
+            <a href="<?php echo e(route('admin.citizens.index')); ?>" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Kembali
+            </a>
+                        </div>
+                    </div>
+
+                    <!-- Foto Penduduk -->
+                    <div class="mb-6 flex justify-center">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-semibold text-gray-800 mb-4 text-center">Foto Penduduk</h4>
+                            <div class="flex justify-center">
+                                <img src="<?php echo e($citizen->photo_path ? asset('storage/' . $citizen->photo_path) : asset('images/default-avatar.svg')); ?>" 
+                                     alt="Foto <?php echo e($citizen->name); ?>" 
+                                     class="h-32 w-32 object-cover rounded-lg border border-gray-300 shadow-sm">
+                            </div>
+                            <?php if(!$citizen->photo_path): ?>
+                                <p class="text-xs text-gray-500 text-center mt-2">Foto belum tersedia</p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Data Pribadi -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-semibold text-gray-800 mb-4">Data Pribadi</h4>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">NIK</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->nik); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Nama Lengkap</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->name); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Tempat, Tanggal Lahir</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->birth_place); ?>, <?php echo e(\Carbon\Carbon::parse($citizen->birth_date)->format('d F Y')); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Umur</label>
+                                    <p class="text-sm text-gray-900"><?php echo e(\Carbon\Carbon::parse($citizen->birth_date)->age); ?> tahun</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Jenis Kelamin</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->gender == 'L' ? 'Laki-laki' : 'Perempuan'); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Agama</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->religion); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Status Perkawinan</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->marital_status); ?></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Data Kontak & Lokasi -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="text-md font-semibold text-gray-800 mb-4">Kontak & Lokasi</h4>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Desa</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->village->name); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Alamat</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->address); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Telepon</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->phone ?: '-'); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Email</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->email ?: '-'); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Pekerjaan</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->occupation ?: '-'); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Pendidikan</label>
+                                    <p class="text-sm text-gray-900"><?php echo e($citizen->education ?: '-'); ?></p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-600">Status</label>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        <?php echo e($citizen->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'); ?>">
+                                        <?php echo e($citizen->is_active ? 'Aktif' : 'Tidak Aktif'); ?>
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informasi Sistem -->
+                    <div class="mt-6 bg-gray-50 p-4 rounded-lg">
+                        <h4 class="text-md font-semibold text-gray-800 mb-4">Informasi Sistem</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600">Dibuat pada</label>
+                                <p class="text-sm text-gray-900"><?php echo e($citizen->created_at->format('d F Y H:i')); ?></p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600">Terakhir diperbarui</label>
+                                <p class="text-sm text-gray-900"><?php echo e($citizen->updated_at->format('d F Y H:i')); ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <form action="<?php echo e(route('admin.citizens.destroy', $citizen)); ?>" method="POST" class="inline">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" 
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data penduduk ini?')">
+                                Hapus Data
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal91fdd17964e43374ae18c674f95cdaa3)): ?>
+<?php $attributes = $__attributesOriginal91fdd17964e43374ae18c674f95cdaa3; ?>
+<?php unset($__attributesOriginal91fdd17964e43374ae18c674f95cdaa3); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal91fdd17964e43374ae18c674f95cdaa3)): ?>
+<?php $component = $__componentOriginal91fdd17964e43374ae18c674f95cdaa3; ?>
+<?php unset($__componentOriginal91fdd17964e43374ae18c674f95cdaa3); ?>
+<?php endif; ?><?php /**PATH D:\laragon\www\kantor-camat-waesama\resources\views\admin\citizens\show.blade.php ENDPATH**/ ?>
